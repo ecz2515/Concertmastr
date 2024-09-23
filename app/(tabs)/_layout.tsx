@@ -27,7 +27,7 @@ export default function AppLayout() {
     <Drawer.Navigator
       drawerContent={(props) => (
         <>
-          <View style={{ flex: 1 }}>
+          <View style={{ flex: 1, paddingTop: 50 }}>
             <CustomDrawerContent {...props} />
           </View>
         </>
