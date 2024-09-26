@@ -15,7 +15,7 @@ const LogoTitle = () => {
         style={{ width: 30, height: 30, marginRight: 10 }} // Adjust size and styling
         resizeMode="contain"
       />
-      <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>
+      <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'white' }}>
         Concertmastr
       </Text>
     </View>

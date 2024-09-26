@@ -17,7 +17,7 @@ export default function HomeScreen() {
       <View style={styles.mainContent}>
         {/* Event Details */}
         <Text style={styles.eventTitle}>
-          Randall Goosby plays Mendelssohn's Violin Concerto, Thomas Wilkins conducts Enigma Variations
+          A Night of Majesty: Beethoven’s 7th Symphony and Brahms’ Violin Concerto
         </Text>
 
         {/* Buttons */}
@@ -31,7 +31,7 @@ export default function HomeScreen() {
           <Text style={styles.buttonText}>Program Notes</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Meet the NSO</Text>
+          <Text style={styles.buttonText}>Meet the Orchestra</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Patrons, Sponsors, and Staff</Text>
