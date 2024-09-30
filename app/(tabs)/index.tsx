@@ -1,7 +1,11 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { router } from 'expo-router';
 
 export default function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       {/* Event Image */}
@@ -21,13 +25,22 @@ export default function HomeScreen() {
         </Text>
 
         {/* Buttons */}
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Tonight's Program</Text>
+        <TouchableOpacity style={styles.button} onPress={() => {
+            console.log("Navigating to Program");
+            router.push("/program");
+          }}>
+          <Text style={styles.buttonText}>Concert Program</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() => {
+            console.log("Navigating to Biographies");
+            router.push("/biographies")
+        }}>
           <Text style={styles.buttonText}>Biographies</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() => {
+            console.log("Navigating to Program Notes");
+            router.push("/program-notes");
+        }}>
           <Text style={styles.buttonText}>Program Notes</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
