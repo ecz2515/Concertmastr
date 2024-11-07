@@ -46,9 +46,6 @@ export default function HomeScreen() {
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Meet the Orchestra</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Patrons, Sponsors, and Staff</Text>
-        </TouchableOpacity>
       </View>
     </View>
   );

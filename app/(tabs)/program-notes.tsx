@@ -1,39 +1,47 @@
+import { useNavigation } from 'expo-router';
 import React from 'react';
-import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 
-export default function BiographiesScreen() {
+export default function ProgramScreen() {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         {/* Title */}
-        <Text style={styles.title}>Biographies</Text>
+        <Text style={styles.title}>Program Notes</Text>
 
-        {/* First Biography Block */}
-        <TouchableOpacity style={styles.bioBlock}>
-          <Image
-            source={require('@/assets/images/react-logo.png')} // Replace with your image path
-            style={styles.bioImage}
-          />
-          <Text style={styles.bioText}>Randall Goosby</Text>
-        </TouchableOpacity>
+        {/* First Program Block */}
+        <View style={styles.programBlock}>
+          <Text style={styles.composerName}>
+            Eleanor Vance <Text style={styles.dates}></Text>
+          </Text>
+          <Text style={styles.workTitle}>
+            <Text>Ethereal Landscapes</Text> <Text style={styles.duration}></Text>
+          </Text>
+        </View>
 
-        {/* Second Biography Block */}
-        <TouchableOpacity style={styles.bioBlock}>
-          <Image
-            source={require('@/assets/images/react-logo.png')} // Replace with your image path
-            style={styles.bioImage}
-          />
-          <Text style={styles.bioText}>Thomas Wilkins</Text>
-        </TouchableOpacity>
+        {/* Second Program Block */}
+        <View style={styles.programBlock}>
+          <Text style={styles.composerName}>
+            Johannes Brahms <Text style={styles.dates}></Text>
+          </Text>
+          <Text style={styles.workTitle}>
+            <Text>
+              Violin Concerto in D major, Op. 77
+            </Text>{' '}
+            <Text style={styles.duration}></Text>
+          </Text>
+        </View>
 
-        {/* Third Biography Block */}
-        <TouchableOpacity style={styles.bioBlock}>
-          <Image
-            source={require('@/assets/images/react-logo.png')} // Replace with your image path
-            style={styles.bioImage}
-          />
-          <Text style={styles.bioText}>National Symphony Orchestra</Text>
-        </TouchableOpacity>
+        {/* Third Program Block */}
+        <View style={styles.programBlock}>
+          <Text style={styles.composerName}>
+            Ludwig van Beethoven <Text style={styles.dates}></Text>
+          </Text>
+          <Text style={styles.workTitle}>
+            <Text>Symphony No. 7 in A major, Op. 92</Text> <Text style={styles.duration}></Text>
+          </Text>
+        </View>
       </ScrollView>
 
       {/* Concertmastr Logo at the Bottom */}
@@ -54,7 +62,6 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     padding: 20,
-    alignItems: 'center', // Center the content horizontally
   },
   title: {
     fontSize: 30,
@@ -63,30 +70,56 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 20,
   },
-  bioBlock: {
+  programBlock: {
     backgroundColor: '#333',
     borderRadius: 10,
     padding: 15,
     marginBottom: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: '100%', // Ensure the block takes the full width of the screen
   },
-  bioImage: {
-    width: 60,
-    height: 60,
-    borderRadius: 30, // Circle image
-    marginRight: 15,
+  composerName: {
+    fontSize: 18,
+    fontStyle: 'italic',
+    color: 'white',
   },
-  bioText: {
+  dates: {
+    fontSize: 16,
+    color: 'white',
+    fontStyle: 'italic',
+  },
+  workTitle: {
     fontSize: 18,
     fontWeight: 'bold',
     color: 'white',
-    flex: 1,
+    marginTop: 5,
+  },
+  italicText: {
+    fontStyle: 'italic',
+  },
+  duration: {
+    fontSize: 16,
+    color: 'white',
+  },
+  movement: {
+    fontSize: 16,
+    color: 'white',
+    marginTop: 5,
+  },
+  soloist: {
+    fontSize: 16,
+    fontStyle: 'italic',
+    color: 'white',
+    marginTop: 10,
+  },
+  intermission: {
+    fontSize: 16,
+    fontStyle: 'italic',
+    color: 'white',
+    textAlign: 'center',
+    marginBottom: 20,
   },
   logoContainer: {
     position: 'absolute',
-    bottom: 40, // Stick it to the bottom
+    bottom: 40, // Stick the logo to the bottom
     width: '100%',
     alignItems: 'center',
   },
