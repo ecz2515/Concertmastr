@@ -21,7 +21,7 @@ const LogoTitle = () => {
 };
 
 export default function AppLayout() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
   const [isSettingsVisible, setIsSettingsVisible] = useState(false);
 
   return (
@@ -95,7 +95,7 @@ export default function AppLayout() {
             headerTitle: () => <LogoTitle />,
             headerLeft: () => (
               <TouchableOpacity onPress={() => navigation.goBack()}>
-                <Ionicons 
+                <Ionicons
                   name="arrow-back"
                   size={30}
                   color="white"
@@ -103,7 +103,25 @@ export default function AppLayout() {
                 />
               </TouchableOpacity>
             ),
-          }} 
+          }}
+        />
+
+        <Tabs.Screen
+          name="program-notes/piece1"
+          options={{
+            title: 'Brahms Program Notes',
+            headerTitle: () => <LogoTitle />,
+            headerLeft: () => (
+              <TouchableOpacity onPress={() => (navigation as any).navigate('program-notes')}>
+                <Ionicons
+                  name="arrow-back"
+                  size={30}
+                  color="white"
+                  style={{ paddingLeft: 15 }}
+                />
+              </TouchableOpacity>
+            ),
+          }}
         />
       </Tabs>
 

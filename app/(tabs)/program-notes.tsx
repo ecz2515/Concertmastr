@@ -1,9 +1,10 @@
-import { useNavigation } from 'expo-router';
+import { useRouter } from 'expo-router'; // Import the router for navigation
 import React from 'react';
-import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
 
 export default function ProgramScreen() {
-  const navigation = useNavigation();
+  const router = useRouter();
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -11,37 +12,44 @@ export default function ProgramScreen() {
         <Text style={styles.title}>Program Notes</Text>
 
         {/* First Program Block */}
-        <View style={styles.programBlock}>
+        <TouchableOpacity
+          style={styles.programBlock}
+          onPress={() => router.push('/program-notes/piece1')} // Navigate to Brahms program notes
+        >
           <Text style={styles.composerName}>
             Eleanor Vance <Text style={styles.dates}></Text>
           </Text>
           <Text style={styles.workTitle}>
             <Text>Ethereal Landscapes</Text> <Text style={styles.duration}></Text>
           </Text>
-        </View>
+        </TouchableOpacity>
 
         {/* Second Program Block */}
-        <View style={styles.programBlock}>
+        <TouchableOpacity
+          style={styles.programBlock}
+          onPress={() => router.push('/program-notes/piece1')} // Navigate to Brahms program notes
+        >
           <Text style={styles.composerName}>
             Johannes Brahms <Text style={styles.dates}></Text>
           </Text>
           <Text style={styles.workTitle}>
-            <Text>
-              Violin Concerto in D major, Op. 77
-            </Text>{' '}
+            <Text>Violin Concerto in D major, Op. 77</Text>{' '}
             <Text style={styles.duration}></Text>
           </Text>
-        </View>
+        </TouchableOpacity>
 
         {/* Third Program Block */}
-        <View style={styles.programBlock}>
+        <TouchableOpacity
+          style={styles.programBlock}
+          onPress={() => router.push('/program-notes/piece1')} // Navigate to Brahms program notes
+        >
           <Text style={styles.composerName}>
             Ludwig van Beethoven <Text style={styles.dates}></Text>
           </Text>
           <Text style={styles.workTitle}>
             <Text>Symphony No. 7 in A major, Op. 92</Text> <Text style={styles.duration}></Text>
           </Text>
-        </View>
+        </TouchableOpacity>
       </ScrollView>
 
       {/* Concertmastr Logo at the Bottom */}
