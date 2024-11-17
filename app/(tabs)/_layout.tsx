@@ -1,9 +1,9 @@
 import { Tabs } from 'expo-router';
 import React, { useState } from 'react';
 import { Image, Text, View, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useRouter } from 'expo-router'; // Use router for navigation
 import { Ionicons } from '@expo/vector-icons';
-import SettingsModal from '@/components/SettingsModal'; // Import the SettingsModal component
+import SettingsModal from '@/components/SettingsModal';
 
 const LogoTitle = () => {
   return (
@@ -21,8 +21,27 @@ const LogoTitle = () => {
 };
 
 export default function AppLayout() {
-  const navigation = useNavigation<any>();
+  const router = useRouter(); // Use router for navigation
   const [isSettingsVisible, setIsSettingsVisible] = useState(false);
+
+  const renderBackButton = () => (
+    <TouchableOpacity
+      onPress={() => {
+        if (router.canGoBack()) {
+          router.back(); // Go back if possible
+        } else {
+          router.push('/'); // Navigate to Home if no screens to go back to
+        }
+      }}
+    >
+      <Ionicons
+        name="arrow-back"
+        size={30}
+        color="white"
+        style={{ paddingLeft: 15 }}
+      />
+    </TouchableOpacity>
+  );
 
   return (
     <>
@@ -57,16 +76,7 @@ export default function AppLayout() {
           options={{
             title: 'Program',
             headerTitle: () => <LogoTitle />,
-            headerLeft: () => (
-              <TouchableOpacity onPress={() => navigation.goBack()}>
-                <Ionicons
-                  name="arrow-back"
-                  size={30}
-                  color="white"
-                  style={{ paddingLeft: 15 }}
-                />
-              </TouchableOpacity>
-            ),
+            headerLeft: renderBackButton,
           }}
         />
 
@@ -75,16 +85,7 @@ export default function AppLayout() {
           options={{
             title: 'Biographies',
             headerTitle: () => <LogoTitle />,
-            headerLeft: () => (
-              <TouchableOpacity onPress={() => navigation.goBack()}>
-                <Ionicons
-                  name="arrow-back"
-                  size={30}
-                  color="white"
-                  style={{ paddingLeft: 15 }}
-                />
-              </TouchableOpacity>
-            ),
+            headerLeft: renderBackButton,
           }}
         />
 
@@ -93,34 +94,16 @@ export default function AppLayout() {
           options={{
             title: 'Program Notes',
             headerTitle: () => <LogoTitle />,
-            headerLeft: () => (
-              <TouchableOpacity onPress={() => navigation.goBack()}>
-                <Ionicons
-                  name="arrow-back"
-                  size={30}
-                  color="white"
-                  style={{ paddingLeft: 15 }}
-                />
-              </TouchableOpacity>
-            ),
+            headerLeft: renderBackButton,
           }}
         />
 
         <Tabs.Screen
-          name="program-notes/piece1"
+          name="pnotes/piece1"
           options={{
             title: 'Brahms Program Notes',
             headerTitle: () => <LogoTitle />,
-            headerLeft: () => (
-              <TouchableOpacity onPress={() => (navigation as any).navigate('program-notes')}>
-                <Ionicons
-                  name="arrow-back"
-                  size={30}
-                  color="white"
-                  style={{ paddingLeft: 15 }}
-                />
-              </TouchableOpacity>
-            ),
+            headerLeft: renderBackButton,
           }}
         />
       </Tabs>
