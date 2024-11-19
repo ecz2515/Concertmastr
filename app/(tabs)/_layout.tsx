@@ -1,36 +1,44 @@
 import { Tabs } from 'expo-router';
+import { useNavigationState } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { Image, Text, View, TouchableOpacity } from 'react-native';
-import { useRouter } from 'expo-router'; // Use router for navigation
+import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import SettingsModal from '@/components/SettingsModal';
+import { useEffect } from 'react';
 
-const LogoTitle = () => {
-  return (
-    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-      <Image
-        source={require('@/assets/images/CM_logo.png')}
-        style={{ width: 30, height: 30, marginRight: 10 }}
-        resizeMode="contain"
-      />
-      <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'white' }}>
-        Concertmastr
-      </Text>
-    </View>
-  );
-};
+const LogoTitle = () => (
+  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+    <Image
+      source={require('@/assets/images/CM_logo.png')}
+      style={{ width: 30, height: 30, marginRight: 10 }}
+      resizeMode="contain"
+    />
+    <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'white' }}>
+      Concertmastr
+    </Text>
+  </View>
+);
 
 export default function AppLayout() {
-  const router = useRouter(); // Use router for navigation
+  const router = useRouter();
   const [isSettingsVisible, setIsSettingsVisible] = useState(false);
+  const currentPath = useNavigationState(
+    (state) => state?.routes[state.index]?.name // Get the current route's name
+  );
+
+  useEffect(() => {
+    console.log('Navigated to:', currentPath);
+  }, [currentPath]);
 
   const renderBackButton = () => (
     <TouchableOpacity
       onPress={() => {
-        if (router.canGoBack()) {
-          router.back(); // Go back if possible
+        if (currentPath === 'pnotes/piece1') {
+        } else if (router.canGoBack()) {
+          router.back();
         } else {
-          router.push('/'); // Navigate to Home if no screens to go back to
+          router.push('/');
         }
       }}
     >
@@ -70,7 +78,6 @@ export default function AppLayout() {
             headerTitle: () => <LogoTitle />,
           }}
         />
-
         <Tabs.Screen
           name="program"
           options={{
@@ -79,7 +86,6 @@ export default function AppLayout() {
             headerLeft: renderBackButton,
           }}
         />
-
         <Tabs.Screen
           name="biographies"
           options={{
@@ -88,7 +94,6 @@ export default function AppLayout() {
             headerLeft: renderBackButton,
           }}
         />
-
         <Tabs.Screen
           name="program-notes"
           options={{
@@ -97,7 +102,6 @@ export default function AppLayout() {
             headerLeft: renderBackButton,
           }}
         />
-
         <Tabs.Screen
           name="pnotes/piece1"
           options={{
@@ -106,6 +110,16 @@ export default function AppLayout() {
             headerLeft: renderBackButton,
           }}
         />
+
+        <Tabs.Screen
+          name="meet-orchestra"
+          options={{
+            title: 'Meet the Orchestra',
+            headerTitle: 'Meet the Orchestra',
+            headerLeft: renderBackButton,
+          }}
+        />
+
       </Tabs>
 
       {/* Settings Modal */}

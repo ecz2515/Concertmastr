@@ -1,0 +1,43 @@
+[
+    {
+      "name": "Jane Doe",
+      "instrument": "Concertmaster",
+      "photo": "./assets/images/placeholder-musician.jpg"
+    },
+    {
+      "name": "John Smith",
+      "instrument": "Principal Cello",
+      "photo": "./assets/images/placeholder-musician.jpg"
+    },
+    {
+      "name": "Emily Brown",
+      "instrument": "Flute",
+      "photo": "./assets/images/placeholder-musician.jpg"
+    },
+    {
+      "name": "Michael Lee",
+      "instrument": "Piano",
+      "photo": "./assets/images/placeholder-musician.jpg"
+    },
+    {
+      "name": "Sarah Johnson",
+      "instrument": "Trumpet",
+      "photo": "./assets/images/placeholder-musician.jpg"
+    },
+    {
+      "name": "David Kim",
+      "instrument": "Double Bass",
+      "photo": "./assets/images/placeholder-musician.jpg"
+    },
+    {
+      "name": "Anna Martinez",
+      "instrument": "Clarinet",
+      "photo": "./assets/images/placeholder-musician.jpg"
+    },
+    {
+      "name": "Robert Garcia",
+      "instrument": "Trombone",
+      "photo": "./assets/images/placeholder-musician.jpg"
+    }
+  ]
+  

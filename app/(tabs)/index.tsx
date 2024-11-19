@@ -43,7 +43,10 @@ export default function HomeScreen() {
         }}>
           <Text style={styles.buttonText}>Program Notes</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() => {
+            console.log("Navigating to Meet the Orchestra");
+            router.push("/meet-orchestra");
+        }}>
           <Text style={styles.buttonText}>Meet the Orchestra</Text>
         </TouchableOpacity>
       </View>
