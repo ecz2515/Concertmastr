@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 
-export default function BrahmsProgramNotes() {
+export default function EtherealLandscapesProgramNotes() {
   const scrollViewRef = useRef<ScrollView>(null);
 
   useFocusEffect(
@@ -18,31 +18,30 @@ export default function BrahmsProgramNotes() {
       style={styles.scrollView}
       contentContainerStyle={styles.container}
     >
-      <Text style={styles.sectionTitle}>Johannes Brahms</Text>
-      <Text style={styles.pieceSubtitle}>Violin Concerto in D Major, Op. 77</Text>
+      <Text style={styles.sectionTitle}>Eleanor Vance</Text>
+      <Text style={styles.pieceSubtitle}>Ethereal Landscapes</Text>
       <Text style={styles.content}>
-        Johannes Brahms' Violin Concerto in D Major is a towering masterpiece of the violin
-        repertoire and a cornerstone of the Romantic era. Completed in 1878 and dedicated to his
-        close friend, the violin virtuoso Joseph Joachim, the concerto is celebrated for its
-        symphonic breadth and profound musical depth.
+        Eleanor Vance's *Ethereal Landscapes* is a modern composition that invites listeners into a
+        vivid auditory world of texture, harmony, and emotional depth. Written in 2022, this piece
+        exemplifies the contemporary movement toward immersive soundscapes, blending orchestral
+        techniques with electronic elements.
         {'\n\n'}
-        The first movement, *Allegro non troppo*, begins with a sweeping orchestral introduction
-        that sets the stage for the violin's dramatic entrance. Brahms weaves the soloist and
-        orchestra together in a seamless dialogue, with virtuosic passages that challenge the
-        performer technically and emotionally.
+        The piece opens with *Stillness and Echoes*, a movement that unfolds delicately, featuring
+        ethereal strings and sparse piano notes. The use of silence is as important as the sound,
+        creating a contemplative space for the audience.
         {'\n\n'}
-        The second movement, *Adagio*, offers a moment of sublime beauty, featuring one of the most
-        heartfelt oboe solos in orchestral literature. The violin's lyrical response is a serene
-        meditation that contrasts with the intensity of the outer movements.
+        The second movement, *Celestial Streams*, introduces electronic textures, weaving them with
+        live instrumentation to evoke the sensation of flowing water under a starlit sky. Pulsating
+        rhythms and shimmering harmonies create an otherworldly experience.
         {'\n\n'}
-        The concerto concludes with the *Allegro giocoso, ma non troppo vivace*—a lively and
-        spirited rondo inspired by Hungarian dance rhythms. This finale is a jubilant celebration of
-        Brahms' mastery of form and his ability to balance profound emotion with exuberant
-        energy.
+        The finale, *Resonant Earth*, grounds the listener with deep, resonant chords and dynamic
+        percussive patterns. This movement explores themes of connection and balance, drawing on
+        inspiration from natural landscapes and human resilience.
         {'\n\n'}
-        First performed on January 1, 1879, in Leipzig, with Joachim as the soloist and Brahms
-        conducting, the concerto received mixed reviews initially but has since become a beloved
-        staple of the violin repertoire.
+        Premiered in 2023 at the New York Philharmonic under the baton of conductor Emily Rivera,
+        *Ethereal Landscapes* has been praised for its innovative approach to blending the organic
+        and the synthetic. The piece continues to inspire audiences with its capacity to transport
+        them to a realm beyond the ordinary.
       </Text>
     </ScrollView>
   );
