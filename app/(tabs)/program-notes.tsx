@@ -27,7 +27,7 @@ export default function ProgramScreen() {
         {/* Second Program Block */}
         <TouchableOpacity
           style={styles.programBlock}
-          onPress={() => router.push('/pnotes/piece1')} // Navigate to Brahms program notes
+          onPress={() => router.push('/pnotes/piece2')} // Navigate to Brahms program notes
         >
           <Text style={styles.composerName}>
             Johannes Brahms <Text style={styles.dates}></Text>
@@ -41,7 +41,7 @@ export default function ProgramScreen() {
         {/* Third Program Block */}
         <TouchableOpacity
           style={styles.programBlock}
-          onPress={() => router.push('/pnotes/piece1')} // Navigate to Brahms program notes
+          onPress={() => router.push('/pnotes/piece3')} // Navigate to Brahms program notes
         >
           <Text style={styles.composerName}>
             Ludwig van Beethoven <Text style={styles.dates}></Text>

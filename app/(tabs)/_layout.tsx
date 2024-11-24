@@ -49,7 +49,7 @@ export default function AppLayout() {
         onPress={() => {
           console.log('[BACK BUTTON]: Pressed on Path ->', currentPath);
 
-          if (currentPath === 'pnotes/piece1') {
+          if (currentPath?.startsWith('pnotes/')) {
             console.log('[BACK BUTTON]: Navigating to /program-notes');
             router.push('/program-notes');
           } else if (router.canGoBack()) {
@@ -61,6 +61,7 @@ export default function AppLayout() {
           }
         }}
       >
+
         <Ionicons
           name="arrow-back"
           size={30}
@@ -125,7 +126,23 @@ export default function AppLayout() {
         <Tabs.Screen
           name="pnotes/piece1"
           options={{
+            title: 'Vance Program Notes',
+            headerTitle: () => <LogoTitle />,
+            headerLeft: renderBackButton,
+          }}
+        />
+        <Tabs.Screen
+          name="pnotes/piece2"
+          options={{
             title: 'Brahms Program Notes',
+            headerTitle: () => <LogoTitle />,
+            headerLeft: renderBackButton,
+          }}
+        />
+        <Tabs.Screen
+          name="pnotes/piece3"
+          options={{
+            title: 'Beethoven Program Notes',
             headerTitle: () => <LogoTitle />,
             headerLeft: renderBackButton,
           }}
