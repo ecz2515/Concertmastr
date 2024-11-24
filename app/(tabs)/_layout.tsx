@@ -1,11 +1,10 @@
 import { Tabs } from 'expo-router';
 import { useNavigationState } from '@react-navigation/native';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Image, Text, View, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import SettingsModal from '@/components/SettingsModal';
-import { useEffect } from 'react';
 
 const LogoTitle = () => (
   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -23,33 +22,54 @@ const LogoTitle = () => (
 export default function AppLayout() {
   const router = useRouter();
   const [isSettingsVisible, setIsSettingsVisible] = useState(false);
-  const currentPath = useNavigationState(
-    (state) => state?.routes[state.index]?.name // Get the current route's name
-  );
 
+  const currentPath = useNavigationState((state) => {
+    // Drill into the nested state to derive the active route name
+    const activeRoute = state?.routes[state.index];
+    const nestedState = activeRoute?.state;
+
+    if (nestedState?.routes && nestedState?.index !== undefined) {
+      const nestedActiveRoute = nestedState.routes[nestedState.index];
+      return nestedActiveRoute?.name;
+    }
+
+    return activeRoute?.name || null;
+  });
+
+  // Log the derived currentPath for debugging
   useEffect(() => {
-    console.log('Navigated to:', currentPath);
+    console.log('[NAVIGATION]: Current Path ->', currentPath);
   }, [currentPath]);
 
-  const renderBackButton = () => (
-    <TouchableOpacity
-      onPress={() => {
-        if (currentPath === 'pnotes/piece1') {
-        } else if (router.canGoBack()) {
-          router.back();
-        } else {
-          router.push('/');
-        }
-      }}
-    >
-      <Ionicons
-        name="arrow-back"
-        size={30}
-        color="white"
-        style={{ paddingLeft: 15 }}
-      />
-    </TouchableOpacity>
-  );
+  const renderBackButton = () => {
+    console.log('[BACK BUTTON]: Rendered on Path ->', currentPath);
+
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          console.log('[BACK BUTTON]: Pressed on Path ->', currentPath);
+
+          if (currentPath === 'pnotes/piece1') {
+            console.log('[BACK BUTTON]: Navigating to /program-notes');
+            router.push('/program-notes');
+          } else if (router.canGoBack()) {
+            console.log('[BACK BUTTON]: Navigating back to previous route');
+            router.back();
+          } else {
+            console.log('[BACK BUTTON]: Navigating to homepage');
+            router.push('/');
+          }
+        }}
+      >
+        <Ionicons
+          name="arrow-back"
+          size={30}
+          color="white"
+          style={{ paddingLeft: 15 }}
+        />
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <>
@@ -110,7 +130,6 @@ export default function AppLayout() {
             headerLeft: renderBackButton,
           }}
         />
-
         <Tabs.Screen
           name="meet-orchestra"
           options={{
@@ -119,7 +138,6 @@ export default function AppLayout() {
             headerLeft: renderBackButton,
           }}
         />
-
       </Tabs>
 
       {/* Settings Modal */}
