@@ -1,5 +1,4 @@
-// components/SettingsModal.tsx
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -19,33 +18,34 @@ interface SettingsModalProps {
 }
 
 export default function SettingsModal({ visible, onClose }: SettingsModalProps) {
-  const slideAnim = React.useRef(new Animated.Value(width)).current;
+  const slideAnim = useRef(new Animated.Value(width)).current; // Start off-screen
+  const [isRendered, setIsRendered] = useState(false); // Manage rendering state
 
-  // States for toggles
-  const [trueTone, setTrueTone] = useState(false);
-  const [blueLight, setBlueLight] = useState(false);
-  const [enhancedContrast, setEnhancedContrast] = useState(false);
-
-  React.useEffect(() => {
+  useEffect(() => {
     if (visible) {
+      setIsRendered(true); // Ensure modal is rendered
       Animated.timing(slideAnim, {
-        toValue: width / 2, // Slide to halfway width
+        toValue: width / 2, // Slide in to halfway width
         duration: 300,
         useNativeDriver: false,
       }).start();
     } else {
       Animated.timing(slideAnim, {
-        toValue: width,
+        toValue: width, // Slide out
         duration: 300,
         useNativeDriver: false,
-      }).start();
+      }).start(() => {
+        setIsRendered(false); // Unmount after animation completes
+      });
     }
   }, [visible]);
+
+  if (!isRendered) return null; // Render modal only when visible or animating
 
   return (
     <Modal
       transparent={true}
-      visible={visible}
+      visible={isRendered} // Use `isRendered` to manage rendering
       onRequestClose={onClose}
       animationType="none"
     >
@@ -62,7 +62,7 @@ export default function SettingsModal({ visible, onClose }: SettingsModalProps) 
           <TouchableOpacity
             style={[styles.fontButton, styles.decreaseButton]}
             onPress={() => {
-              /* Implement decrease font size logic */
+              // Placeholder for decrease font size logic
             }}
             activeOpacity={0.7} // Feedback effect on press
           >
@@ -71,7 +71,7 @@ export default function SettingsModal({ visible, onClose }: SettingsModalProps) 
           <TouchableOpacity
             style={[styles.fontButton, styles.increaseButton]}
             onPress={() => {
-              /* Implement increase font size logic */
+              // Placeholder for increase font size logic
             }}
             activeOpacity={0.7} // Feedback effect on press
           >
@@ -83,24 +83,30 @@ export default function SettingsModal({ visible, onClose }: SettingsModalProps) 
         <View style={styles.toggleGroup}>
           <Text style={styles.toggleLabel}>True Tone</Text>
           <Switch
-            value={trueTone}
-            onValueChange={setTrueTone}
+            value={false} // Default value (non-functional)
+            onValueChange={() => {
+              // Placeholder for True Tone logic
+            }}
             style={styles.toggleSwitch}
           />
         </View>
         <View style={styles.toggleGroup}>
           <Text style={styles.toggleLabel}>Blue Light</Text>
           <Switch
-            value={blueLight}
-            onValueChange={setBlueLight}
+            value={false} // Default value (non-functional)
+            onValueChange={() => {
+              // Placeholder for Blue Light logic
+            }}
             style={styles.toggleSwitch}
           />
         </View>
         <View style={styles.toggleGroup}>
           <Text style={styles.toggleLabel}>Enhanced Contrast</Text>
           <Switch
-            value={enhancedContrast}
-            onValueChange={setEnhancedContrast}
+            value={false} // Default value (non-functional)
+            onValueChange={() => {
+              // Placeholder for Enhanced Contrast logic
+            }}
             style={styles.toggleSwitch}
           />
         </View>
@@ -146,7 +152,7 @@ const styles = StyleSheet.create({
   },
   fontSizeControls: {
     flexDirection: 'row',
-    justifyContent: 'center', // Center buttons horizontally
+    justifyContent: 'center',
     marginBottom: 30,
   },
   fontButton: {
