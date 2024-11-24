@@ -1,14 +1,16 @@
-// app/(tabs)/program-notes/brahms.tsx
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 
 export default function BrahmsProgramNotes() {
   const scrollViewRef = useRef<ScrollView>(null);
 
-  useEffect(() => {
-    // Scroll to the top when the component is mounted
-    scrollViewRef.current?.scrollTo({ y: 0, animated: false });
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      // Scroll to the top when the screen gains focus
+      scrollViewRef.current?.scrollTo({ y: 0, animated: false });
+    }, [])
+  );
 
   return (
     <ScrollView
