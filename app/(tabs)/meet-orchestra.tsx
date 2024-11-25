@@ -19,22 +19,42 @@ const MeetOrchestra: React.FC = () => {
     fetchMusicians();
   }, []);
 
+  const photoMap: { [key: string]: any } = {
+    "jing-wang": require('@/assets/orchestra_headshots/jing_wang.jpg'),
+    "leung-kin-fung": require('@/assets/orchestra_headshots/leung_kin-fung.jpg'),
+    "anders-hui": require('@/assets/orchestra_headshots/anders_hui.jpg'),
+    "wang-liang": require('@/assets/orchestra_headshots/wang_liang.jpg'),
+    "bei-de-gaulle": require('@/assets/orchestra_headshots/bei_de_gaulle.jpg'),
+    "ai-jin": require('@/assets/orchestra_headshots/ai_jin.jpg'),
+    "ba-wenjing": require('@/assets/orchestra_headshots/ba_wenjing.jpg'),
+    "cheng-li": require('@/assets/orchestra_headshots/cheng_li.jpg'),
+    "gui-li": require('@/assets/orchestra_headshots/gui_li.jpg'),
+    "jia-shuchen": require('@/assets/orchestra_headshots/jia_shuchen.jpg'),
+  };
+  
   const renderMusicianCard = ({ item }: { item: Musician }) => (
     <View style={styles.card}>
-      <Image source={require('@/assets/images/placeholder-musician.jpg')} style={styles.image} />
+      <Image source={photoMap[item.photo]} style={styles.image} />
       <Text style={styles.name}>{item.name}</Text>
       <Text style={styles.instrument}>{item.instrument}</Text>
     </View>
   );
+  
 
   return (
-    <FlatList
-      data={musicians}
-      renderItem={renderMusicianCard}
-      keyExtractor={(item, index) => index.toString()}
-      numColumns={2} // 2 cards per row
-      contentContainerStyle={styles.container}
-    />
+    <View style={styles.container}>
+      <FlatList
+        data={musicians}
+        ListHeaderComponent={
+          <Text style={styles.disclaimer}>
+            Images feature members of the Hong Kong Philharmonic first violin section, credited to hkphil.org. These are for demonstration only and will be replaced with client-provided content.
+          </Text>
+        }
+        renderItem={renderMusicianCard}
+        keyExtractor={(item, index) => index.toString()}
+        numColumns={2} // 2 cards per row}
+      />
+    </View>
   );
 };
 
@@ -55,6 +75,15 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 4,
   },
+  disclaimer: {
+    fontSize: 14,
+    width: '90%',
+    color: 'gray',
+    textAlign: 'center',
+    marginBottom: 10,
+    marginTop: 10,
+    alignSelf: 'center', // Centers the element horizontally
+  },
   image: {
     width: 100,
     height: 100,
@@ -70,6 +99,7 @@ const styles = StyleSheet.create({
   instrument: {
     fontSize: 14,
     color: 'lightgray',
+    textAlign: 'center',
   },
 });
 
