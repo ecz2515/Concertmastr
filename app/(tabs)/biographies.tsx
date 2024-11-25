@@ -1,7 +1,10 @@
 import React from 'react';
+import { useRouter } from 'expo-router';
 import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
 
 export default function BiographiesScreen() {
+  const router = useRouter();
+  
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -9,27 +12,27 @@ export default function BiographiesScreen() {
         <Text style={styles.title}>Biographies</Text>
 
         {/* First Biography Block */}
-        <TouchableOpacity style={styles.bioBlock}>
+        <TouchableOpacity style={styles.bioBlock} onPress={() => router.push('/bios/bio1')}>
           <Image
-            source={require('@/assets/images/react-logo.png')} // Replace with your image path
+            source={require('@/assets/headshots/musician1.jpg')} // Replace with your image path
             style={styles.bioImage}
           />
           <Text style={styles.bioText}>Victor Stoyanov</Text>
         </TouchableOpacity>
 
         {/* Second Biography Block */}
-        <TouchableOpacity style={styles.bioBlock}>
+        <TouchableOpacity style={styles.bioBlock} onPress={() => router.push('/bios/bio2')}>
           <Image
-            source={require('@/assets/images/react-logo.png')} // Replace with your image path
+            source={require('@/assets/headshots/musician2.jpg')} // Replace with your image path
             style={styles.bioImage}
           />
           <Text style={styles.bioText}>Clara Xu</Text>
         </TouchableOpacity>
 
         {/* Third Biography Block */}
-        <TouchableOpacity style={styles.bioBlock}>
+        <TouchableOpacity style={styles.bioBlock} onPress={() => router.push('/bios/bio3')}>
           <Image
-            source={require('@/assets/images/react-logo.png')} // Replace with your image path
+            source={require('@/assets/headshots/musician3.jpg')} // Replace with your image path
             style={styles.bioImage}
           />
           <Text style={styles.bioText}>New World Philharmonic</Text>

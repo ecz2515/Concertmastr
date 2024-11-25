@@ -52,6 +52,8 @@ export default function AppLayout() {
           if (currentPath?.startsWith('pnotes/')) {
             console.log('[BACK BUTTON]: Navigating to /program-notes');
             router.push('/program-notes');
+          } else if (currentPath?.startsWith('bios/')) {
+            router.push('/biographies');
           } else if (router.canGoBack()) {
             console.log('[BACK BUTTON]: Navigating back to previous route');
             router.back();
@@ -111,6 +113,30 @@ export default function AppLayout() {
           name="biographies"
           options={{
             title: 'Biographies',
+            headerTitle: () => <LogoTitle />,
+            headerLeft: renderBackButton,
+          }}
+        />
+        <Tabs.Screen
+          name="bios/bio1"
+          options={{
+            title: 'bio1',
+            headerTitle: () => <LogoTitle />,
+            headerLeft: renderBackButton,
+          }}
+        />
+        <Tabs.Screen
+          name="bios/bio2"
+          options={{
+            title: 'bio2',
+            headerTitle: () => <LogoTitle />,
+            headerLeft: renderBackButton,
+          }}
+        />
+        <Tabs.Screen
+          name="bios/bio3"
+          options={{
+            title: 'bio3',
             headerTitle: () => <LogoTitle />,
             headerLeft: renderBackButton,
           }}
