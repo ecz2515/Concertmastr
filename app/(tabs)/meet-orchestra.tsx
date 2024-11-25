@@ -20,16 +20,16 @@ const MeetOrchestra: React.FC = () => {
   }, []);
 
   const photoMap: { [key: string]: any } = {
-    "jing-wang": require('@/assets/orchestra_headshots/jing_wang.jpg'),
-    "leung-kin-fung": require('@/assets/orchestra_headshots/leung_kin-fung.jpg'),
-    "anders-hui": require('@/assets/orchestra_headshots/anders_hui.jpg'),
-    "wang-liang": require('@/assets/orchestra_headshots/wang_liang.jpg'),
-    "bei-de-gaulle": require('@/assets/orchestra_headshots/bei_de_gaulle.jpg'),
-    "ai-jin": require('@/assets/orchestra_headshots/ai_jin.jpg'),
-    "ba-wenjing": require('@/assets/orchestra_headshots/ba_wenjing.jpg'),
-    "cheng-li": require('@/assets/orchestra_headshots/cheng_li.jpg'),
-    "gui-li": require('@/assets/orchestra_headshots/gui_li.jpg'),
-    "jia-shuchen": require('@/assets/orchestra_headshots/jia_shuchen.jpg'),
+    "jing_wang.jpg": require('@/assets/orchestra_headshots/jing_wang.jpg'),
+    "leung_kin_fung.jpg": require('@/assets/orchestra_headshots/leung_kin-fung.jpg'), 
+    "anders_hui.jpg": require('@/assets/orchestra_headshots/anders_hui.jpg'),
+    "wang_liang.jpg": require('@/assets/orchestra_headshots/wang_liang.jpg'),
+    "bei_de_gaulle.jpg": require('@/assets/orchestra_headshots/bei_de_gaulle.jpg'),
+    "ai_jin.jpg": require('@/assets/orchestra_headshots/ai_jin.jpg'),
+    "ba_wenjing.jpg": require('@/assets/orchestra_headshots/ba_wenjing.jpg'),
+    "cheng_li.jpg": require('@/assets/orchestra_headshots/cheng_li.jpg'),
+    "gui_li.jpg": require('@/assets/orchestra_headshots/gui_li.jpg'),
+    "jia_shuchen.jpg": require('@/assets/orchestra_headshots/jia_shuchen.jpg'),
   };
   
   const renderMusicianCard = ({ item }: { item: Musician }) => (
