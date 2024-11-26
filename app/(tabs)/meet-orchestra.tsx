@@ -61,6 +61,7 @@ const MeetOrchestra: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
+    backgroundColor: '#111',
   },
   card: {
     flex: 1,
