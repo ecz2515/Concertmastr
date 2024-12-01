@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   View,
   Text,
@@ -9,6 +9,7 @@ import {
   Animated,
   Switch,
 } from 'react-native';
+import { useAppContext } from '../AppStateProvider'; // Import global state hook
 
 const { width } = Dimensions.get('window');
 
@@ -19,11 +20,10 @@ interface SettingsModalProps {
 
 export default function SettingsModal({ visible, onClose }: SettingsModalProps) {
   const slideAnim = useRef(new Animated.Value(width)).current; // Start off-screen
-  const [isRendered, setIsRendered] = useState(false); // Manage rendering state
+  const { enhancedContrast, setEnhancedContrast, trueTone, setTrueTone, blueLight, setBlueLight, fontSize, setFontSize } = useAppContext();
 
   useEffect(() => {
     if (visible) {
-      setIsRendered(true); // Ensure modal is rendered
       Animated.timing(slideAnim, {
         toValue: width / 2, // Slide in to halfway width
         duration: 300,
@@ -34,24 +34,16 @@ export default function SettingsModal({ visible, onClose }: SettingsModalProps) 
         toValue: width, // Slide out
         duration: 300,
         useNativeDriver: false,
-      }).start(() => {
-        setIsRendered(false); // Unmount after animation completes
-      });
+      }).start();
     }
   }, [visible]);
 
-  if (!isRendered) return null; // Render modal only when visible or animating
+  if (!visible) return null; // Render modal only when visible
 
   return (
-    <Modal
-      transparent={true}
-      visible={isRendered} // Use `isRendered` to manage rendering
-      onRequestClose={onClose}
-      animationType="none"
-    >
+    <Modal transparent={true} visible={visible} onRequestClose={onClose} animationType="none">
       <TouchableOpacity style={styles.overlay} onPress={onClose} activeOpacity={1} />
       <Animated.View style={[styles.modalContainer, { left: slideAnim }]}>
-        {/* Logo and Title */}
         <View style={styles.logoContainer}>
           <Text style={styles.title}>Settings</Text>
         </View>
@@ -61,19 +53,15 @@ export default function SettingsModal({ visible, onClose }: SettingsModalProps) 
         <View style={styles.fontSizeControls}>
           <TouchableOpacity
             style={[styles.fontButton, styles.decreaseButton]}
-            onPress={() => {
-              // Placeholder for decrease font size logic
-            }}
-            activeOpacity={0.7} // Feedback effect on press
+            onPress={() => setFontSize(fontSize - 1)}
+            activeOpacity={0.7}
           >
             <Text style={styles.fontButtonText}>-</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.fontButton, styles.increaseButton]}
-            onPress={() => {
-              // Placeholder for increase font size logic
-            }}
-            activeOpacity={0.7} // Feedback effect on press
+            onPress={() => setFontSize(fontSize + 1)}
+            activeOpacity={0.7}
           >
             <Text style={styles.fontButtonText}>+</Text>
           </TouchableOpacity>
@@ -81,32 +69,26 @@ export default function SettingsModal({ visible, onClose }: SettingsModalProps) 
 
         {/* Toggle Settings */}
         <View style={styles.toggleGroup}>
+          <Text style={styles.toggleLabel}>Enhanced Contrast</Text>
+          <Switch
+            value={enhancedContrast}
+            onValueChange={setEnhancedContrast} // Update global state
+            style={styles.toggleSwitch}
+          />
+        </View>
+        <View style={styles.toggleGroup}>
           <Text style={styles.toggleLabel}>True Tone</Text>
           <Switch
-            value={false} // Default value (non-functional)
-            onValueChange={() => {
-              // Placeholder for True Tone logic
-            }}
+            value={trueTone}
+            onValueChange={setTrueTone} // Update global state
             style={styles.toggleSwitch}
           />
         </View>
         <View style={styles.toggleGroup}>
           <Text style={styles.toggleLabel}>Blue Light</Text>
           <Switch
-            value={false} // Default value (non-functional)
-            onValueChange={() => {
-              // Placeholder for Blue Light logic
-            }}
-            style={styles.toggleSwitch}
-          />
-        </View>
-        <View style={styles.toggleGroup}>
-          <Text style={styles.toggleLabel}>Enhanced Contrast</Text>
-          <Switch
-            value={false} // Default value (non-functional)
-            onValueChange={() => {
-              // Placeholder for Enhanced Contrast logic
-            }}
+            value={blueLight}
+            onValueChange={setBlueLight} // Update global state
             style={styles.toggleSwitch}
           />
         </View>
