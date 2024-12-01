@@ -1,9 +1,11 @@
 import React, { useRef } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
+import { useAppContext } from '@/AppStateProvider'; // Import global state hook
 
 export default function BrahmsProgramNotes() {
   const scrollViewRef = useRef<ScrollView>(null);
+  const { enhancedContrast, fontSize, trueTone, blueLight } = useAppContext(); // Access global states
 
   useFocusEffect(
     React.useCallback(() => {
@@ -15,12 +17,26 @@ export default function BrahmsProgramNotes() {
   return (
     <ScrollView
       ref={scrollViewRef}
-      style={styles.scrollView}
+      style={[
+        styles.scrollView,
+        enhancedContrast && styles.enhancedBackground, // Apply Enhanced Contrast
+      ]}
       contentContainerStyle={styles.container}
     >
-      <Text style={styles.sectionTitle}>Johannes Brahms</Text>
-      <Text style={styles.pieceSubtitle}>Violin Concerto in D Major, Op. 77</Text>
-      <Text style={styles.content}>
+      {/* Dynamically scale font sizes */}
+      <Text style={[styles.sectionTitle, { fontSize: fontSize * 1.5 }]}>
+        Johannes Brahms
+      </Text>
+      <Text style={[styles.pieceSubtitle, { fontSize: fontSize * 1.2 }]}>
+        Violin Concerto in D Major, Op. 77
+      </Text>
+      <Text
+        style={[
+          styles.content,
+          { fontSize, lineHeight: fontSize * 1.5 }, // Adjust line height based on font size
+          enhancedContrast && styles.enhancedText, // Apply Enhanced Contrast for text
+        ]}
+      >
         Johannes Brahms' Violin Concerto in D Major is a towering masterpiece of the violin
         repertoire and a cornerstone of the Romantic era. Completed in 1878 and dedicated to his
         close friend, the violin virtuoso Joseph Joachim, the concerto is celebrated for its
@@ -44,33 +60,60 @@ export default function BrahmsProgramNotes() {
         conducting, the concerto received mixed reviews initially but has since become a beloved
         staple of the violin repertoire.
       </Text>
+      {/* Add overlays for True Tone and Blue Light */}
+      {trueTone && <View style={styles.trueToneOverlay} />}
+      {blueLight && <View style={styles.blueLightOverlay} />}
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   scrollView: {
-    flex: 1, // Ensures the ScrollView fills the entire screen
-    backgroundColor: 'black', // Keeps the background black
+    flex: 1,
+    backgroundColor: 'black', // Default background
+  },
+  enhancedBackground: {
+    backgroundColor: '#000', // Stronger black for enhanced contrast
   },
   container: {
     padding: 20,
   },
   sectionTitle: {
-    fontSize: 24,
+    fontSize: 24, // Dynamically scaled
     fontWeight: 'bold',
     color: 'white',
     marginBottom: 20,
   },
   pieceSubtitle: {
-    fontSize: 18,
+    fontSize: 18, // Dynamically scaled
     fontWeight: '600',
     color: 'white',
     marginBottom: 20,
   },
   content: {
-    fontSize: 16,
-    lineHeight: 24,
+    fontSize: 16, // Dynamically scaled
+    lineHeight: 24, // Dynamically scaled
     color: 'white',
+  },
+  enhancedText: {
+    color: '#FFFFFF', // Brighter white for enhanced contrast
+  },
+  trueToneOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(255, 244, 214, 0.2)', // Warm overlay for True Tone
+    zIndex: 1,
+  },
+  blueLightOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(255, 173, 96, 0.2)', // Amber overlay for Blue Light
+    zIndex: 1,
   },
 });

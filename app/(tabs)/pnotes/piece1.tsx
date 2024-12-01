@@ -1,9 +1,11 @@
 import React, { useRef } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
+import { useAppContext } from '@/AppStateProvider';
 
 export default function EtherealLandscapesProgramNotes() {
   const scrollViewRef = useRef<ScrollView>(null);
+  const { enhancedContrast, fontSize, trueTone, blueLight } = useAppContext();
 
   useFocusEffect(
     React.useCallback(() => {
@@ -15,12 +17,26 @@ export default function EtherealLandscapesProgramNotes() {
   return (
     <ScrollView
       ref={scrollViewRef}
-      style={styles.scrollView}
+      style={[
+        styles.scrollView,
+        enhancedContrast && styles.enhancedBackground, // Apply Enhanced Contrast
+      ]}
       contentContainerStyle={styles.container}
     >
-      <Text style={styles.sectionTitle}>Eleanor Vance</Text>
-      <Text style={styles.pieceSubtitle}>Ethereal Landscapes</Text>
-      <Text style={styles.content}>
+      {/* Apply dynamic styles */}
+      <Text style={[styles.sectionTitle, { fontSize: fontSize * 1.5 }]}>
+        Eleanor Vance
+      </Text>
+      <Text style={[styles.pieceSubtitle, { fontSize: fontSize * 1.2 }]}>
+        Ethereal Landscapes
+      </Text>
+      <Text
+        style={[
+          styles.content,
+          { fontSize, lineHeight: fontSize * 1.5 },
+          enhancedContrast && styles.enhancedText, // Enhanced Contrast for text
+        ]}
+      >
         Eleanor Vance's *Ethereal Landscapes* is a modern composition that invites listeners into a
         vivid auditory world of texture, harmony, and emotional depth. Written in 2022, this piece
         exemplifies the contemporary movement toward immersive soundscapes, blending orchestral
@@ -43,33 +59,60 @@ export default function EtherealLandscapesProgramNotes() {
         and the synthetic. The piece continues to inspire audiences with its capacity to transport
         them to a realm beyond the ordinary.
       </Text>
+      {/* True Tone and Blue Light overlays */}
+      {trueTone && <View style={styles.trueToneOverlay} />}
+      {blueLight && <View style={styles.blueLightOverlay} />}
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   scrollView: {
-    flex: 1, // Ensures the ScrollView fills the entire screen
-    backgroundColor: 'black', // Keeps the background black
+    flex: 1,
+    backgroundColor: 'black', // Default background
+  },
+  enhancedBackground: {
+    backgroundColor: '#000000', // Stronger black for enhanced contrast
   },
   container: {
     padding: 20,
   },
   sectionTitle: {
-    fontSize: 24,
+    fontSize: 24, // Scaled dynamically
     fontWeight: 'bold',
     color: 'white',
     marginBottom: 20,
   },
   pieceSubtitle: {
-    fontSize: 18,
+    fontSize: 18, // Scaled dynamically
     fontWeight: '600',
     color: 'white',
     marginBottom: 20,
   },
   content: {
-    fontSize: 16,
+    fontSize: 16, // Scaled dynamically
     lineHeight: 24,
     color: 'white',
+  },
+  enhancedText: {
+    color: '#FFFFFF', // Brighter white for enhanced contrast
+  },
+  trueToneOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(255, 244, 214, 0.2)', // Warm overlay for True Tone
+    zIndex: 1,
+  },
+  blueLightOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(255, 173, 96, 0.2)', // Amber overlay for Blue Light
+    zIndex: 1,
   },
 });
