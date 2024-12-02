@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { router } from 'expo-router';
+import { useAppContext } from '@/AppStateProvider'; // Import global state hook
 
 const imagesToPreload = [
   require('@/assets/images/event-image.jpg'),
@@ -12,6 +13,7 @@ const imagesToPreload = [
 
 export default function HomeScreen() {
   const navigation = useNavigation();
+  const { enhancedContrast, fontSize, trueTone, blueLight } = useAppContext();
   const [isReady, setIsReady] = useState(false);
   const [imagesLoaded, setImagesLoaded] = useState(0);
   const totalImages = imagesToPreload.length;
@@ -40,7 +42,15 @@ export default function HomeScreen() {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color="#ffffff" />
-        <Text style={styles.loadingText}>Loading...</Text>
+        <Text
+          style={[
+            styles.loadingText,
+            { fontSize: fontSize * 1.2 },
+            enhancedContrast && styles.enhancedLoadingText,
+          ]}
+        >
+          Loading...
+        </Text>
         <View style={styles.hiddenContainer}>
           {imagesToPreload.map((image, index) => (
             <Image
@@ -66,46 +76,98 @@ export default function HomeScreen() {
         />
       </View>
       <View style={styles.mainContent}>
-        <Text style={styles.eventTitle}>
+        <Text
+          style={[
+            styles.eventTitle,
+            { fontSize: fontSize * 1.6 },
+            enhancedContrast && styles.enhancedEventTitle,
+          ]}
+        >
           A Night of Majesty: Beethoven’s 7th Symphony and Brahms’ Violin Concerto
         </Text>
         <TouchableOpacity
-          style={styles.button}
+          style={[
+            styles.button,
+            enhancedContrast && styles.enhancedButton,
+          ]}
           onPress={() => {
-            console.log('Navigating to Program');
+            console.log('Navigating to Concert Program');
             router.push('/program');
           }}
         >
-          <Text style={styles.buttonText}>Concert Program</Text>
+          <Text
+            style={[
+              styles.buttonText,
+              { fontSize },
+              enhancedContrast && styles.enhancedButtonText,
+            ]}
+          >
+            Concert Program
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.button}
+          style={[
+            styles.button,
+            enhancedContrast && styles.enhancedButton,
+          ]}
           onPress={() => {
             console.log('Navigating to Biographies');
             router.push('/biographies');
           }}
         >
-          <Text style={styles.buttonText}>Biographies</Text>
+          <Text
+            style={[
+              styles.buttonText,
+              { fontSize },
+              enhancedContrast && styles.enhancedButtonText,
+            ]}
+          >
+            Biographies
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.button}
+          style={[
+            styles.button,
+            enhancedContrast && styles.enhancedButton,
+          ]}
           onPress={() => {
             console.log('Navigating to Program Notes');
             router.push('/program-notes');
           }}
         >
-          <Text style={styles.buttonText}>Program Notes</Text>
+          <Text
+            style={[
+              styles.buttonText,
+              { fontSize },
+              enhancedContrast && styles.enhancedButtonText,
+            ]}
+          >
+            Program Notes
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.button}
+          style={[
+            styles.button,
+            enhancedContrast && styles.enhancedButton,
+          ]}
           onPress={() => {
             console.log('Navigating to Meet the Orchestra');
             router.push('/meet-orchestra');
           }}
         >
-          <Text style={styles.buttonText}>Meet the Orchestra</Text>
+          <Text
+            style={[
+              styles.buttonText,
+              { fontSize },
+              enhancedContrast && styles.enhancedButtonText,
+            ]}
+          >
+            Meet the Orchestra
+          </Text>
         </TouchableOpacity>
       </View>
+      {trueTone && <View style={styles.trueToneOverlay} />}
+      {blueLight && <View style={styles.blueLightOverlay} />}
     </View>
   );
 }
@@ -137,6 +199,10 @@ const styles = StyleSheet.create({
     marginTop: 20,
     textAlign: 'center',
   },
+  enhancedEventTitle: {
+    fontWeight: '900', // Extra bold for Enhanced Contrast
+    textDecorationLine: 'underline', // Underline for emphasis
+  },
   button: {
     backgroundColor: '#333',
     paddingVertical: 15,
@@ -144,10 +210,18 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     alignItems: 'center',
   },
+  enhancedButton: {
+    backgroundColor: '#444', // Slightly brighter for Enhanced Contrast
+    borderWidth: 1,
+    borderColor: 'white', // Add border for better visibility
+  },
   buttonText: {
     fontSize: 16,
     color: 'white',
     fontWeight: 'bold',
+  },
+  enhancedButtonText: {
+    fontWeight: '900', // Extra bold for Enhanced Contrast
   },
   loadingContainer: {
     flex: 1,
@@ -160,6 +234,9 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
   },
+  enhancedLoadingText: {
+    fontWeight: '700', // Bold loading text for Enhanced Contrast
+  },
   hiddenContainer: {
     position: 'absolute',
     top: -1000, // Move offscreen
@@ -169,5 +246,25 @@ const styles = StyleSheet.create({
   hiddenImage: {
     width: 1,
     height: 1,
+  },
+  trueToneOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(255, 223, 186, 0.4)', // Warmer overlay for True Tone
+    zIndex: 1,
+    pointerEvents: 'none',
+  },
+  blueLightOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(255, 140, 0, 0.4)', // Richer amber overlay for Blue Light
+    zIndex: 1,
+    pointerEvents: 'none',
   },
 });

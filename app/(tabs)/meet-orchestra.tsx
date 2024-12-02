@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FlatList, View, Text, Image, StyleSheet } from 'react-native';
+import { useAppContext } from '@/AppStateProvider'; // Import global state hook
 
 interface Musician {
   name: string;
@@ -9,6 +10,7 @@ interface Musician {
 
 const MeetOrchestra: React.FC = () => {
   const [musicians, setMusicians] = useState<Musician[]>([]);
+  const { enhancedContrast, fontSize, trueTone, blueLight } = useAppContext();
 
   useEffect(() => {
     // Load the JSON data
@@ -31,29 +33,54 @@ const MeetOrchestra: React.FC = () => {
     "gui_li.jpg": require('@/assets/orchestra_headshots/gui_li.jpg'),
     "jia_shuchen.jpg": require('@/assets/orchestra_headshots/jia_shuchen.jpg'),
   };
-  
+
   const renderMusicianCard = ({ item }: { item: Musician }) => (
-    <View style={styles.card}>
+    <View style={[styles.card, enhancedContrast && styles.enhancedCard]}>
       <Image source={photoMap[item.photo]} style={styles.image} />
-      <Text style={styles.name}>{item.name}</Text>
-      <Text style={styles.instrument}>{item.instrument}</Text>
+      <Text
+        style={[
+          styles.name,
+          { fontSize: fontSize * 1.2 },
+          enhancedContrast && styles.enhancedName,
+        ]}
+      >
+        {item.name}
+      </Text>
+      <Text
+        style={[
+          styles.instrument,
+          { fontSize },
+          enhancedContrast && styles.enhancedInstrument,
+        ]}
+      >
+        {item.instrument}
+      </Text>
     </View>
   );
-  
 
   return (
     <View style={styles.container}>
       <FlatList
         data={musicians}
         ListHeaderComponent={
-          <Text style={styles.disclaimer}>
-            Images feature members of the Hong Kong Philharmonic first violin section, credited to hkphil.org. These are for demonstration only and will be replaced with client-provided content.
+          <Text
+            style={[
+              styles.disclaimer,
+              { fontSize: fontSize * 0.9 },
+              enhancedContrast && styles.enhancedDisclaimer,
+            ]}
+          >
+            Images feature members of the Hong Kong Philharmonic first violin section, credited to
+            hkphil.org. These are for demonstration only and will be replaced with client-provided
+            content.
           </Text>
         }
         renderItem={renderMusicianCard}
         keyExtractor={(item, index) => index.toString()}
-        numColumns={2} // 2 cards per row}
+        numColumns={2} // 2 cards per row
       />
+      {trueTone && <View style={styles.trueToneOverlay} />}
+      {blueLight && <View style={styles.blueLightOverlay} />}
     </View>
   );
 };
@@ -70,11 +97,15 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     backgroundColor: '#333',
     alignItems: 'center',
-    justifyContent: 'center',
     elevation: 4, // Shadow for Android
     shadowColor: '#000', // Shadow for iOS
     shadowOpacity: 0.2,
     shadowRadius: 4,
+  },
+  enhancedCard: {
+    backgroundColor: '#444',
+    borderWidth: 1,
+    borderColor: 'white',
   },
   disclaimer: {
     fontSize: 14,
@@ -83,7 +114,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 10,
     marginTop: 10,
-    alignSelf: 'center', // Centers the element horizontally
+    alignSelf: 'center',
+  },
+  enhancedDisclaimer: {
+    fontWeight: '600',
+    color: 'white',
   },
   image: {
     width: 100,
@@ -96,11 +131,42 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
     marginBottom: 5,
+    textAlign: 'center', // Center the text
+  },
+  enhancedName: {
+    fontWeight: '900',
+    textShadowColor: '#FFFFFF',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 1,
   },
   instrument: {
     fontSize: 14,
     color: 'lightgray',
     textAlign: 'center',
+  },
+  enhancedInstrument: {
+    color: 'white',
+    fontWeight: '700',
+  },
+  trueToneOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(255, 223, 186, 0.4)', // Warm overlay for True Tone
+    zIndex: 1,
+    pointerEvents: 'none', // Allow interactions through overlay
+  },
+  blueLightOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(255, 140, 0, 0.4)', // Blue light filter
+    zIndex: 1,
+    pointerEvents: 'none', // Allow interactions through overlay
   },
 });
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -20,29 +20,51 @@ interface SettingsModalProps {
 
 export default function SettingsModal({ visible, onClose }: SettingsModalProps) {
   const slideAnim = useRef(new Animated.Value(width)).current; // Start off-screen
-  const { enhancedContrast, setEnhancedContrast, trueTone, setTrueTone, blueLight, setBlueLight, fontSize, setFontSize } = useAppContext();
+  const [localVisible, setLocalVisible] = useState(visible); // Manage internal visibility
+  const {
+    enhancedContrast,
+    setEnhancedContrast,
+    trueTone,
+    setTrueTone,
+    blueLight,
+    setBlueLight,
+    fontSize,
+    setFontSize,
+  } = useAppContext();
 
+  // Handle modal open and close animations
   useEffect(() => {
     if (visible) {
+      setLocalVisible(true); // Make modal visible
       Animated.timing(slideAnim, {
         toValue: width / 2, // Slide in to halfway width
         duration: 300,
         useNativeDriver: false,
       }).start();
     } else {
+      // Slide out and wait for animation to complete
       Animated.timing(slideAnim, {
         toValue: width, // Slide out
         duration: 300,
         useNativeDriver: false,
-      }).start();
+      }).start(() => setLocalVisible(false)); // Hide modal after animation
     }
   }, [visible]);
 
-  if (!visible) return null; // Render modal only when visible
+  if (!localVisible) return null; // Render modal only when animating or visible
 
   return (
-    <Modal transparent={true} visible={visible} onRequestClose={onClose} animationType="none">
-      <TouchableOpacity style={styles.overlay} onPress={onClose} activeOpacity={1} />
+    <Modal
+      transparent={true}
+      visible={localVisible} // Controlled by internal state
+      onRequestClose={onClose}
+      animationType="none"
+    >
+      <TouchableOpacity
+        style={styles.overlay}
+        onPress={onClose} // Trigger slide-out animation
+        activeOpacity={1}
+      />
       <Animated.View style={[styles.modalContainer, { left: slideAnim }]}>
         <View style={styles.logoContainer}>
           <Text style={styles.title}>Settings</Text>
@@ -66,6 +88,15 @@ export default function SettingsModal({ visible, onClose }: SettingsModalProps) 
             <Text style={styles.fontButtonText}>+</Text>
           </TouchableOpacity>
         </View>
+
+        {/* Reset Font Size Button */}
+        <TouchableOpacity
+          style={styles.resetButton}
+          onPress={() => setFontSize(16)} // Reset to default font size
+          activeOpacity={0.7}
+        >
+          <Text style={styles.resetButtonText}>Reset Font Size</Text>
+        </TouchableOpacity>
 
         {/* Toggle Settings */}
         <View style={styles.toggleGroup}>
@@ -92,6 +123,20 @@ export default function SettingsModal({ visible, onClose }: SettingsModalProps) 
             style={styles.toggleSwitch}
           />
         </View>
+
+        {/* Reset All Settings Button */}
+        <TouchableOpacity
+          style={styles.resetAllButton}
+          onPress={() => {
+            setFontSize(16); // Default font size
+            setEnhancedContrast(false); // Default enhanced contrast
+            setTrueTone(false); // Default true tone
+            setBlueLight(false); // Default blue light
+          }}
+          activeOpacity={0.7}
+        >
+          <Text style={styles.resetAllButtonText}>Reset All Settings</Text>
+        </TouchableOpacity>
       </Animated.View>
     </Modal>
   );
@@ -135,7 +180,7 @@ const styles = StyleSheet.create({
   fontSizeControls: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginBottom: 30,
+    marginBottom: 10,
   },
   fontButton: {
     padding: 15,
@@ -153,17 +198,44 @@ const styles = StyleSheet.create({
   },
   fontButtonText: {
     color: 'white',
-    fontSize: 22,
+    fontSize: 30,
+  },
+  resetButton: {
+    marginTop: 10,
+    marginBottom: 50,
+    padding: 10,
+    backgroundColor: '#333',
+    borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  resetButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'normal',
   },
   toggleGroup: {
     marginBottom: 20,
   },
   toggleLabel: {
     color: 'white',
-    fontSize: 16,
+    fontSize: 18,
     marginBottom: 5,
   },
   toggleSwitch: {
     alignSelf: 'flex-start',
+  },
+  resetAllButton: {
+    marginTop: 20,
+    padding: 15,
+    backgroundColor: '#8b3232',
+    borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  resetAllButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });

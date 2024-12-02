@@ -24,17 +24,29 @@ export default function BrahmsProgramNotes() {
       contentContainerStyle={styles.container}
     >
       {/* Dynamically scale font sizes */}
-      <Text style={[styles.sectionTitle, { fontSize: fontSize * 1.5 }]}>
+      <Text
+        style={[
+          styles.sectionTitle,
+          { fontSize: fontSize * 1.5 },
+          enhancedContrast && styles.enhancedSectionTitle, // Enhanced Contrast for title
+        ]}
+      >
         Johannes Brahms
       </Text>
-      <Text style={[styles.pieceSubtitle, { fontSize: fontSize * 1.2 }]}>
+      <Text
+        style={[
+          styles.pieceSubtitle,
+          { fontSize: fontSize * 1.2 },
+          enhancedContrast && styles.enhancedPieceSubtitle, // Enhanced Contrast for subtitle
+        ]}
+      >
         Violin Concerto in D Major, Op. 77
       </Text>
       <Text
         style={[
           styles.content,
           { fontSize, lineHeight: fontSize * 1.5 }, // Adjust line height based on font size
-          enhancedContrast && styles.enhancedText, // Apply Enhanced Contrast for text
+          enhancedContrast && styles.enhancedContent, // Enhanced Contrast for content
         ]}
       >
         Johannes Brahms' Violin Concerto in D Major is a towering masterpiece of the violin
@@ -73,30 +85,43 @@ const styles = StyleSheet.create({
     backgroundColor: 'black', // Default background
   },
   enhancedBackground: {
-    backgroundColor: '#000', // Stronger black for enhanced contrast
+    backgroundColor: '#000000', // Stronger black for enhanced contrast
   },
   container: {
     padding: 20,
   },
   sectionTitle: {
-    fontSize: 24, // Dynamically scaled
+    fontSize: 24, // Scaled dynamically
     fontWeight: 'bold',
     color: 'white',
     marginBottom: 20,
   },
+  enhancedSectionTitle: {
+    fontWeight: '900', // Bolder font weight
+    textDecorationLine: 'underline', // Add underline for emphasis
+  },
   pieceSubtitle: {
-    fontSize: 18, // Dynamically scaled
+    fontSize: 18, // Scaled dynamically
     fontWeight: '600',
     color: 'white',
     marginBottom: 20,
   },
+  enhancedPieceSubtitle: {
+    fontWeight: '800', // Bolder font weight for subtitles
+    textShadowColor: '#FFFFFF', // Subtle shadow to enhance visibility
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 1,
+  },
   content: {
-    fontSize: 16, // Dynamically scaled
-    lineHeight: 24, // Dynamically scaled
+    fontSize: 16, // Scaled dynamically
+    lineHeight: 24,
     color: 'white',
   },
-  enhancedText: {
-    color: '#FFFFFF', // Brighter white for enhanced contrast
+  enhancedContent: {
+    fontWeight: '700', // Make content text bold
+    textShadowColor: '#FFFFFF', // Subtle shadow for text
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 1,
   },
   trueToneOverlay: {
     position: 'absolute',
@@ -104,8 +129,9 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(255, 244, 214, 0.2)', // Warm overlay for True Tone
+    backgroundColor: 'rgba(255, 223, 186, 0.4)', // Warmer, deeper tone for True Tone
     zIndex: 1,
+    pointerEvents: 'none',
   },
   blueLightOverlay: {
     position: 'absolute',
@@ -113,7 +139,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(255, 173, 96, 0.2)', // Amber overlay for Blue Light
+    backgroundColor: 'rgba(255, 140, 0, 0.4)', // Richer amber for Blue Light
     zIndex: 1,
   },
 });
