@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { router } from 'expo-router';
 import { useAppContext } from '@/AppStateProvider'; // Import global state hook
+import { NativeSyntheticEvent, ImageErrorEventData } from 'react-native';
 
 const imagesToPreload = [
   require('@/assets/images/event-image.jpg'),
@@ -14,57 +15,14 @@ const imagesToPreload = [
 export default function HomeScreen() {
   const navigation = useNavigation();
   const { enhancedContrast, fontSize, trueTone, blueLight } = useAppContext();
-  const [isReady, setIsReady] = useState(false);
-  const [imagesLoaded, setImagesLoaded] = useState(0);
-  const totalImages = imagesToPreload.length;
-
-  useEffect(() => {
-    const resolvedImages = imagesToPreload.map((image) => Image.resolveAssetSource(image));
-    console.log('Resolved images:', resolvedImages);
-
-    if (imagesLoaded === totalImages) {
-      console.log('All images loaded successfully!');
-      setIsReady(true);
-    }
-  }, [imagesLoaded]);
 
   const handleImageLoad = (index: number) => {
     console.log(`Image ${index + 1} loaded successfully.`);
-    setImagesLoaded((prev) => prev + 1);
   };
 
-  const handleImageError = (index: number, error: any) => {
-    console.error(`Image ${index + 1} failed to load.`, error);
-    setImagesLoaded((prev) => prev + 1); // Proceed even if an image fails
+  const handleImageError = (index: number, error: NativeSyntheticEvent<ImageErrorEventData>) => {
+    console.error(`Image ${index + 1} failed to load.`, error.nativeEvent);
   };
-
-  if (!isReady) {
-    return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#ffffff" />
-        <Text
-          style={[
-            styles.loadingText,
-            { fontSize: fontSize * 1.2 },
-            enhancedContrast && styles.enhancedLoadingText,
-          ]}
-        >
-          Loading...
-        </Text>
-        <View style={styles.hiddenContainer}>
-          {imagesToPreload.map((image, index) => (
-            <Image
-              key={index}
-              source={image}
-              onLoad={() => handleImageLoad(index)}
-              onError={(error) => handleImageError(index, error)}
-              style={styles.hiddenImage} // Offscreen rendering
-            />
-          ))}
-        </View>
-      </View>
-    );
-  }
 
   return (
     <View style={styles.container}>
@@ -86,14 +44,8 @@ export default function HomeScreen() {
           A Night of Majesty: Beethoven’s 7th Symphony and Brahms’ Violin Concerto
         </Text>
         <TouchableOpacity
-          style={[
-            styles.button,
-            enhancedContrast && styles.enhancedButton,
-          ]}
-          onPress={() => {
-            console.log('Navigating to Concert Program');
-            router.push('/program');
-          }}
+          style={[styles.button, enhancedContrast && styles.enhancedButton]}
+          onPress={() => router.push('/program')}
         >
           <Text
             style={[
@@ -106,14 +58,8 @@ export default function HomeScreen() {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[
-            styles.button,
-            enhancedContrast && styles.enhancedButton,
-          ]}
-          onPress={() => {
-            console.log('Navigating to Biographies');
-            router.push('/biographies');
-          }}
+          style={[styles.button, enhancedContrast && styles.enhancedButton]}
+          onPress={() => router.push('/biographies')}
         >
           <Text
             style={[
@@ -126,14 +72,8 @@ export default function HomeScreen() {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[
-            styles.button,
-            enhancedContrast && styles.enhancedButton,
-          ]}
-          onPress={() => {
-            console.log('Navigating to Program Notes');
-            router.push('/program-notes');
-          }}
+          style={[styles.button, enhancedContrast && styles.enhancedButton]}
+          onPress={() => router.push('/program-notes')}
         >
           <Text
             style={[
@@ -146,14 +86,8 @@ export default function HomeScreen() {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[
-            styles.button,
-            enhancedContrast && styles.enhancedButton,
-          ]}
-          onPress={() => {
-            console.log('Navigating to Meet the Orchestra');
-            router.push('/meet-orchestra');
-          }}
+          style={[styles.button, enhancedContrast && styles.enhancedButton]}
+          onPress={() => router.push('/meet-orchestra')}
         >
           <Text
             style={[
@@ -168,6 +102,18 @@ export default function HomeScreen() {
       </View>
       {trueTone && <View style={styles.trueToneOverlay} />}
       {blueLight && <View style={styles.blueLightOverlay} />}
+      {/* Offscreen image preloading */}
+      <View style={styles.hiddenContainer}>
+        {imagesToPreload.map((image, index) => (
+          <Image
+            key={index}
+            source={image}
+            onLoad={() => handleImageLoad(index)}
+            onError={(error: any) => handleImageError(index, error)}
+            style={styles.hiddenImage}
+          />
+        ))}
+      </View>
     </View>
   );
 }
@@ -222,20 +168,6 @@ const styles = StyleSheet.create({
   },
   enhancedButtonText: {
     fontWeight: '900', // Extra bold for Enhanced Contrast
-  },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'black',
-  },
-  loadingText: {
-    marginTop: 10,
-    color: 'white',
-    fontSize: 18,
-  },
-  enhancedLoadingText: {
-    fontWeight: '700', // Bold loading text for Enhanced Contrast
   },
   hiddenContainer: {
     position: 'absolute',
