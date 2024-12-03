@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, Image, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { router } from 'expo-router';
 import { useAppContext } from '@/AppStateProvider'; // Import global state hook
@@ -15,6 +15,15 @@ const imagesToPreload = [
 export default function HomeScreen() {
   const navigation = useNavigation();
   const { enhancedContrast, fontSize, trueTone, blueLight } = useAppContext();
+
+  useEffect(() => {
+    // Display an alert to remind users to silence their phones
+    Alert.alert(
+      "Shh... Phones on Silent!",
+      "To let the music play uninterrupted, please kindly set your mobile phone to silent mode",
+      [{ text: "Got it!", onPress: () => console.log("Alert acknowledged") }]
+    );
+  }, []);
 
   const handleImageLoad = (index: number) => {
     console.log(`Image ${index + 1} loaded successfully.`);
