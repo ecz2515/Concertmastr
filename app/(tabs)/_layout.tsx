@@ -24,7 +24,6 @@ export default function AppLayout() {
   const [isSettingsVisible, setIsSettingsVisible] = useState(false);
 
   const currentPath = useNavigationState((state) => {
-    // Drill into the nested state to derive the active route name
     const activeRoute = state?.routes[state.index];
     const nestedState = activeRoute?.state;
 
@@ -36,7 +35,6 @@ export default function AppLayout() {
     return activeRoute?.name || null;
   });
 
-  // Log the derived currentPath for debugging
   useEffect(() => {
     console.log('[NAVIGATION]: Current Path ->', currentPath);
   }, [currentPath]);
@@ -50,20 +48,16 @@ export default function AppLayout() {
           console.log('[BACK BUTTON]: Pressed on Path ->', currentPath);
 
           if (currentPath?.startsWith('pnotes/')) {
-            console.log('[BACK BUTTON]: Navigating to /program-notes');
             router.push('/program-notes');
           } else if (currentPath?.startsWith('bios/')) {
             router.push('/biographies');
           } else if (router.canGoBack()) {
-            console.log('[BACK BUTTON]: Navigating back to previous route');
             router.back();
           } else {
-            console.log('[BACK BUTTON]: Navigating to homepage');
             router.push('/');
           }
         }}
       >
-
         <Ionicons
           name="arrow-back"
           size={30}
@@ -120,7 +114,7 @@ export default function AppLayout() {
         <Tabs.Screen
           name="bios/bio1"
           options={{
-            title: 'bio1',
+            title: 'Biography',
             headerTitle: () => <LogoTitle />,
             headerLeft: renderBackButton,
           }}
@@ -128,7 +122,7 @@ export default function AppLayout() {
         <Tabs.Screen
           name="bios/bio2"
           options={{
-            title: 'bio2',
+            title: 'Biography',
             headerTitle: () => <LogoTitle />,
             headerLeft: renderBackButton,
           }}
@@ -136,7 +130,7 @@ export default function AppLayout() {
         <Tabs.Screen
           name="bios/bio3"
           options={{
-            title: 'bio3',
+            title: 'Biography',
             headerTitle: () => <LogoTitle />,
             headerLeft: renderBackButton,
           }}
@@ -152,7 +146,7 @@ export default function AppLayout() {
         <Tabs.Screen
           name="pnotes/piece1"
           options={{
-            title: 'Vance Program Notes',
+            title: 'Program Notes',
             headerTitle: () => <LogoTitle />,
             headerLeft: renderBackButton,
           }}
@@ -160,7 +154,7 @@ export default function AppLayout() {
         <Tabs.Screen
           name="pnotes/piece2"
           options={{
-            title: 'Brahms Program Notes',
+            title: 'Program Notes',
             headerTitle: () => <LogoTitle />,
             headerLeft: renderBackButton,
           }}
@@ -168,7 +162,7 @@ export default function AppLayout() {
         <Tabs.Screen
           name="pnotes/piece3"
           options={{
-            title: 'Beethoven Program Notes',
+            title: 'Program Notes',
             headerTitle: () => <LogoTitle />,
             headerLeft: renderBackButton,
           }}
@@ -177,7 +171,7 @@ export default function AppLayout() {
           name="meet-orchestra"
           options={{
             title: 'Meet the Orchestra',
-            headerTitle: 'Meet the Orchestra',
+            headerTitle: () => <LogoTitle />,
             headerLeft: renderBackButton,
           }}
         />

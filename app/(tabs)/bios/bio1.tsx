@@ -2,10 +2,14 @@ import React, { useRef } from 'react';
 import { View, Text, StyleSheet, ScrollView, Image } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { useAppContext } from '@/AppStateProvider'; // Import global state hook
+import concertData from '@/concert.json'; // Import JSON file
 
-export default function bio1() {
+export default function Bio1() {
   const scrollViewRef = useRef<ScrollView>(null);
   const { enhancedContrast, fontSize, trueTone, blueLight } = useAppContext();
+
+  // Fetch artist data directly for the first artist
+  const artist = concertData.artists[0]; // Statically fetch the first artist
 
   useFocusEffect(
     React.useCallback(() => {
@@ -30,7 +34,7 @@ export default function bio1() {
           enhancedContrast && styles.enhancedSectionTitle,
         ]}
       >
-        Victor Stoyanov
+        {artist.name}
       </Text>
       <Text
         style={[
@@ -39,10 +43,10 @@ export default function bio1() {
           enhancedContrast && styles.enhancedPieceSubtitle,
         ]}
       >
-        Conductor
+        {artist.role || 'Musician'} {/* Default to 'Musician' if no role */}
       </Text>
       <Image
-        source={require('@/assets/headshots/musician1.jpg')}
+        source={{ uri: artist.image }} // Use artist image dynamically
         style={styles.bioImage}
       />
       <Text
@@ -52,31 +56,7 @@ export default function bio1() {
           enhancedContrast && styles.enhancedContent,
         ]}
       >
-        Victor Stoyanov is a world-renowned conductor celebrated for his dynamic interpretations and
-        profound musical insight. Born in Sofia, Bulgaria, Stoyanov began his musical journey as a
-        violinist before discovering his passion for conducting. After completing his studies at
-        the Sofia Conservatory, he continued his education at the Juilliard School in New York,
-        where he studied under the legendary maestro Leonid Grin.
-        {'\n\n'}
-        Stoyanov's career took off when he won the prestigious Herbert von Karajan Conducting
-        Competition in Berlin. This achievement opened the doors to collaborations with some of the
-        most esteemed orchestras in the world, including the Berlin Philharmonic, the Vienna
-        Philharmonic, and the Chicago Symphony Orchestra.
-        {'\n\n'}
-        Known for his charismatic presence on the podium and his meticulous attention to detail,
-        Stoyanov has become a favorite among musicians and audiences alike. His repertoire spans
-        from the Classical and Romantic eras to contemporary compositions, and he is particularly
-        admired for his interpretations of works by Beethoven, Mahler, and Shostakovich.
-        {'\n\n'}
-        In addition to his conducting career, Stoyanov is a passionate advocate for music education.
-        He has led masterclasses around the globe and currently serves as the artistic director of
-        the Sofia Youth Orchestra, a program dedicated to nurturing the next generation of musical
-        talent.
-        {'\n\n'}
-        Stoyanov's recent projects include a critically acclaimed recording of Gustav Mahler's
-        Symphony No. 2 with the London Symphony Orchestra and an international tour with the Vienna
-        Philharmonic. When not conducting, he enjoys hiking in the Bulgarian mountains and
-        exploring the culinary traditions of the countries he visits.
+        {artist.bio}
       </Text>
       {trueTone && <View style={styles.trueToneOverlay} />}
       {blueLight && <View style={styles.blueLightOverlay} />}

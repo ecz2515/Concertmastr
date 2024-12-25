@@ -2,10 +2,14 @@ import React, { useRef } from 'react';
 import { View, Text, StyleSheet, ScrollView, Image } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { useAppContext } from '@/AppStateProvider'; // Import global state hook
+import concertData from '@/concert.json'; // Import JSON file
 
-export default function bio3() {
+export default function Bio3() {
   const scrollViewRef = useRef<ScrollView>(null);
   const { enhancedContrast, fontSize, trueTone, blueLight } = useAppContext();
+
+  // Fetch artist data directly for the first artist
+  const artist = concertData.artists[2]; // Statically fetch the first artist
 
   useFocusEffect(
     React.useCallback(() => {
@@ -30,10 +34,19 @@ export default function bio3() {
           enhancedContrast && styles.enhancedSectionTitle,
         ]}
       >
-        New World Philharmonic
+        {artist.name}
+      </Text>
+      <Text
+        style={[
+          styles.pieceSubtitle,
+          { fontSize: fontSize * 1.2 },
+          enhancedContrast && styles.enhancedPieceSubtitle,
+        ]}
+      >
+        {artist.role || 'Musician'} {/* Default to 'Musician' if no role */}
       </Text>
       <Image
-        source={require('@/assets/headshots/musician3.jpg')}
+        source={{ uri: artist.image }} // Use artist image dynamically
         style={styles.bioImage}
       />
       <Text
@@ -43,30 +56,7 @@ export default function bio3() {
           enhancedContrast && styles.enhancedContent,
         ]}
       >
-        The New World Philharmonic is one of the most prestigious orchestras in the world, renowned
-        for its commitment to artistic excellence and its innovative approach to classical music.
-        Founded in 1950 and based in New York City, the orchestra has become a cultural cornerstone,
-        captivating audiences with its rich sound and dynamic programming.
-        {'\n\n'}
-        Under the direction of distinguished conductors over the decades, including Victor
-        Stoyanov, the New World Philharmonic has performed in the most celebrated concert halls
-        worldwide, from Carnegie Hall to the Berlin Philharmonie. The orchestra is celebrated for
-        its interpretations of the core classical repertoire, from Beethoven and Brahms to
-        Tchaikovsky and Mahler, while also championing the works of contemporary composers.
-        {'\n\n'}
-        The orchestra's educational initiatives are equally impressive, with programs such as the
-        New World Academy, which trains young musicians, and its community outreach concerts that
-        bring classical music to underserved communities. These efforts reflect the orchestra's
-        dedication to inspiring future generations and making music accessible to all.
-        {'\n\n'}
-        The New World Philharmonic has an extensive recording history, including Grammy-winning
-        performances of Mahler's Symphony No. 5 and Stravinsky's *The Rite of Spring*. Their most
-        recent projects include a celebrated interpretation of John Adams's *Harmonielehre* and a
-        collaboration with soprano Clara Xu for a recording of Strauss's *Four Last Songs*.
-        {'\n\n'}
-        With its tradition of excellence and forward-thinking spirit, the New World Philharmonic
-        continues to be a leader in the classical music world, bringing unparalleled artistry to
-        audiences around the globe.
+        {artist.bio}
       </Text>
       {trueTone && <View style={styles.trueToneOverlay} />}
       {blueLight && <View style={styles.blueLightOverlay} />}
@@ -101,6 +91,18 @@ const styles = StyleSheet.create({
   enhancedSectionTitle: {
     fontWeight: '900', // Extra bold for Enhanced Contrast
     textDecorationLine: 'underline', // Underline for emphasis
+  },
+  pieceSubtitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: 'white',
+    marginBottom: 20,
+  },
+  enhancedPieceSubtitle: {
+    fontWeight: '800', // Bolder font weight for Enhanced Contrast
+    textShadowColor: '#FFFFFF', // Subtle shadow to enhance visibility
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 1,
   },
   content: {
     fontSize: 16,

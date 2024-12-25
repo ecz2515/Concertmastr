@@ -2,14 +2,20 @@ import { useNavigation } from 'expo-router';
 import React from 'react';
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 import { useAppContext } from '@/AppStateProvider'; // Import global state hook
+import concertData from '@/concert.json'; // Import JSON file directly
 
 export default function ProgramScreen() {
   const navigation = useNavigation();
   const { enhancedContrast, fontSize, trueTone, blueLight } = useAppContext();
 
+  const { program, intermissionAfter, intermissionDuration } = concertData;
+
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <ScrollView
+        contentContainerStyle={styles.scrollContainer}
+        style={styles.scrollView} // Ensure the background color is applied to the scrollable area
+      >
         {/* Title */}
         <Text
           style={[
@@ -18,186 +24,94 @@ export default function ProgramScreen() {
             enhancedContrast && styles.enhancedTitle,
           ]}
         >
-          Tonight's Program
+          Concert Program
         </Text>
 
-        {/* First Program Block */}
-        <View
-          style={[
-            styles.programBlock,
-            enhancedContrast && styles.enhancedProgramBlock,
-          ]}
-        >
-          <Text
-            style={[
-              styles.composerName,
-              { fontSize: fontSize * 1.2 },
-              enhancedContrast && styles.enhancedComposerName,
-            ]}
-          >
-            Eleanor Vance <Text style={styles.dates}>(b. 1982)</Text>
-          </Text>
-          <Text
-            style={[
-              styles.workTitle,
-              { fontSize: fontSize * 1.2 },
-              enhancedContrast && styles.enhancedWorkTitle,
-            ]}
-          >
-            <Text style={styles.italicText}>Ethereal Landscapes</Text>{' '}
-            <Text style={styles.duration}>(6’)</Text>
-          </Text>
-        </View>
+        {/* Dynamic Program Blocks */}
+        {program.map((piece, index) => (
+          <React.Fragment key={index}>
+            <View
+              style={[
+                styles.programBlock,
+                enhancedContrast && styles.enhancedProgramBlock,
+              ]}
+            >
+              <Text
+                style={[
+                  styles.composerName,
+                  { fontSize: fontSize * 1.2 },
+                  enhancedContrast && styles.enhancedComposerName,
+                ]}
+              >
+                {piece.composer}{' '}
+                <Text style={styles.dates}>
+                  {piece.born && piece.death
+                    ? `(${piece.born} - ${piece.death})`
+                    : piece.born
+                    ? `(b. ${piece.born})`
+                    : ''}
+                </Text>
+              </Text>
+              <Text
+                style={[
+                  styles.workTitle,
+                  { fontSize: fontSize * 1.2 },
+                  enhancedContrast && styles.enhancedWorkTitle,
+                ]}
+              >
+                <Text style={styles.italicText}>{piece.pieceName}</Text>{' '}
+                <Text style={styles.duration}>({piece.duration})</Text>
+              </Text>
+              {/* Movements */}
+              {piece.movements.map((movement, idx) => (
+                <Text
+                  key={idx}
+                  style={[
+                    styles.movement,
+                    { fontSize },
+                    enhancedContrast && styles.enhancedMovement,
+                  ]}
+                >
+                  {movement}
+                </Text>
+              ))}
+              {/* Soloists */}
+              {piece.soloists.length > 0 && (
+                <Text
+                  style={[
+                    styles.soloist,
+                    { fontSize },
+                    enhancedContrast && styles.enhancedSoloist,
+                  ]}
+                >
+                  {piece.soloists.join(', ')}
+                </Text>
+              )}
+            </View>
 
-        {/* Second Program Block */}
-        <View
-          style={[
-            styles.programBlock,
-            enhancedContrast && styles.enhancedProgramBlock,
-          ]}
-        >
-          <Text
-            style={[
-              styles.composerName,
-              { fontSize: fontSize * 1.2 },
-              enhancedContrast && styles.enhancedComposerName,
-            ]}
-          >
-            Johannes Brahms <Text style={styles.dates}>(1833-1897)</Text>
-          </Text>
-          <Text
-            style={[
-              styles.workTitle,
-              { fontSize: fontSize * 1.2 },
-              enhancedContrast && styles.enhancedWorkTitle,
-            ]}
-          >
-            <Text style={styles.italicText}>
-              Violin Concerto in D major, Op. 77
-            </Text>{' '}
-            <Text style={styles.duration}>(24’)</Text>
-          </Text>
-          <Text
-            style={[
-              styles.movement,
-              { fontSize },
-              enhancedContrast && styles.enhancedMovement,
-            ]}
-          >
-            I. Allegro non troppo
-          </Text>
-          <Text
-            style={[
-              styles.movement,
-              { fontSize },
-              enhancedContrast && styles.enhancedMovement,
-            ]}
-          >
-            II. Adagio
-          </Text>
-          <Text
-            style={[
-              styles.movement,
-              { fontSize },
-              enhancedContrast && styles.enhancedMovement,
-            ]}
-          >
-            III. Allegro giocoso, ma non troppo vivace
-          </Text>
-          <Text
-            style={[
-              styles.soloist,
-              { fontSize },
-              enhancedContrast && styles.enhancedSoloist,
-            ]}
-          >
-            Clara Xu, violin
-          </Text>
-        </View>
+            {/* Intermission */}
+            {index === intermissionAfter && (
+              <Text
+                style={[
+                  styles.intermission,
+                  { fontSize },
+                  enhancedContrast && styles.enhancedIntermission,
+                ]}
+              >
+                ~ {intermissionDuration} minute intermission ~
+              </Text>
+            )}
+          </React.Fragment>
+        ))}
 
-        {/* Intermission */}
-        <Text
-          style={[
-            styles.intermission,
-            { fontSize },
-            enhancedContrast && styles.enhancedIntermission,
-          ]}
-        >
-          ~ 15 minute intermission ~
-        </Text>
-
-        {/* Third Program Block */}
-        <View
-          style={[
-            styles.programBlock,
-            enhancedContrast && styles.enhancedProgramBlock,
-          ]}
-        >
-          <Text
-            style={[
-              styles.composerName,
-              { fontSize: fontSize * 1.2 },
-              enhancedContrast && styles.enhancedComposerName,
-            ]}
-          >
-            Ludwig van Beethoven <Text style={styles.dates}>(1833-1897)</Text>
-          </Text>
-          <Text
-            style={[
-              styles.workTitle,
-              { fontSize: fontSize * 1.2 },
-              enhancedContrast && styles.enhancedWorkTitle,
-            ]}
-          >
-            <Text style={styles.italicText}>Symphony No. 7 in A major, Op. 92</Text>{' '}
-            <Text style={styles.duration}>(35’)</Text>
-          </Text>
-          <Text
-            style={[
-              styles.movement,
-              { fontSize },
-              enhancedContrast && styles.enhancedMovement,
-            ]}
-          >
-            I. Poco sostenuto - Allegro vivace
-          </Text>
-          <Text
-            style={[
-              styles.movement,
-              { fontSize },
-              enhancedContrast && styles.enhancedMovement,
-            ]}
-          >
-            II. Allegretto
-          </Text>
-          <Text
-            style={[
-              styles.movement,
-              { fontSize },
-              enhancedContrast && styles.enhancedMovement,
-            ]}
-          >
-            III. Presto - Assai meno presto
-          </Text>
-          <Text
-            style={[
-              styles.movement,
-              { fontSize },
-              enhancedContrast && styles.enhancedMovement,
-            ]}
-          >
-            IV. Allegro con brio
-          </Text>
+        {/* Concertmastr Logo at the Bottom */}
+        <View style={styles.logoContainer}>
+          <Image
+            source={require('@/assets/images/CM_logo.png')}
+            style={styles.logo}
+          />
         </View>
       </ScrollView>
-
-      {/* Concertmastr Logo at the Bottom */}
-      <View style={styles.logoContainer}>
-        <Image
-          source={require('@/assets/images/CM_logo.png')}
-          style={styles.logo}
-        />
-      </View>
       {trueTone && <View style={styles.trueToneOverlay} />}
       {blueLight && <View style={styles.blueLightOverlay} />}
     </View>
@@ -207,7 +121,10 @@ export default function ProgramScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: 'black', // Ensure full-screen background
+  },
+  scrollView: {
+    backgroundColor: 'black', // Apply the same background color to the scrollable area
   },
   scrollContainer: {
     padding: 20,
@@ -276,15 +193,14 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
     color: 'white',
     textAlign: 'center',
-    marginBottom: 20,
+    marginVertical: 20,
+    marginTop: 10,
   },
   enhancedIntermission: {
     fontWeight: '700',
   },
   logoContainer: {
-    position: 'absolute',
-    bottom: 40,
-    width: '100%',
+    marginTop: 20,
     alignItems: 'center',
   },
   logo: {

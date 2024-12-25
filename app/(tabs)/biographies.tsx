@@ -2,6 +2,7 @@ import React from 'react';
 import { useRouter } from 'expo-router';
 import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { useAppContext } from '@/AppStateProvider'; // Import global state hook
+import concertData from '@/concert.json'; // Import JSON file
 
 export default function BiographiesScreen() {
   const router = useRouter();
@@ -21,7 +22,7 @@ export default function BiographiesScreen() {
           Biographies
         </Text>
 
-        {/* First Biography Block */}
+        {/* Static Biography Blocks */}
         <TouchableOpacity
           style={[
             styles.bioBlock,
@@ -40,11 +41,10 @@ export default function BiographiesScreen() {
               enhancedContrast && styles.enhancedBioText,
             ]}
           >
-            Victor Stoyanov
+            {concertData.artists[0].name}
           </Text>
         </TouchableOpacity>
 
-        {/* Second Biography Block */}
         <TouchableOpacity
           style={[
             styles.bioBlock,
@@ -63,11 +63,10 @@ export default function BiographiesScreen() {
               enhancedContrast && styles.enhancedBioText,
             ]}
           >
-            Clara Xu
+            {concertData.artists[1].name}
           </Text>
         </TouchableOpacity>
 
-        {/* Third Biography Block */}
         <TouchableOpacity
           style={[
             styles.bioBlock,
@@ -86,7 +85,7 @@ export default function BiographiesScreen() {
               enhancedContrast && styles.enhancedBioText,
             ]}
           >
-            New World Philharmonic
+            {concertData.artists[2].name}
           </Text>
         </TouchableOpacity>
       </ScrollView>

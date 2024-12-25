@@ -2,6 +2,7 @@ import { useRouter } from 'expo-router'; // Import the router for navigation
 import React from 'react';
 import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { useAppContext } from '@/AppStateProvider'; // Import global state hook
+import concertData from '@/concert.json'; // Import JSON file
 
 export default function ProgramScreen() {
   const router = useRouter();
@@ -27,7 +28,7 @@ export default function ProgramScreen() {
             styles.programBlock,
             enhancedContrast && styles.enhancedProgramBlock,
           ]}
-          onPress={() => router.push('/pnotes/piece1')} // Navigate to Eleanor Vance program notes
+          onPress={() => router.push('/pnotes/piece1')} // Static path for Eleanor Vance
         >
           <Text
             style={[
@@ -36,7 +37,14 @@ export default function ProgramScreen() {
               enhancedContrast && styles.enhancedComposerName,
             ]}
           >
-            Eleanor Vance <Text style={styles.dates}></Text>
+            {concertData.program[0].composer}{' '}
+            <Text style={styles.dates}>
+              {concertData.program[0].born && concertData.program[0].death
+                ? `(${concertData.program[0].born} - ${concertData.program[0].death})`
+                : concertData.program[0].born
+                ? `(b. ${concertData.program[0].born})`
+                : ''}
+            </Text>
           </Text>
           <Text
             style={[
@@ -45,7 +53,8 @@ export default function ProgramScreen() {
               enhancedContrast && styles.enhancedWorkTitle,
             ]}
           >
-            <Text>Ethereal Landscapes</Text> <Text style={styles.duration}></Text>
+            <Text>{concertData.program[0].pieceName}</Text>{' '}
+            <Text style={styles.duration}>({concertData.program[0].duration})</Text>
           </Text>
         </TouchableOpacity>
 
@@ -55,7 +64,7 @@ export default function ProgramScreen() {
             styles.programBlock,
             enhancedContrast && styles.enhancedProgramBlock,
           ]}
-          onPress={() => router.push('/pnotes/piece2')} // Navigate to Brahms program notes
+          onPress={() => router.push('/pnotes/piece2')} 
         >
           <Text
             style={[
@@ -64,7 +73,14 @@ export default function ProgramScreen() {
               enhancedContrast && styles.enhancedComposerName,
             ]}
           >
-            Johannes Brahms <Text style={styles.dates}></Text>
+            {concertData.program[1].composer}{' '}
+            <Text style={styles.dates}>
+              {concertData.program[1].born && concertData.program[1].death
+                ? `(${concertData.program[1].born} - ${concertData.program[1].death})`
+                : concertData.program[1].born
+                ? `(b. ${concertData.program[1].born})`
+                : ''}
+            </Text>
           </Text>
           <Text
             style={[
@@ -73,8 +89,8 @@ export default function ProgramScreen() {
               enhancedContrast && styles.enhancedWorkTitle,
             ]}
           >
-            <Text>Violin Concerto in D major, Op. 77</Text>{' '}
-            <Text style={styles.duration}></Text>
+            <Text>{concertData.program[1].pieceName}</Text>{' '}
+            <Text style={styles.duration}>({concertData.program[1].duration})</Text>
           </Text>
         </TouchableOpacity>
 
@@ -84,7 +100,7 @@ export default function ProgramScreen() {
             styles.programBlock,
             enhancedContrast && styles.enhancedProgramBlock,
           ]}
-          onPress={() => router.push('/pnotes/piece3')} // Navigate to Beethoven program notes
+          onPress={() => router.push('/pnotes/piece3')} // Static path for Beethoven
         >
           <Text
             style={[
@@ -93,7 +109,14 @@ export default function ProgramScreen() {
               enhancedContrast && styles.enhancedComposerName,
             ]}
           >
-            Ludwig van Beethoven <Text style={styles.dates}></Text>
+            {concertData.program[2].composer}{' '}
+            <Text style={styles.dates}>
+              {concertData.program[2].born && concertData.program[2].death
+                ? `(${concertData.program[2].born} - ${concertData.program[2].death})`
+                : concertData.program[2].born
+                ? `(b. ${concertData.program[2].born})`
+                : ''}
+            </Text>
           </Text>
           <Text
             style={[
@@ -102,7 +125,8 @@ export default function ProgramScreen() {
               enhancedContrast && styles.enhancedWorkTitle,
             ]}
           >
-            <Text>Symphony No. 7 in A major, Op. 92</Text> <Text style={styles.duration}></Text>
+            <Text>{concertData.program[2].pieceName}</Text>{' '}
+            <Text style={styles.duration}>({concertData.program[2].duration})</Text>
           </Text>
         </TouchableOpacity>
       </ScrollView>

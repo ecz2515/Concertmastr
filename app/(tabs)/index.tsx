@@ -3,6 +3,7 @@ import { View, Text, Image, StyleSheet, TouchableOpacity, Alert } from 'react-na
 import { useNavigation } from '@react-navigation/native';
 import { router } from 'expo-router';
 import { useAppContext } from '@/AppStateProvider'; // Import global state hook
+import concertData from '@/concert.json'; // Import JSON file directly
 import { NativeSyntheticEvent, ImageErrorEventData } from 'react-native';
 
 const imagesToPreload = [
@@ -50,7 +51,10 @@ export default function HomeScreen() {
             enhancedContrast && styles.enhancedEventTitle,
           ]}
         >
-          A Night of Majesty: Beethoven’s 7th Symphony and Brahms’ Violin Concerto
+          {concertData.concertName}
+        </Text>
+        <Text style={[styles.eventDetails, { fontSize }]}>
+          {concertData.date} | {concertData.venue} | {concertData.time}
         </Text>
         <TouchableOpacity
           style={[styles.button, enhancedContrast && styles.enhancedButton]}
@@ -153,6 +157,11 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     marginTop: 20,
     textAlign: 'center',
+  },
+  eventDetails: {
+    color: 'gray',
+    textAlign: 'center',
+    marginBottom: 20,
   },
   enhancedEventTitle: {
     fontWeight: '900', // Extra bold for Enhanced Contrast
