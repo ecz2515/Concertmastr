@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FlatList, View, Text, Image, StyleSheet } from 'react-native';
 import { useAppContext } from '@/AppStateProvider'; // Import global state hook
+import { useFocusEffect } from '@react-navigation/native'; // Import useFocusEffect
 
 interface Musician {
   name: string;
@@ -12,6 +13,9 @@ const MeetOrchestra: React.FC = () => {
   const [musicians, setMusicians] = useState<Musician[]>([]);
   const { enhancedContrast, fontSize, trueTone, blueLight } = useAppContext();
 
+  // Reference for FlatList
+  const flatListRef = useRef<FlatList>(null);
+
   useEffect(() => {
     // Load the JSON data
     const fetchMusicians = async () => {
@@ -20,6 +24,13 @@ const MeetOrchestra: React.FC = () => {
     };
     fetchMusicians();
   }, []);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      // Scroll to top when the component is focused
+      flatListRef.current?.scrollToOffset({ animated: false, offset: 0 });
+    }, [])
+  );
 
   const photoMap: { [key: string]: any } = {
     "jing_wang.jpg": require('@/assets/orchestra_headshots/jing_wang.jpg'),
@@ -61,6 +72,7 @@ const MeetOrchestra: React.FC = () => {
   return (
     <View style={styles.container}>
       <FlatList
+        ref={flatListRef} // Attach ref
         data={musicians}
         ListHeaderComponent={
           <Text
