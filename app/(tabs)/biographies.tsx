@@ -31,7 +31,7 @@ export default function BiographiesScreen() {
           onPress={() => router.push('/bios/bio1')}
         >
           <Image
-            source={require('@/assets/headshots/musician1.jpg')}
+            source={require('@/assets/images/musician1.jpg')}
             style={styles.bioImage}
           />
           <Text
@@ -53,7 +53,7 @@ export default function BiographiesScreen() {
           onPress={() => router.push('/bios/bio2')}
         >
           <Image
-            source={require('@/assets/headshots/musician2.jpg')}
+            source={require('@/assets/images/musician2.jpg')}
             style={styles.bioImage}
           />
           <Text
@@ -75,7 +75,7 @@ export default function BiographiesScreen() {
           onPress={() => router.push('/bios/bio3')}
         >
           <Image
-            source={require('@/assets/headshots/musician3.jpg')}
+            source={require('@/assets/images/musician3.jpg')}
             style={styles.bioImage}
           />
           <Text

@@ -10,19 +10,19 @@
           "name": "Artist 1 Name",
           "role": "Artist Role",
           "bio": "Artist bio text",
-          "image": "assets/headshots/musician1.jpg",
+          "image": "assets/images/musician1.jpg",
           "imageAlt": "Description of artist image"
       },
       {
           "name": "Artist 2 Name",
           "bio": "Artist bio text",
-          "image": "@/assets/headshots/musician2.jpg",
+          "image": "@/assets/images/musician2.jpg",
           "imageAlt": "Description of artist image"
       },
       {
           "name": "Artist 3 Name",
           "bio": "Artist bio text",
-          "image": "@/assets/headshots/musician3.jpg",
+          "image": "@/assets/images/musician3.jpg",
           "imageAlt": "Description of orchestra image"
       }
   ],

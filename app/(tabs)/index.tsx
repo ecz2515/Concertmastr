@@ -8,9 +8,7 @@ import { NativeSyntheticEvent, ImageErrorEventData } from 'react-native';
 
 const imagesToPreload = [
   require('@/assets/images/event-image.jpg'),
-  require('@/assets/headshots/musician1.jpg'),
-  require('@/assets/headshots/musician2.jpg'),
-  require('@/assets/headshots/musician3.jpg'),
+  require('@/assets/images/default_musician.jpg'),
 ];
 
 export default function HomeScreen() {
