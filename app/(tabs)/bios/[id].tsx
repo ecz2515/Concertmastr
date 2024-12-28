@@ -2,14 +2,15 @@ import React, { useRef } from 'react';
 import { View, Text, StyleSheet, ScrollView, Image } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { useAppContext } from '@/AppStateProvider'; // Import global state hook
+import { useRouter, useLocalSearchParams } from 'expo-router';
 import concertData from '@/concert.json'; // Import JSON file
 
-export default function Bio1() {
+export default function ArtistBio() {
+  const { id } = useLocalSearchParams<{ id: string }>();
   const scrollViewRef = useRef<ScrollView>(null);
   const { enhancedContrast, fontSize, trueTone, blueLight } = useAppContext();
-
-  // Fetch artist data directly for the first artist
-  const artist = concertData.artists[0]; // Statically fetch the first artist
+  const router = useRouter();
+  const artist = concertData.artists[Number(id)]; // Convert id to number
 
   useFocusEffect(
     React.useCallback(() => {
@@ -17,6 +18,10 @@ export default function Bio1() {
       scrollViewRef.current?.scrollTo({ y: 0, animated: false });
     }, [])
   );
+
+  if (!artist) {
+    return <Text style={styles.errorText}>Artist not found</Text>;
+  }
 
   return (
     <ScrollView
@@ -45,10 +50,12 @@ export default function Bio1() {
       >
         {artist.role || 'Musician'} {/* Default to 'Musician' if no role */}
       </Text>
-      <Image
-        source={{ uri: artist.image }} // Use artist image dynamically
-        style={styles.bioImage}
-      />
+      {artist.image && (
+        <Image
+          source={{ uri: artist.image }}
+          style={styles.bioImage}
+        />
+      )}
       <Text
         style={[
           styles.content,
@@ -114,6 +121,12 @@ const styles = StyleSheet.create({
     textShadowColor: '#FFFFFF', // Subtle shadow for text
     textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 1,
+  },
+  errorText: {
+    fontSize: 18,
+    color: 'red',
+    textAlign: 'center',
+    marginTop: 50,
   },
   trueToneOverlay: {
     position: 'absolute',

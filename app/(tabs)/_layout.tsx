@@ -144,29 +144,14 @@ export default function AppLayout() {
           }}
         />
         <Tabs.Screen
-          name="pnotes/piece1"
+          name="pnotes/[id]" // Dynamic route for program notes
           options={{
             title: 'Program Notes',
             headerTitle: () => <LogoTitle />,
-            headerLeft: renderBackButton,
+            headerLeft: renderBackButton, // Use the shared back button
           }}
         />
-        <Tabs.Screen
-          name="pnotes/piece2"
-          options={{
-            title: 'Program Notes',
-            headerTitle: () => <LogoTitle />,
-            headerLeft: renderBackButton,
-          }}
-        />
-        <Tabs.Screen
-          name="pnotes/piece3"
-          options={{
-            title: 'Program Notes',
-            headerTitle: () => <LogoTitle />,
-            headerLeft: renderBackButton,
-          }}
-        />
+
         <Tabs.Screen
           name="meet-orchestra"
           options={{
@@ -175,7 +160,16 @@ export default function AppLayout() {
             headerLeft: renderBackButton,
           }}
         />
+        <Tabs.Screen
+          name="bios/[id]" // Dynamic route for artist bios
+          options={{
+            title: 'Biography',
+            headerTitle: () => <LogoTitle />, // Keeps the consistent header design
+            headerLeft: renderBackButton, // Reuses the shared back button functionality
+          }}
+        />
       </Tabs>
+
 
       {/* Settings Modal */}
       <SettingsModal

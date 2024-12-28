@@ -22,72 +22,33 @@ export default function BiographiesScreen() {
           Biographies
         </Text>
 
-        {/* Static Biography Blocks */}
-        <TouchableOpacity
-          style={[
-            styles.bioBlock,
-            enhancedContrast && styles.enhancedBioBlock,
-          ]}
-          onPress={() => router.push('/bios/bio1')}
-        >
-          <Image
-            source={require('@/assets/images/musician1.jpg')}
-            style={styles.bioImage}
-          />
-          <Text
+        {/* Dynamic Biography Blocks */}
+        {concertData.artists.map((artist, index) => (
+          <TouchableOpacity
+            key={index}
             style={[
-              styles.bioText,
-              { fontSize },
-              enhancedContrast && styles.enhancedBioText,
+              styles.bioBlock,
+              enhancedContrast && styles.enhancedBioBlock,
             ]}
+            onPress={() => router.push({ pathname: '/bios/[id]', params: { id: index.toString() } })} // Dynamic path for each artist
           >
-            {concertData.artists[0].name}
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={[
-            styles.bioBlock,
-            enhancedContrast && styles.enhancedBioBlock,
-          ]}
-          onPress={() => router.push('/bios/bio2')}
-        >
-          <Image
-            source={require('@/assets/images/musician2.jpg')}
-            style={styles.bioImage}
-          />
-          <Text
-            style={[
-              styles.bioText,
-              { fontSize },
-              enhancedContrast && styles.enhancedBioText,
-            ]}
-          >
-            {concertData.artists[1].name}
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={[
-            styles.bioBlock,
-            enhancedContrast && styles.enhancedBioBlock,
-          ]}
-          onPress={() => router.push('/bios/bio3')}
-        >
-          <Image
-            source={require('@/assets/images/musician3.jpg')}
-            style={styles.bioImage}
-          />
-          <Text
-            style={[
-              styles.bioText,
-              { fontSize },
-              enhancedContrast && styles.enhancedBioText,
-            ]}
-          >
-            {concertData.artists[2].name}
-          </Text>
-        </TouchableOpacity>
+            {artist.image && (
+              <Image
+                source={{ uri: artist.image }}
+                style={styles.bioImage}
+              />
+            )}
+            <Text
+              style={[
+                styles.bioText,
+                { fontSize },
+                enhancedContrast && styles.enhancedBioText,
+              ]}
+            >
+              {artist.name}
+            </Text>
+          </TouchableOpacity>
+        ))}
       </ScrollView>
 
       {/* Concertmastr Logo at the Bottom */}

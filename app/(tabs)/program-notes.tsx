@@ -22,113 +22,44 @@ export default function ProgramScreen() {
           Program Notes
         </Text>
 
-        {/* First Program Block */}
-        <TouchableOpacity
-          style={[
-            styles.programBlock,
-            enhancedContrast && styles.enhancedProgramBlock,
-          ]}
-          onPress={() => router.push('/pnotes/piece1')} // Static path for Eleanor Vance
-        >
-          <Text
+        {/* Dynamic Program Blocks */}
+        {concertData.program.map((piece, index) => (
+          <TouchableOpacity
+            key={index}
             style={[
-              styles.composerName,
-              { fontSize: fontSize * 1.2 },
-              enhancedContrast && styles.enhancedComposerName,
+              styles.programBlock,
+              enhancedContrast && styles.enhancedProgramBlock,
             ]}
+            onPress={() => router.push({ pathname: '/pnotes/[id]', params: { id: index.toString() } })} // Dynamic path for each piece
           >
-            {concertData.program[0].composer}{' '}
-            <Text style={styles.dates}>
-              {concertData.program[0].born && concertData.program[0].death
-                ? `(${concertData.program[0].born} - ${concertData.program[0].death})`
-                : concertData.program[0].born
-                ? `(b. ${concertData.program[0].born})`
-                : ''}
+            <Text
+              style={[
+                styles.composerName,
+                { fontSize: fontSize * 1.2 },
+                enhancedContrast && styles.enhancedComposerName,
+              ]}
+            >
+              {piece.composer}{' '}
+              <Text style={styles.dates}>
+                {piece.born && piece.death
+                  ? `(${piece.born} - ${piece.death})`
+                  : piece.born
+                  ? `(b. ${piece.born})`
+                  : ''}
+              </Text>
             </Text>
-          </Text>
-          <Text
-            style={[
-              styles.workTitle,
-              { fontSize: fontSize * 1.2 },
-              enhancedContrast && styles.enhancedWorkTitle,
-            ]}
-          >
-            <Text>{concertData.program[0].pieceName}</Text>{' '}
-            <Text style={styles.duration}>({concertData.program[0].duration})</Text>
-          </Text>
-        </TouchableOpacity>
-
-        {/* Second Program Block */}
-        <TouchableOpacity
-          style={[
-            styles.programBlock,
-            enhancedContrast && styles.enhancedProgramBlock,
-          ]}
-          onPress={() => router.push('/pnotes/piece2')} 
-        >
-          <Text
-            style={[
-              styles.composerName,
-              { fontSize: fontSize * 1.2 },
-              enhancedContrast && styles.enhancedComposerName,
-            ]}
-          >
-            {concertData.program[1].composer}{' '}
-            <Text style={styles.dates}>
-              {concertData.program[1].born && concertData.program[1].death
-                ? `(${concertData.program[1].born} - ${concertData.program[1].death})`
-                : concertData.program[1].born
-                ? `(b. ${concertData.program[1].born})`
-                : ''}
+            <Text
+              style={[
+                styles.workTitle,
+                { fontSize: fontSize * 1.2 },
+                enhancedContrast && styles.enhancedWorkTitle,
+              ]}
+            >
+              <Text>{piece.pieceName}</Text>{' '}
+              <Text style={styles.duration}>({piece.duration})</Text>
             </Text>
-          </Text>
-          <Text
-            style={[
-              styles.workTitle,
-              { fontSize: fontSize * 1.2 },
-              enhancedContrast && styles.enhancedWorkTitle,
-            ]}
-          >
-            <Text>{concertData.program[1].pieceName}</Text>{' '}
-            <Text style={styles.duration}>({concertData.program[1].duration})</Text>
-          </Text>
-        </TouchableOpacity>
-
-        {/* Third Program Block */}
-        <TouchableOpacity
-          style={[
-            styles.programBlock,
-            enhancedContrast && styles.enhancedProgramBlock,
-          ]}
-          onPress={() => router.push('/pnotes/piece3')} // Static path for Beethoven
-        >
-          <Text
-            style={[
-              styles.composerName,
-              { fontSize: fontSize * 1.2 },
-              enhancedContrast && styles.enhancedComposerName,
-            ]}
-          >
-            {concertData.program[2].composer}{' '}
-            <Text style={styles.dates}>
-              {concertData.program[2].born && concertData.program[2].death
-                ? `(${concertData.program[2].born} - ${concertData.program[2].death})`
-                : concertData.program[2].born
-                ? `(b. ${concertData.program[2].born})`
-                : ''}
-            </Text>
-          </Text>
-          <Text
-            style={[
-              styles.workTitle,
-              { fontSize: fontSize * 1.2 },
-              enhancedContrast && styles.enhancedWorkTitle,
-            ]}
-          >
-            <Text>{concertData.program[2].pieceName}</Text>{' '}
-            <Text style={styles.duration}>({concertData.program[2].duration})</Text>
-          </Text>
-        </TouchableOpacity>
+          </TouchableOpacity>
+        ))}
       </ScrollView>
 
       {/* Concertmastr Logo at the Bottom */}

@@ -24,6 +24,12 @@
           "bio": "Artist bio text",
           "image": "@/assets/images/musician3.jpg",
           "imageAlt": "Description of orchestra image"
+      },
+      {
+          "name": "Artist 4 Name",
+          "bio": "Artist bio text",
+          "image": "@/assets/images/musician4.jpg",
+          "imageAlt": "Description of orchestra image"
       }
   ],
   "program": [
