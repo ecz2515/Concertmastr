@@ -19,7 +19,7 @@ export default function BiographiesScreen() {
             enhancedContrast && styles.enhancedTitle,
           ]}
         >
-          Biographies
+          Artist Biographies
         </Text>
 
         {/* Dynamic Biography Blocks */}
@@ -30,14 +30,24 @@ export default function BiographiesScreen() {
               styles.bioBlock,
               enhancedContrast && styles.enhancedBioBlock,
             ]}
-            onPress={() => router.push({ pathname: '/bios/[id]', params: { id: index.toString() } })} // Dynamic path for each artist
+            onPress={() => router.push({ pathname: '/bios/[id]', params: { id: index.toString() } })}
           >
-            {artist.image && (
-              <Image
-                source={{ uri: artist.image }}
-                style={styles.bioImage}
-              />
-            )}
+            <Image
+              source={
+                artist.image?.startsWith('http')
+                  ? { uri: artist.image } // Use remote URL
+                  : require('../../assets/images/default_musician.jpg') // Always use default for non-URL paths
+              }
+              style={styles.bioImage}
+              onError={() => console.error(`Failed to load image for ${artist.name}: ${artist.image}`)}
+            />
+
+
+
+
+
+
+
             <Text
               style={[
                 styles.bioText,
@@ -49,6 +59,7 @@ export default function BiographiesScreen() {
             </Text>
           </TouchableOpacity>
         ))}
+
       </ScrollView>
 
       {/* Concertmastr Logo at the Bottom */}

@@ -112,30 +112,6 @@ export default function AppLayout() {
           }}
         />
         <Tabs.Screen
-          name="bios/bio1"
-          options={{
-            title: 'Biography',
-            headerTitle: () => <LogoTitle />,
-            headerLeft: renderBackButton,
-          }}
-        />
-        <Tabs.Screen
-          name="bios/bio2"
-          options={{
-            title: 'Biography',
-            headerTitle: () => <LogoTitle />,
-            headerLeft: renderBackButton,
-          }}
-        />
-        <Tabs.Screen
-          name="bios/bio3"
-          options={{
-            title: 'Biography',
-            headerTitle: () => <LogoTitle />,
-            headerLeft: renderBackButton,
-          }}
-        />
-        <Tabs.Screen
           name="program-notes"
           options={{
             title: 'Program Notes',
