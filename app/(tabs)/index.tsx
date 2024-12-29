@@ -7,7 +7,7 @@ import concertData from '@/concert.json'; // Import JSON file directly
 import { NativeSyntheticEvent, ImageErrorEventData } from 'react-native';
 
 const imagesToPreload = [
-  require('@/assets/images/event-image.jpg'),
+  require('@/assets/images/default_event-image.jpg'),
   require('@/assets/images/default_musician.jpg'),
 ];
 
@@ -35,11 +35,17 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <Image
-          source={require('@/assets/images/event-image.jpg')}
-          style={styles.eventImage}
-          resizeMode="cover"
-        />
+      <Image
+        source={
+          concertData.image?.startsWith('http')
+            ? { uri: concertData.image } // Use remote URL if it's a valid URL
+            : require('../../assets/images/default_event-image.jpg') // Default fallback for local or missing paths
+        }
+        style={styles.eventImage}
+        resizeMode="cover"
+        onError={() => console.error(`Failed to load concert image: ${concertData.image}`)} // Log errors
+      />
+
       </View>
       <View style={styles.mainContent}>
         <Text

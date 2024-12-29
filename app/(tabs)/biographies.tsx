@@ -41,13 +41,6 @@ export default function BiographiesScreen() {
               style={styles.bioImage}
               onError={() => console.error(`Failed to load image for ${artist.name}: ${artist.image}`)}
             />
-
-
-
-
-
-
-
             <Text
               style={[
                 styles.bioText,
