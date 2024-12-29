@@ -52,9 +52,17 @@ export default function ArtistBio() {
       </Text>
       {artist.image && (
         <Image
-          source={{ uri: artist.image }}
+          source={
+            artist.image?.startsWith('http')
+              ? { uri: artist.image } // Use remote URL if valid
+              : require('../../../assets/images/default_musician.jpg') // Default fallback image
+          }
           style={styles.bioImage}
+          onError={() =>
+            console.error(`Failed to load image for ${artist.name}: ${artist.image}`)
+          }
         />
+      
       )}
       <Text
         style={[

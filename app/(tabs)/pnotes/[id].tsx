@@ -1,9 +1,9 @@
 import React, { useRef } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Image } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
-import { useAppContext } from '@/AppStateProvider'; // Import global state hook
+import { useAppContext } from '@/AppStateProvider';
 import { useRouter, useLocalSearchParams } from 'expo-router';
-import concertData from '@/concert.json'; // Import JSON file
+import concertData from '@/concert.json';
 
 export default function ProgramNotes() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -40,6 +40,37 @@ export default function ProgramNotes() {
         >
           {piece.pieceName}
         </Text>
+
+        {/* Add Image with Default Fallback */}
+        <Image
+          source={
+            piece.image?.startsWith('http')
+              ? { uri: piece.image } // Use remote URL if valid
+              : require('../../../assets/images/default_piece.png') // Default fallback image
+          }
+          style={styles.pieceImage}
+          onError={() => console.error(`Failed to load image for ${piece.pieceName}: ${piece.image}`)}
+        />
+
+        {/* Display Soloists */}
+          {piece.soloists && piece.soloists.length > 0 && (
+            <Text
+              style={[
+                styles.soloist,
+                { fontSize: fontSize * 1.2 },
+                enhancedContrast && styles.enhancedSoloist,
+              ]}
+            >
+              {piece.soloists.map(([name, instrument], index) => (
+                <Text key={index}>
+                  {name}, {instrument}
+                  {index < piece.soloists.length - 1 && '\n'}
+                </Text>
+              ))}
+            </Text>
+          )}
+
+
         <Text
           style={[styles.content, { fontSize, lineHeight: fontSize * 1.5 }, enhancedContrast && styles.enhancedContent]}
         >
@@ -49,7 +80,6 @@ export default function ProgramNotes() {
         {blueLight && <View style={styles.blueLightOverlay} />}
       </ScrollView>
     </View>
-
   );
 }
 
@@ -90,6 +120,26 @@ const styles = StyleSheet.create({
     textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 1,
   },
+  pieceImage: {
+    width: '100%',
+    height: 200,
+    alignSelf: 'center',
+    resizeMode: 'cover',
+    marginBottom: 20,
+  },
+  soloist: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: 'lightgray',
+    marginBottom: 20,
+  },
+  enhancedSoloist: {
+    fontWeight: '800',
+    color: 'white',
+    textShadowColor: '#FFFFFF',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 1,
+  },
   content: {
     fontSize: 16,
     lineHeight: 24,
@@ -106,17 +156,6 @@ const styles = StyleSheet.create({
     color: 'red',
     textAlign: 'center',
     marginTop: 50,
-  },
-  backButton: {
-    padding: 10,
-    backgroundColor: '#444',
-    borderRadius: 5,
-    margin: 10,
-    alignSelf: 'flex-start',
-  },
-  backButtonText: {
-    color: 'white',
-    fontWeight: 'bold',
   },
   trueToneOverlay: {
     position: 'absolute',
