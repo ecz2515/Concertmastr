@@ -84,7 +84,12 @@ export default function ProgramScreen() {
                     enhancedContrast && styles.enhancedSoloist,
                   ]}
                 >
-                  {piece.soloists.join(', ')}
+                  {piece.soloists.map(([name, instrument], index) => (
+                    <Text key={index}>
+                      {name}, {instrument}
+                      {index < piece.soloists.length - 1 && '\n'}
+                    </Text>
+                  ))}
                 </Text>
               )}
             </View>
