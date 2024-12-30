@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 10,
     padding: 10,
-    borderRadius: 8,
+    borderRadius: 15,
     backgroundColor: '#333',
     alignItems: 'center',
     elevation: 4, // Shadow for Android

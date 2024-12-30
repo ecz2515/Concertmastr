@@ -98,8 +98,8 @@ const styles = StyleSheet.create({
   },
   programBlock: {
     backgroundColor: '#333',
-    borderRadius: 10,
-    padding: 15,
+    borderRadius: 25,
+    padding: 20,
     marginBottom: 20,
   },
   enhancedProgramBlock: {

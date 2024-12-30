@@ -90,8 +90,8 @@ const styles = StyleSheet.create({
   },
   bioBlock: {
     backgroundColor: '#333',
-    borderRadius: 10,
-    padding: 15,
+    borderRadius: 25,
+    padding: 20,
     marginBottom: 20,
     flexDirection: 'row',
     alignItems: 'center',
