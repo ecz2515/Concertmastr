@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, Image, StyleSheet, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { router } from 'expo-router';
+import { Button } from 'react-native-paper';
 import { useAppContext } from '@/AppStateProvider'; // Import global state hook
 import concertData from '@/concert.json'; // Import JSON file directly
 import { NativeSyntheticEvent, ImageErrorEventData } from 'react-native';
@@ -35,17 +36,16 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-      <Image
-        source={
-          concertData.image?.startsWith('http')
-            ? { uri: concertData.image } // Use remote URL if it's a valid URL
-            : require('../../assets/images/default_event-image.jpg') // Default fallback for local or missing paths
-        }
-        style={styles.eventImage}
-        resizeMode="cover"
-        onError={() => console.error(`Failed to load concert image: ${concertData.image}`)} // Log errors
-      />
-
+        <Image
+          source={
+            concertData.image?.startsWith('http')
+              ? { uri: concertData.image } // Use remote URL if it's a valid URL
+              : require('../../assets/images/default_event-image.jpg') // Default fallback for local or missing paths
+          }
+          style={styles.eventImage}
+          resizeMode="cover"
+          onError={() => console.error(`Failed to load concert image: ${concertData.image}`)} // Log errors
+        />
       </View>
       <View style={styles.mainContent}>
         <Text
@@ -60,62 +60,42 @@ export default function HomeScreen() {
         <Text style={[styles.eventDetails, { fontSize }]}>
           {concertData.date} | {concertData.venue} | {concertData.time}
         </Text>
-        <TouchableOpacity
+        <Button
+          mode="contained"
           style={[styles.button, enhancedContrast && styles.enhancedButton]}
+          contentStyle={styles.buttonContent} // Ensure full button area is clickable
+          labelStyle={[styles.buttonText, { fontSize }]}
           onPress={() => router.push('/program')}
         >
-          <Text
-            style={[
-              styles.buttonText,
-              { fontSize },
-              enhancedContrast && styles.enhancedButtonText,
-            ]}
-          >
-            Concert Program
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
+          Concert Program
+        </Button>
+        <Button
+          mode="contained"
           style={[styles.button, enhancedContrast && styles.enhancedButton]}
+          contentStyle={styles.buttonContent}
+          labelStyle={[styles.buttonText, { fontSize }]}
           onPress={() => router.push('/biographies')}
         >
-          <Text
-            style={[
-              styles.buttonText,
-              { fontSize },
-              enhancedContrast && styles.enhancedButtonText,
-            ]}
-          >
-            Biographies
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
+          Biographies
+        </Button>
+        <Button
+          mode="contained"
           style={[styles.button, enhancedContrast && styles.enhancedButton]}
+          contentStyle={styles.buttonContent}
+          labelStyle={[styles.buttonText, { fontSize }]}
           onPress={() => router.push('/program-notes')}
         >
-          <Text
-            style={[
-              styles.buttonText,
-              { fontSize },
-              enhancedContrast && styles.enhancedButtonText,
-            ]}
-          >
-            Program Notes
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
+          Program Notes
+        </Button>
+        <Button
+          mode="contained"
           style={[styles.button, enhancedContrast && styles.enhancedButton]}
+          contentStyle={styles.buttonContent}
+          labelStyle={[styles.buttonText, { fontSize }]}
           onPress={() => router.push('/meet-orchestra')}
         >
-          <Text
-            style={[
-              styles.buttonText,
-              { fontSize },
-              enhancedContrast && styles.enhancedButtonText,
-            ]}
-          >
-            Meet the Orchestra
-          </Text>
-        </TouchableOpacity>
+          Meet the Orchestra
+        </Button>
       </View>
       {trueTone && <View style={styles.trueToneOverlay} />}
       {blueLight && <View style={styles.blueLightOverlay} />}
@@ -173,9 +153,13 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#333',
-    padding: 18,
     borderRadius: 25,
     marginBottom: 10,
+    width: '100%', // Full width of the button
+  },
+  buttonContent: {
+    paddingVertical: 8, // Ensures full height of button is clickable
+    justifyContent: 'center',
     alignItems: 'center',
   },
   enhancedButton: {

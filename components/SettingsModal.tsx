@@ -4,12 +4,11 @@ import {
   Text,
   StyleSheet,
   Modal,
-  TouchableOpacity,
   Dimensions,
   Animated,
-  Switch,
   ScrollView,
 } from 'react-native';
+import { Button, Switch } from 'react-native-paper'; // Use Switch from React Native Paper
 import { useAppContext } from '../AppStateProvider';
 
 const { width } = Dimensions.get('window');
@@ -59,11 +58,7 @@ export default function SettingsModal({ visible, onClose }: SettingsModalProps) 
       onRequestClose={onClose}
       animationType="none"
     >
-      <TouchableOpacity
-        style={styles.overlay}
-        onPress={onClose}
-        activeOpacity={1}
-      />
+      <View style={styles.overlay} onTouchEnd={onClose} />
       <Animated.View style={[styles.modalContainer, { left: slideAnim }]}>
         <ScrollView contentContainerStyle={styles.scrollContent}>
           <View style={styles.logoContainer}>
@@ -73,29 +68,35 @@ export default function SettingsModal({ visible, onClose }: SettingsModalProps) 
           {/* Font Size Controls */}
           <Text style={styles.sectionTitle}>Font Size</Text>
           <View style={styles.fontSizeControls}>
-            <TouchableOpacity
+            <Button
+              mode="contained"
               style={[styles.fontButton, styles.decreaseButton]}
+              contentStyle={styles.fullButtonContent}
+              labelStyle={styles.fontButtonText}
               onPress={() => setFontSize(fontSize - 1)}
-              activeOpacity={0.7}
             >
-              <Text style={styles.fontButtonText}>-</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
+              -
+            </Button>
+            <Button
+              mode="contained"
               style={[styles.fontButton, styles.increaseButton]}
+              contentStyle={styles.fullButtonContent}
+              labelStyle={styles.fontButtonText}
               onPress={() => setFontSize(fontSize + 1)}
-              activeOpacity={0.7}
             >
-              <Text style={styles.fontButtonText}>+</Text>
-            </TouchableOpacity>
+              +
+            </Button>
           </View>
 
-          <TouchableOpacity
+          <Button
+            mode="contained"
             style={styles.resetButton}
+            contentStyle={styles.fullButtonContent}
+            labelStyle={styles.resetButtonText}
             onPress={() => setFontSize(16)}
-            activeOpacity={0.7}
           >
-            <Text style={styles.resetButtonText}>Reset Font Size</Text>
-          </TouchableOpacity>
+            Reset Font Size
+          </Button>
 
           {/* Toggle Settings */}
           <View style={styles.toggleGroup}>
@@ -127,18 +128,20 @@ export default function SettingsModal({ visible, onClose }: SettingsModalProps) 
           <View style={{ flex: 1 }} />
 
           {/* Reset All Settings Button */}
-          <TouchableOpacity
+          <Button
+            mode="contained"
             style={styles.resetAllButton}
+            contentStyle={styles.fullButtonContent}
+            labelStyle={styles.resetAllButtonText}
             onPress={() => {
               setFontSize(16);
               setEnhancedContrast(false);
               setTrueTone(false);
               setBlueLight(false);
             }}
-            activeOpacity={0.7}
           >
-            <Text style={styles.resetAllButtonText}>Reset All Settings</Text>
-          </TouchableOpacity>
+            Reset All
+          </Button>
         </ScrollView>
       </Animated.View>
     </Modal>
@@ -146,6 +149,7 @@ export default function SettingsModal({ visible, onClose }: SettingsModalProps) 
 }
 
 const styles = StyleSheet.create({
+  // Existing styles remain unchanged
   overlay: {
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -190,11 +194,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   fontButton: {
-    padding: 15,
     backgroundColor: '#333',
     borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
     width: 75,
   },
   decreaseButton: {
@@ -203,23 +204,22 @@ const styles = StyleSheet.create({
   increaseButton: {
     marginLeft: 5,
   },
+  fullButtonContent: {
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   fontButtonText: {
+    fontSize: 20,
     color: 'white',
-    fontSize: 30,
   },
   resetButton: {
     marginTop: 10,
     marginBottom: 50,
-    padding: 10,
-    backgroundColor: '#333',
     borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   resetButtonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: 'normal',
+    fontSize: 14,
   },
   toggleGroup: {
     marginBottom: 20,
@@ -235,15 +235,12 @@ const styles = StyleSheet.create({
   resetAllButton: {
     marginTop: 20,
     marginBottom: 50,
-    padding: 15,
     backgroundColor: '#8b3232',
     borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   resetAllButtonText: {
-    color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
+    color: 'white',
   },
 });
