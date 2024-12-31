@@ -1,10 +1,11 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import { DarkTheme as NavigationDarkTheme, DefaultTheme as NavigationDefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
 
+import { MD3DarkTheme, MD3LightTheme, Provider as PaperProvider } from 'react-native-paper'; // Import MD3 themes
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { AppStateProvider } from '../AppStateProvider'; // Import AppStateProvider
 
@@ -27,16 +28,21 @@ export default function RootLayout() {
     return null;
   }
 
+  // Themes for PaperProvider and ThemeProvider
+  const paperTheme = colorScheme === 'dark' ? MD3DarkTheme : MD3LightTheme;
+  const navigationTheme = colorScheme === 'dark' ? NavigationDarkTheme : NavigationDefaultTheme;
+
   return (
     <AppStateProvider>
-      {/* Wrapping everything in AppStateProvider */}
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <Stack>
-          {/* File-based routing automatically handles screens in (tabs) */}
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="+not-found" />
-        </Stack>
-      </ThemeProvider>
+      <PaperProvider theme={paperTheme}>
+        <ThemeProvider value={navigationTheme}>
+          <Stack>
+            {/* File-based routing automatically handles screens in (tabs) */}
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="+not-found" />
+          </Stack>
+        </ThemeProvider>
+      </PaperProvider>
     </AppStateProvider>
   );
 }
