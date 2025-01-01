@@ -13,11 +13,12 @@ const LogoTitle = () => (
       style={{ width: 30, height: 30, marginRight: 10 }}
       resizeMode="contain"
     />
-    <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'white' }}>
+    <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'white', fontFamily: 'DMSans' }}>
       Concertmastr
     </Text>
   </View>
 );
+
 
 export default function AppLayout() {
   const router = useRouter();

@@ -149,7 +149,6 @@ export default function SettingsModal({ visible, onClose }: SettingsModalProps) 
 }
 
 const styles = StyleSheet.create({
-  // Existing styles remain unchanged
   overlay: {
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -179,13 +178,15 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 22,
+    fontFamily: 'DMSans',
     fontWeight: 'bold',
     color: 'white',
     marginBottom: 20,
   },
   sectionTitle: {
-    color: 'white',
     fontSize: 18,
+    fontFamily: 'DMSans',
+    color: 'white',
     marginBottom: 10,
   },
   fontSizeControls: {
@@ -211,22 +212,27 @@ const styles = StyleSheet.create({
   },
   fontButtonText: {
     fontSize: 20,
+    fontFamily: 'DMSans',
     color: 'white',
   },
   resetButton: {
     marginTop: 10,
     marginBottom: 50,
     borderRadius: 8,
+    backgroundColor: '#6C3483',
   },
   resetButtonText: {
     fontSize: 14,
+    fontFamily: 'DMSans',
+    color: 'white',
   },
   toggleGroup: {
     marginBottom: 20,
   },
   toggleLabel: {
+    fontSize: 16,
+    fontFamily: 'DMSans',
     color: 'white',
-    fontSize: 18,
     marginBottom: 5,
   },
   toggleSwitch: {
@@ -240,6 +246,7 @@ const styles = StyleSheet.create({
   },
   resetAllButtonText: {
     fontSize: 16,
+    fontFamily: 'DMSans',
     fontWeight: 'bold',
     color: 'white',
   },

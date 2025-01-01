@@ -40,13 +40,13 @@ export default function ProgramScreen() {
               ]}
             >
               {piece.composer}{' '}
-              <Text style={styles.dates}>
+              {/* <Text style={styles.dates}>
                 {piece.born && piece.death
                   ? `(${piece.born} - ${piece.death})`
                   : piece.born
                   ? `(b. ${piece.born})`
                   : ''}
-              </Text>
+              </Text> */}
             </Text>
             <Text
               style={[
@@ -56,7 +56,6 @@ export default function ProgramScreen() {
               ]}
             >
               <Text>{piece.pieceName}</Text>{' '}
-              <Text style={styles.duration}>({piece.duration})</Text>
             </Text>
           </TouchableOpacity>
         ))}
@@ -87,6 +86,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 30,
+    fontFamily: 'DMSans',
     fontWeight: 'bold',
     color: 'white',
     textAlign: 'center',
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
   },
   composerName: {
     fontSize: 18,
-    fontStyle: 'italic',
+    fontFamily: 'DMSansItalic',
     color: 'white',
   },
   enhancedComposerName: {
@@ -117,6 +117,7 @@ const styles = StyleSheet.create({
   },
   workTitle: {
     fontSize: 18,
+    fontFamily: 'DMSans',
     fontWeight: 'bold',
     color: 'white',
     marginTop: 5,
@@ -129,6 +130,7 @@ const styles = StyleSheet.create({
   },
   duration: {
     fontSize: 16,
+    fontFamily: 'DMSans',
     color: 'white',
   },
   logoContainer: {
@@ -139,6 +141,7 @@ const styles = StyleSheet.create({
   },
   dates: {
     fontSize: 16,
+    fontFamily: 'DMSans',
     color: 'white',
     fontStyle: 'italic',
   },

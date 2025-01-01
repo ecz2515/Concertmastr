@@ -136,6 +136,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 30,
+    fontFamily: 'DMSans',
     fontWeight: 'bold',
     color: 'white',
     textAlign: 'center',
@@ -158,6 +159,7 @@ const styles = StyleSheet.create({
   },
   composerName: {
     fontSize: 18,
+    fontFamily: 'DMSans',
     fontWeight: 'bold',
     color: 'white',
   },
@@ -166,6 +168,7 @@ const styles = StyleSheet.create({
   },
   workTitle: {
     fontSize: 18,
+    fontFamily: 'DMSans',
     fontWeight: 'bold',
     color: 'white',
     marginTop: 5,
@@ -178,6 +181,7 @@ const styles = StyleSheet.create({
   },
   movement: {
     fontSize: 16,
+    fontFamily: 'DMSans',
     color: 'white',
     marginTop: 5,
   },
@@ -186,6 +190,7 @@ const styles = StyleSheet.create({
   },
   soloist: {
     fontSize: 16,
+    fontFamily: 'DMSans',
     fontStyle: 'italic',
     color: 'white',
     marginTop: 10,
@@ -195,6 +200,7 @@ const styles = StyleSheet.create({
   },
   intermission: {
     fontSize: 16,
+    fontFamily: 'DMSans',
     fontStyle: 'italic',
     color: 'white',
     textAlign: 'center',
@@ -232,13 +238,16 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   dates: {
+    fontFamily: 'DMSans',
     color: '#CCC',
     fontWeight: 'normal',
   },
   italicText: {
+    fontFamily: 'DMSans',
     fontStyle: 'italic',
   },
   duration: {
+    fontFamily: 'DMSans',
     color: '#CCC',
     fontWeight: 'normal',
   },

@@ -1,83 +1,86 @@
 {
-  "concertName": "Concert Name",
-  "date": "202X-XX-XX",
-  "venue": "Concert Venue",
+  "concertName": "Yuja Wang Plays Rachmaninov",
+  "date": "2023-11-15",
+  "venue": "Symphony Center",
   "image": "",
-  "time": "XX:XX PM",
+  "time": "7:30 PM",
   "version": "1.0",
-  "lastUpdated": "202X-XX-XX",
+  "lastUpdated": "2023-10-01",
   "artists": [
       {
-          "name": "Artist 1 Name",
-          "role": "Artist Role",
-          "bio": "Artist bio text",
+          "name": "Riccardo Muti",
+          "role": "Conductor",
+          "bio": "Riccardo Muti is an Italian conductor, currently serving as the music director of the Chicago Symphony Orchestra.",
           "image": "assets/images/musician1.jpg",
           "imageAlt": "Description of artist image"
       },
       {
-          "name": "Artist 2 Name",
-          "bio": "Artist bio text",
+          "name": "Yuja Wang",
+          "bio": "Yuja Wang is a Chinese classical pianist known for her charismatic stage presence and virtuosic skill.",
           "image": "assets/images/musician2.jpg",
           "imageAlt": "Description of artist image"
       },
       {
-          "name": "Artist 3 Name",
-          "bio": "Artist bio text",
+          "name": "Chicago Symphony Orchestra",
+          "bio": "The Chicago Symphony Orchestra is one of the leading orchestras in the world, known for its powerful performances and rich history.",
           "image": "assets/images/musician3.jpg",
           "imageAlt": "Description of orchestra image"
       },
       {
-          "name": "Artist 4 Name",
-          "bio": "Artist bio text",
+          "name": "John Adams",
+          "bio": "John Adams is an American composer known for his innovative and contemporary compositions.",
           "image": "assets/images/musician4.jpg",
           "imageAlt": "Description of orchestra image"
       }
   ],
   "program": [
       {
-          "pieceName": "Piece Name 1",
-          "composer": "Composer Name", 
-          "duration": "Duration",
-          "notes": "Program notes text",
-          "born": "xxxx",
-          "death": "xxxx",
+          "pieceName": "Harmonielehre",
+          "composer": "John Adams", 
+          "duration": "40 minutes",
+          "notes": "Harmonielehre is a symphonic work by John Adams, inspired by a dream and the music of Mahler and Sibelius.",
+          "born": "1947",
+          "death": "",
           "image": "",
           "movements": [
+              "First Movement",
+              "The Anfortas Wound",
+              "Meister Eckhardt and Quackie"
           ],
           "soloists": []
       },
       {
-          "pieceName": "Piece Name 2",
-          "composer": "Composer Name",
-          "duration": "Duration",
-          "notes": "Program notes text",
-          "born": "xxxx",
-          "death": "xxxx",
+          "pieceName": "Piano Concerto No. 2",
+          "composer": "Sergei Rachmaninoff",
+          "duration": "35 minutes",
+          "notes": "Rachmaninoff's Piano Concerto No. 2 is one of the most popular piano concertos, known for its lush melodies and emotional depth.",
+          "born": "1873",
+          "death": "1943",
           "image": "",
           "movements": [
-              "Movement 1",
-              "Movement 2",
-              "Movement 3"
+              "Moderato",
+              "Adagio sostenuto",
+              "Allegro scherzando"
           ],
-          "soloists": [["Soloist Name", "Soloist Instrument"]]
+          "soloists": [["Yuja Wang", "Piano"]]
       },
       {
-          "pieceName": "Piece Name 3",
-          "composer": "Composer Name",
-          "duration": "Duration",
-          "notes": "Program notes text",
-          "born": "xxxx",
-          "death": "xxxx",
+          "pieceName": "Symphony No. 4",
+          "composer": "Johannes Brahms",
+          "duration": "40 minutes",
+          "notes": "Brahms' Symphony No. 4 is a masterpiece of the symphonic repertoire, known for its complexity and emotional depth.",
+          "born": "1833",
+          "death": "1897",
           "image": "",
           "movements": [
-              "Movement 1",
-              "Movement 2",
-              "Movement 3",
-              "Movement 4"
+              "Allegro non troppo",
+              "Andante moderato",
+              "Allegro giocoso",
+              "Allegro energico e passionato"
           ],
           "soloists": []
       }
   ],
   "intermissionAfter": 1,
-  "intermissionDuration": 15
+  "intermissionDuration": 20
 }

@@ -5,20 +5,22 @@ interface AppState {
   trueTone: boolean;
   blueLight: boolean;
   fontSize: number;
+  fontFamily: string; // Add fontFamily
   setEnhancedContrast: (value: boolean) => void;
   setTrueTone: (value: boolean) => void;
   setBlueLight: (value: boolean) => void;
   setFontSize: (value: number) => void;
+  setFontFamily: (value: string) => void; // Add setter for fontFamily
 }
 
 const AppContext = createContext<AppState | undefined>(undefined);
 
 export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // State variables
   const [enhancedContrast, setEnhancedContrast] = useState(false);
   const [trueTone, setTrueTone] = useState(false);
   const [blueLight, setBlueLight] = useState(false);
-  const [fontSize, setFontSize] = useState(16); // Default font size
+  const [fontSize, setFontSize] = useState(16);
+  const [fontFamily, setFontFamily] = useState('SourceSans3'); // Default font family
 
   return (
     <AppContext.Provider
@@ -27,10 +29,12 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         trueTone,
         blueLight,
         fontSize,
+        fontFamily,
         setEnhancedContrast,
         setTrueTone,
         setBlueLight,
         setFontSize,
+        setFontFamily, // Provide setter
       }}
     >
       {children}

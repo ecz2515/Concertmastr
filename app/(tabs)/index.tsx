@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, Image, StyleSheet, Alert } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { router } from 'expo-router';
 import { Button } from 'react-native-paper';
-import { useAppContext } from '@/AppStateProvider'; // Import global state hook
-import concertData from '@/concert.json'; // Import JSON file directly
-import { NativeSyntheticEvent, ImageErrorEventData } from 'react-native';
+import { useAppContext } from '@/AppStateProvider';
+import { router } from 'expo-router';
+import concertData from '@/concert.json';
 
 const imagesToPreload = [
   require('@/assets/images/default_event-image.jpg'),
@@ -13,11 +11,9 @@ const imagesToPreload = [
 ];
 
 export default function HomeScreen() {
-  const navigation = useNavigation();
-  const { enhancedContrast, fontSize, trueTone, blueLight } = useAppContext();
+  const { fontFamily, enhancedContrast, fontSize, trueTone, blueLight } = useAppContext();
 
   useEffect(() => {
-    // Display an alert to remind users to silence their phones
     Alert.alert(
       "Shh... Phones on Silent!",
       "To let the music play uninterrupted, please kindly set your mobile phone to silent mode",
@@ -25,46 +21,37 @@ export default function HomeScreen() {
     );
   }, []);
 
-  const handleImageLoad = (index: number) => {
-    console.log(`Image ${index + 1} loaded successfully.`);
-  };
-
-  const handleImageError = (index: number, error: NativeSyntheticEvent<ImageErrorEventData>) => {
-    console.error(`Image ${index + 1} failed to load.`, error.nativeEvent);
-  };
-
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
         <Image
           source={
             concertData.image?.startsWith('http')
-              ? { uri: concertData.image } // Use remote URL if it's a valid URL
-              : require('../../assets/images/default_event-image.jpg') // Default fallback for local or missing paths
+              ? { uri: concertData.image }
+              : require('../../assets/images/default_event-image.jpg')
           }
           style={styles.eventImage}
           resizeMode="cover"
-          onError={() => console.error(`Failed to load concert image: ${concertData.image}`)} // Log errors
         />
       </View>
       <View style={styles.mainContent}>
         <Text
           style={[
             styles.eventTitle,
-            { fontSize: fontSize * 1.6 },
+            { fontSize: fontSize * 1.6, fontFamily: 'DMSans' },
             enhancedContrast && styles.enhancedEventTitle,
           ]}
         >
           {concertData.concertName}
         </Text>
-        <Text style={[styles.eventDetails, { fontSize }]}>
+        <Text style={[styles.eventDetails, { fontSize, fontFamily: 'DMSans', fontWeight: '500' }]}>
           {concertData.date} | {concertData.venue} | {concertData.time}
         </Text>
         <Button
           mode="contained"
           style={[styles.button, enhancedContrast && styles.enhancedButton]}
-          contentStyle={styles.buttonContent} // Ensure full button area is clickable
-          labelStyle={[styles.buttonText, { fontSize }]}
+          contentStyle={styles.buttonContent}
+          labelStyle={[styles.buttonText, { fontSize, fontFamily: 'DMSans' }]}
           onPress={() => router.push('/program')}
         >
           Concert Program
@@ -73,7 +60,7 @@ export default function HomeScreen() {
           mode="contained"
           style={[styles.button, enhancedContrast && styles.enhancedButton]}
           contentStyle={styles.buttonContent}
-          labelStyle={[styles.buttonText, { fontSize }]}
+          labelStyle={[styles.buttonText, { fontSize, fontFamily: 'DMSans' }]}
           onPress={() => router.push('/biographies')}
         >
           Biographies
@@ -82,7 +69,7 @@ export default function HomeScreen() {
           mode="contained"
           style={[styles.button, enhancedContrast && styles.enhancedButton]}
           contentStyle={styles.buttonContent}
-          labelStyle={[styles.buttonText, { fontSize }]}
+          labelStyle={[styles.buttonText, { fontSize, fontFamily: 'DMSans' }]}
           onPress={() => router.push('/program-notes')}
         >
           Program Notes
@@ -91,7 +78,7 @@ export default function HomeScreen() {
           mode="contained"
           style={[styles.button, enhancedContrast && styles.enhancedButton]}
           contentStyle={styles.buttonContent}
-          labelStyle={[styles.buttonText, { fontSize }]}
+          labelStyle={[styles.buttonText, { fontSize, fontFamily: 'DMSans' }]}
           onPress={() => router.push('/meet-orchestra')}
         >
           Meet the Orchestra
@@ -99,18 +86,6 @@ export default function HomeScreen() {
       </View>
       {trueTone && <View style={styles.trueToneOverlay} />}
       {blueLight && <View style={styles.blueLightOverlay} />}
-      {/* Offscreen image preloading */}
-      <View style={styles.hiddenContainer}>
-        {imagesToPreload.map((image, index) => (
-          <Image
-            key={index}
-            source={image}
-            onLoad={() => handleImageLoad(index)}
-            onError={(error: any) => handleImageError(index, error)}
-            style={styles.hiddenImage}
-          />
-        ))}
-      </View>
     </View>
   );
 }
@@ -136,54 +111,44 @@ const styles = StyleSheet.create({
   },
   eventTitle: {
     fontSize: 26,
-    fontWeight: 'bold',
+    fontFamily: 'DMSans', // Using DM Sans
+    fontWeight: '900', // Bold weight
     color: 'white',
     marginBottom: 20,
     marginTop: 20,
     textAlign: 'center',
   },
   eventDetails: {
+    fontFamily: 'DMSans',
     color: 'gray',
     textAlign: 'center',
     marginBottom: 20,
-  },
-  enhancedEventTitle: {
-    fontWeight: '900', // Extra bold for Enhanced Contrast
-    textDecorationLine: 'underline', // Underline for emphasis
+    fontWeight: '500', // Medium weight for readability
   },
   button: {
     backgroundColor: '#333',
     borderRadius: 25,
     marginBottom: 10,
-    width: '100%', // Full width of the button
+    width: '100%',
   },
   buttonContent: {
-    paddingVertical: 8, // Ensures full height of button is clickable
+    paddingVertical: 8,
     justifyContent: 'center',
     alignItems: 'center',
   },
   enhancedButton: {
-    backgroundColor: '#444', // Slightly brighter for Enhanced Contrast
+    backgroundColor: '#444',
     borderWidth: 1,
-    borderColor: 'white', // Add border for better visibility
+    borderColor: 'white',
   },
   buttonText: {
+    fontFamily: 'DMSans',
     fontSize: 16,
+    fontWeight: '600', // Semi-bold for buttons
     color: 'white',
-    fontWeight: 'bold',
   },
-  enhancedButtonText: {
-    fontWeight: '900', // Extra bold for Enhanced Contrast
-  },
-  hiddenContainer: {
-    position: 'absolute',
-    top: -1000, // Move offscreen
-    left: 0,
-    opacity: 0.01,
-  },
-  hiddenImage: {
-    width: 1,
-    height: 1,
+  enhancedEventTitle: {
+    textDecorationLine: 'underline',
   },
   trueToneOverlay: {
     position: 'absolute',
@@ -191,7 +156,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(255, 223, 186, 0.4)', // Warmer overlay for True Tone
+    backgroundColor: 'rgba(255, 223, 186, 0.4)',
     zIndex: 1,
     pointerEvents: 'none',
   },
@@ -201,7 +166,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(255, 140, 0, 0.4)', // Richer amber overlay for Blue Light
+    backgroundColor: 'rgba(255, 140, 0, 0.4)',
     zIndex: 1,
     pointerEvents: 'none',
   },

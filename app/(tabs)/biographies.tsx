@@ -19,7 +19,7 @@ export default function BiographiesScreen() {
             enhancedContrast && styles.enhancedTitle,
           ]}
         >
-          Artist Biographies
+          Biographies
         </Text>
 
         {/* Dynamic Biography Blocks */}
@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 30,
+    fontFamily: 'DMSans',
     fontWeight: 'bold',
     color: 'white',
     textAlign: 'center',
@@ -110,6 +111,7 @@ const styles = StyleSheet.create({
   },
   bioText: {
     fontSize: 18,
+    fontFamily: 'DMSans',
     fontWeight: 'bold',
     color: 'white',
     flex: 1,

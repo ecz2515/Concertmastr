@@ -100,6 +100,7 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 24,
+    fontFamily: 'DMSans',
     fontWeight: 'bold',
     color: 'white',
     marginBottom: 20,
@@ -110,6 +111,7 @@ const styles = StyleSheet.create({
   },
   pieceSubtitle: {
     fontSize: 18,
+    fontFamily: 'DMSans',
     fontWeight: '600',
     color: 'white',
     marginBottom: 20,
@@ -129,12 +131,14 @@ const styles = StyleSheet.create({
   },
   soloist: {
     fontSize: 18,
+    fontFamily: 'DMSans',
     fontWeight: '600',
     color: 'lightgray',
     marginBottom: 20,
   },
   enhancedSoloist: {
     fontWeight: '800',
+    fontFamily: 'DMSans',
     color: 'white',
     textShadowColor: '#FFFFFF',
     textShadowOffset: { width: 0, height: 1 },
@@ -142,6 +146,7 @@ const styles = StyleSheet.create({
   },
   content: {
     fontSize: 16,
+    fontFamily: 'DMSans',
     lineHeight: 24,
     color: 'white',
   },
@@ -153,6 +158,7 @@ const styles = StyleSheet.create({
   },
   errorText: {
     fontSize: 18,
+    fontFamily: 'DMSans',
     color: 'red',
     textAlign: 'center',
     marginTop: 50,

@@ -121,6 +121,7 @@ const styles = StyleSheet.create({
   },
   disclaimer: {
     fontSize: 14,
+    fontFamily: 'DMSans',
     width: '90%',
     color: 'gray',
     textAlign: 'center',
@@ -130,6 +131,7 @@ const styles = StyleSheet.create({
   },
   enhancedDisclaimer: {
     fontWeight: '600',
+    fontFamily: 'DMSans',
     color: 'white',
   },
   image: {
@@ -140,6 +142,7 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 16,
+    fontFamily: 'DMSans',
     fontWeight: 'bold',
     color: 'white',
     marginBottom: 5,
@@ -147,18 +150,21 @@ const styles = StyleSheet.create({
   },
   enhancedName: {
     fontWeight: '900',
+    fontFamily: 'DMSans',
     textShadowColor: '#FFFFFF',
     textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 1,
   },
   instrument: {
     fontSize: 14,
+    fontFamily: 'DMSans',
     color: 'lightgray',
     textAlign: 'center',
   },
   enhancedInstrument: {
-    color: 'white',
     fontWeight: '700',
+    fontFamily: 'DMSans',
+    color: 'white',
   },
   trueToneOverlay: {
     position: 'absolute',
@@ -181,5 +187,6 @@ const styles = StyleSheet.create({
     pointerEvents: 'none', // Allow interactions through overlay
   },
 });
+
 
 export default MeetOrchestra;
