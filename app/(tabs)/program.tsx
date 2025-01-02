@@ -14,7 +14,7 @@ export default function ProgramScreen() {
     <View style={styles.container}>
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
-        style={styles.scrollView} // Ensure the background color is applied to the scrollable area
+        style={styles.scrollView}
       >
         {/* Title */}
         <Text
@@ -45,7 +45,12 @@ export default function ProgramScreen() {
                 ]}
               >
                 {piece.composer}{' '}
-                <Text style={styles.dates}>
+                <Text
+                  style={[
+                    styles.dates,
+                    { fontSize: fontSize * 0.9 }, // Scale dates with fontSize
+                  ]}
+                >
                   {piece.born && piece.death
                     ? `(${piece.born} - ${piece.death})`
                     : piece.born
@@ -85,8 +90,20 @@ export default function ProgramScreen() {
                 <View style={styles.soloistContainer}>
                   {piece.soloists.map(([name, instrument], idx) => (
                     <Text key={idx}>
-                      <Text style={styles.soloistName}>{name},</Text>{' '}
-                      <Text style={styles.soloistInstrument}>
+                      <Text
+                        style={[
+                          styles.soloistName,
+                          { fontSize: fontSize * 1.1 }, // Scale soloist name
+                        ]}
+                      >
+                        {name},
+                      </Text>{' '}
+                      <Text
+                        style={[
+                          styles.soloistInstrument,
+                          { fontSize: fontSize * 1.0 }, // Scale instrument
+                        ]}
+                      >
                         {instrument}
                       </Text>
                     </Text>
@@ -119,10 +136,10 @@ export default function ProgramScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black', // Ensure full-screen background
+    backgroundColor: 'black',
   },
   scrollView: {
-    backgroundColor: 'black', // Apply the same background color to the scrollable area
+    backgroundColor: 'black',
   },
   scrollContainer: {
     padding: 20,
@@ -149,20 +166,19 @@ const styles = StyleSheet.create({
     borderColor: 'white',
   },
   composerName: {
-    fontFamily: 'DMSans-BoldItalic', // Composer name in bold italic
+    fontFamily: 'DMSans-BoldItalic',
     fontSize: 18,
     color: 'white',
   },
   enhancedComposerName: {
-    fontFamily: 'DMSans-BoldItalic', // Ensure enhanced style doesn’t override bold italic
+    fontFamily: 'DMSans-BoldItalic',
   },
   dates: {
-    fontFamily: 'DMSans-Italic', // Composer birth-death dates in italic
-    fontSize: 18,
+    fontFamily: 'DMSans-Italic',
     color: '#CCC',
   },
   workTitle: {
-    fontFamily: 'DMSans-Bold', // Piece title in bold
+    fontFamily: 'DMSans-Bold',
     fontSize: 18,
     color: 'white',
     marginTop: 5,
@@ -171,28 +187,23 @@ const styles = StyleSheet.create({
     textShadowColor: '#FFFFFF',
     textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 1,
-    fontFamily: 'DMSans-Bold', // Ensure enhanced style doesn’t override bold
   },
   movement: {
-    fontFamily: 'DMSans-Italic', // Movements in italic
+    fontFamily: 'DMSans-Italic',
     fontSize: 16,
     color: 'white',
     marginTop: 5,
   },
-  enhancedMovement: {
-    fontFamily: 'DMSans-Italic', // Ensure enhanced style keeps italic
-  },
+  enhancedMovement: {},
   soloistContainer: {
     marginTop: 10,
   },
   soloistName: {
-    fontFamily: 'DMSans-SemiBold', // Soloist name in semi-bold
-    fontSize: 16,
+    fontFamily: 'DMSans-SemiBold',
     color: 'white',
   },
   soloistInstrument: {
-    fontFamily: 'DMSans-SemiBoldItalic', // Soloist instrument in semi-bold italic
-    fontSize: 16,
+    fontFamily: 'DMSans-SemiBoldItalic',
     color: 'white',
   },
   intermission: {
@@ -202,9 +213,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 20,
   },
-  enhancedIntermission: {
-    fontFamily: 'DMSans-Italic',
-  },
+  enhancedIntermission: {},
   duration: {
     fontFamily: 'DMSans-Italic',
     color: '#CCC',
