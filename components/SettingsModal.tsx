@@ -11,7 +11,7 @@ import {
 import { Button, Switch } from 'react-native-paper'; // Use Switch from React Native Paper
 import { useAppContext } from '../AppStateProvider';
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 interface SettingsModalProps {
   visible: boolean;
@@ -63,42 +63,45 @@ export default function SettingsModal({ visible, onClose }: SettingsModalProps) 
     >
       <View style={styles.overlay} onTouchEnd={onClose} />
       <Animated.View style={[styles.modalContainer, { left: slideAnim }]}>
-        <ScrollView contentContainerStyle={styles.scrollContent}>
+        <ScrollView 
+          contentContainerStyle={styles.scrollContent}
+          bounces={false}
+        >
           <View style={styles.logoContainer}>
             <Text style={styles.title}>Settings</Text>
           </View>
 
           {/* Font Size Controls */}
           <Text style={styles.sectionTitle}>Font Size</Text>
-          <View style={styles.fontSizeControls}>
-            <Button
-              mode="contained"
-              style={[
-                styles.fontButton,
-                styles.decreaseButton,
-                fontSize <= MIN_FONT_SIZE && { backgroundColor: 'gray' }, // Disabled style
-              ]}
-              contentStyle={styles.fullButtonContent}
-              labelStyle={styles.fontButtonText}
-              onPress={() => setFontSize(fontSize - 1)}
-              disabled={fontSize <= MIN_FONT_SIZE} // Disable if at minimum
-            >
-              -
-            </Button>
-            <Button
-              mode="contained"
-              style={[
-                styles.fontButton,
-                styles.increaseButton,
-                fontSize >= MAX_FONT_SIZE && { backgroundColor: 'gray' }, // Disabled style
-              ]}
-              contentStyle={styles.fullButtonContent}
-              labelStyle={styles.fontButtonText}
-              onPress={() => setFontSize(fontSize + 1)}
-              disabled={fontSize >= MAX_FONT_SIZE} // Disable if at maximum
-            >
-              +
-            </Button>
+          <View style={styles.fontSizeControlsContainer}>
+            <View style={styles.fontSizeControls}>
+              <Button
+                mode="contained"
+                style={[
+                  styles.fontButton,
+                  fontSize <= MIN_FONT_SIZE && { backgroundColor: 'gray' }, // Disabled style
+                ]}
+                contentStyle={styles.fullButtonContent}
+                labelStyle={styles.fontButtonText}
+                onPress={() => setFontSize(fontSize - 1)}
+                disabled={fontSize <= MIN_FONT_SIZE} // Disable if at minimum
+              >
+                -
+              </Button>
+              <Button
+                mode="contained"
+                style={[
+                  styles.fontButton,
+                  fontSize >= MAX_FONT_SIZE && { backgroundColor: 'gray' }, // Disabled style
+                ]}
+                contentStyle={styles.fullButtonContent}
+                labelStyle={styles.fontButtonText}
+                onPress={() => setFontSize(fontSize + 1)}
+                disabled={fontSize >= MAX_FONT_SIZE} // Disable if at maximum
+              >
+                +
+              </Button>
+            </View>
           </View>
 
           <Button
@@ -201,21 +204,22 @@ const styles = StyleSheet.create({
     color: 'white',
     marginBottom: 10,
   },
-  fontSizeControls: {
-    flexDirection: 'row',
+  fontSizeControlsContainer: {
+    alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 10,
+    maxWidth: 200,
+  },
+  fontSizeControls: {
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'space-between',
   },
   fontButton: {
     backgroundColor: '#333',
     borderRadius: 8,
-    width: 75,
-  },
-  decreaseButton: {
-    marginRight: 5,
-  },
-  increaseButton: {
-    marginLeft: 5,
+    flex: 1,
+    marginHorizontal: 5,
   },
   fullButtonContent: {
     height: 50,
