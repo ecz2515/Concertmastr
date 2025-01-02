@@ -1,6 +1,6 @@
 import { useNavigation } from 'expo-router';
 import React from 'react';
-import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { useAppContext } from '@/AppStateProvider'; // Import global state hook
 import concertData from '@/concert.json'; // Import JSON file directly
 
@@ -36,6 +36,7 @@ export default function ProgramScreen() {
                 enhancedContrast && styles.enhancedProgramBlock,
               ]}
             >
+              {/* Composer Name */}
               <Text
                 style={[
                   styles.composerName,
@@ -52,6 +53,8 @@ export default function ProgramScreen() {
                     : ''}
                 </Text>
               </Text>
+
+              {/* Piece Title */}
               <Text
                 style={[
                   styles.workTitle,
@@ -59,9 +62,10 @@ export default function ProgramScreen() {
                   enhancedContrast && styles.enhancedWorkTitle,
                 ]}
               >
-                <Text style={styles.italicText}>{piece.pieceName}</Text>{' '}
+                {piece.pieceName}{' '}
                 <Text style={styles.duration}>({piece.duration})</Text>
               </Text>
+
               {/* Movements */}
               {piece.movements.map((movement, idx) => (
                 <Text
@@ -75,22 +79,19 @@ export default function ProgramScreen() {
                   {movement}
                 </Text>
               ))}
+
               {/* Soloists */}
               {piece.soloists.length > 0 && (
-                <Text
-                  style={[
-                    styles.soloist,
-                    { fontSize },
-                    enhancedContrast && styles.enhancedSoloist,
-                  ]}
-                >
-                  {piece.soloists.map(([name, instrument], index) => (
-                    <Text key={index}>
-                      {name}, {instrument}
-                      {index < piece.soloists.length - 1 && '\n'}
+                <View style={styles.soloistContainer}>
+                  {piece.soloists.map(([name, instrument], idx) => (
+                    <Text key={idx}>
+                      <Text style={styles.soloistName}>{name},</Text>{' '}
+                      <Text style={styles.soloistInstrument}>
+                        {instrument}
+                      </Text>
                     </Text>
                   ))}
-                </Text>
+                </View>
               )}
             </View>
 
@@ -108,14 +109,6 @@ export default function ProgramScreen() {
             )}
           </React.Fragment>
         ))}
-
-        {/* Concertmastr Logo at the Bottom */}
-        <View style={styles.logoContainer}>
-          <Image
-            source={require('@/assets/images/CM_logo.png')}
-            style={styles.logo}
-          />
-        </View>
       </ScrollView>
       {trueTone && <View style={styles.trueToneOverlay} />}
       {blueLight && <View style={styles.blueLightOverlay} />}
@@ -135,15 +128,13 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   title: {
+    fontFamily: 'DMSans-Bold',
     fontSize: 30,
-    fontFamily: 'DMSans',
-    fontWeight: 'bold',
     color: 'white',
     textAlign: 'center',
     marginBottom: 20,
   },
   enhancedTitle: {
-    fontWeight: '900',
     textDecorationLine: 'underline',
   },
   programBlock: {
@@ -158,65 +149,65 @@ const styles = StyleSheet.create({
     borderColor: 'white',
   },
   composerName: {
+    fontFamily: 'DMSans-BoldItalic', // Composer name in bold italic
     fontSize: 18,
-    fontFamily: 'DMSans',
-    fontWeight: 'bold',
     color: 'white',
   },
   enhancedComposerName: {
-    fontWeight: '900',
+    fontFamily: 'DMSans-BoldItalic', // Ensure enhanced style doesn’t override bold italic
+  },
+  dates: {
+    fontFamily: 'DMSans-Italic', // Composer birth-death dates in italic
+    fontSize: 18,
+    color: '#CCC',
   },
   workTitle: {
+    fontFamily: 'DMSans-Bold', // Piece title in bold
     fontSize: 18,
-    fontFamily: 'DMSans',
-    fontWeight: 'bold',
     color: 'white',
     marginTop: 5,
   },
   enhancedWorkTitle: {
-    fontWeight: '900',
     textShadowColor: '#FFFFFF',
     textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 1,
+    fontFamily: 'DMSans-Bold', // Ensure enhanced style doesn’t override bold
   },
   movement: {
+    fontFamily: 'DMSans-Italic', // Movements in italic
     fontSize: 16,
-    fontFamily: 'DMSans',
     color: 'white',
     marginTop: 5,
   },
   enhancedMovement: {
-    fontWeight: '700',
+    fontFamily: 'DMSans-Italic', // Ensure enhanced style keeps italic
   },
-  soloist: {
-    fontSize: 16,
-    fontFamily: 'DMSans',
-    fontStyle: 'italic',
-    color: 'white',
+  soloistContainer: {
     marginTop: 10,
   },
-  enhancedSoloist: {
-    fontWeight: '700',
+  soloistName: {
+    fontFamily: 'DMSans-SemiBold', // Soloist name in semi-bold
+    fontSize: 16,
+    color: 'white',
+  },
+  soloistInstrument: {
+    fontFamily: 'DMSans-SemiBoldItalic', // Soloist instrument in semi-bold italic
+    fontSize: 16,
+    color: 'white',
   },
   intermission: {
+    fontFamily: 'DMSans-Italic',
     fontSize: 16,
-    fontFamily: 'DMSans',
-    fontStyle: 'italic',
     color: 'white',
     textAlign: 'center',
-    marginVertical: 20,
-    marginTop: 10,
+    marginBottom: 20,
   },
   enhancedIntermission: {
-    fontWeight: '700',
+    fontFamily: 'DMSans-Italic',
   },
-  logoContainer: {
-    marginTop: 20,
-    alignItems: 'center',
-  },
-  logo: {
-    width: 40,
-    height: 40,
+  duration: {
+    fontFamily: 'DMSans-Italic',
+    color: '#CCC',
   },
   trueToneOverlay: {
     position: 'absolute',
@@ -236,19 +227,5 @@ const styles = StyleSheet.create({
     bottom: 0,
     backgroundColor: 'rgba(255, 140, 0, 0.4)',
     zIndex: 1,
-  },
-  dates: {
-    fontFamily: 'DMSans',
-    color: '#CCC',
-    fontWeight: 'normal',
-  },
-  italicText: {
-    fontFamily: 'DMSans',
-    fontStyle: 'italic',
-  },
-  duration: {
-    fontFamily: 'DMSans',
-    color: '#CCC',
-    fontWeight: 'normal',
   },
 });

@@ -62,12 +62,12 @@ export default function ProgramScreen() {
       </ScrollView>
 
       {/* Concertmastr Logo at the Bottom */}
-      <View style={styles.logoContainer}>
+      {/* <View style={styles.logoContainer}>
         <Image
           source={require('@/assets/images/CM_logo.png')} // Replace with your logo path
           style={styles.logo}
         />
-      </View>
+      </View> */}
 
       {/* True Tone and Blue Light overlays */}
       {trueTone && <View style={styles.trueToneOverlay} />}
@@ -86,8 +86,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 30,
-    fontFamily: 'DMSans',
-    fontWeight: 'bold',
+    fontFamily: 'DMSans-Bold',
     color: 'white',
     textAlign: 'center',
     marginBottom: 20,

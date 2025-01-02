@@ -10,7 +10,7 @@ const LogoTitle = () => (
   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
     <Image
       source={require('@/assets/images/CM_logo.png')}
-      style={{ width: 30, height: 30, marginRight: 10 }}
+      style={{ width: 25, height: 25, marginRight: 10 }}
       resizeMode="contain"
     />
     <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'white', fontFamily: 'DMSans' }}>

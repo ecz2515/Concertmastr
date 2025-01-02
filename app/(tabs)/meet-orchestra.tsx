@@ -71,6 +71,15 @@ const MeetOrchestra: React.FC = () => {
 
   return (
     <View style={styles.container}>
+      <Text
+        style={[
+          styles.title,
+          { fontSize: fontSize * 1.8 },
+          enhancedContrast && styles.enhancedTitle,
+        ]}
+      >
+        Meet the Orchestra
+      </Text>
       <FlatList
         ref={flatListRef} // Attach ref
         data={musicians}
@@ -118,6 +127,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#444',
     borderWidth: 1,
     borderColor: 'white',
+  },
+  title: {
+    fontSize: 24,
+    fontFamily: 'DMSans-Bold',
+    color: 'white',
+    textAlign: 'center',
+  },
+  enhancedTitle: {
+    fontWeight: '900',
   },
   disclaimer: {
     fontSize: 14,

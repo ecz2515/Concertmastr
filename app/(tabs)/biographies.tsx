@@ -56,12 +56,12 @@ export default function BiographiesScreen() {
       </ScrollView>
 
       {/* Concertmastr Logo at the Bottom */}
-      <View style={styles.logoContainer}>
+      {/* <View style={styles.logoContainer}>
         <Image
           source={require('@/assets/images/CM_logo.png')}
           style={styles.logo}
         />
-      </View>
+      </View> */}
       {trueTone && <View style={styles.trueToneOverlay} />}
       {blueLight && <View style={styles.blueLightOverlay} />}
     </View>
@@ -79,8 +79,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 30,
-    fontFamily: 'DMSans',
-    fontWeight: 'bold',
+    fontFamily: 'DMSans-Bold',
     color: 'white',
     textAlign: 'center',
     marginBottom: 20,

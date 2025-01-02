@@ -178,8 +178,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 22,
-    fontFamily: 'DMSans',
-    fontWeight: 'bold',
+    fontFamily: 'DMSans-Bold',
     color: 'white',
     marginBottom: 20,
   },

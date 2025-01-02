@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { View, Text, Image, StyleSheet, Alert } from 'react-native';
+import React from 'react';
+import { View, Text, Image, StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
 import { useAppContext } from '@/AppStateProvider';
 import { router } from 'expo-router';
@@ -12,14 +12,6 @@ const imagesToPreload = [
 
 export default function HomeScreen() {
   const { fontFamily, enhancedContrast, fontSize, trueTone, blueLight } = useAppContext();
-
-  useEffect(() => {
-    Alert.alert(
-      "Shh... Phones on Silent!",
-      "To let the music play uninterrupted, please kindly set your mobile phone to silent mode",
-      [{ text: "Got it!", onPress: () => console.log("Alert acknowledged") }]
-    );
-  }, []);
 
   return (
     <View style={styles.container}>
@@ -35,23 +27,17 @@ export default function HomeScreen() {
         />
       </View>
       <View style={styles.mainContent}>
-        <Text
-          style={[
-            styles.eventTitle,
-            { fontSize: fontSize * 1.6, fontFamily: 'DMSans' },
-            enhancedContrast && styles.enhancedEventTitle,
-          ]}
-        >
+        <Text style={[styles.eventTitle, { fontSize: fontSize * 1.6 }]}>
           {concertData.concertName}
         </Text>
-        <Text style={[styles.eventDetails, { fontSize, fontFamily: 'DMSans', fontWeight: '500' }]}>
+        <Text style={[styles.eventDetails, { fontSize }]}>
           {concertData.date} | {concertData.venue} | {concertData.time}
         </Text>
         <Button
           mode="contained"
           style={[styles.button, enhancedContrast && styles.enhancedButton]}
           contentStyle={styles.buttonContent}
-          labelStyle={[styles.buttonText, { fontSize, fontFamily: 'DMSans' }]}
+          labelStyle={[styles.buttonText, { fontSize }]}
           onPress={() => router.push('/program')}
         >
           Concert Program
@@ -60,7 +46,7 @@ export default function HomeScreen() {
           mode="contained"
           style={[styles.button, enhancedContrast && styles.enhancedButton]}
           contentStyle={styles.buttonContent}
-          labelStyle={[styles.buttonText, { fontSize, fontFamily: 'DMSans' }]}
+          labelStyle={[styles.buttonText, { fontSize }]}
           onPress={() => router.push('/biographies')}
         >
           Biographies
@@ -69,7 +55,7 @@ export default function HomeScreen() {
           mode="contained"
           style={[styles.button, enhancedContrast && styles.enhancedButton]}
           contentStyle={styles.buttonContent}
-          labelStyle={[styles.buttonText, { fontSize, fontFamily: 'DMSans' }]}
+          labelStyle={[styles.buttonText, { fontSize }]}
           onPress={() => router.push('/program-notes')}
         >
           Program Notes
@@ -78,7 +64,7 @@ export default function HomeScreen() {
           mode="contained"
           style={[styles.button, enhancedContrast && styles.enhancedButton]}
           contentStyle={styles.buttonContent}
-          labelStyle={[styles.buttonText, { fontSize, fontFamily: 'DMSans' }]}
+          labelStyle={[styles.buttonText, { fontSize }]}
           onPress={() => router.push('/meet-orchestra')}
         >
           Meet the Orchestra
@@ -110,20 +96,17 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   eventTitle: {
-    fontSize: 26,
-    fontFamily: 'DMSans', // Using DM Sans
-    fontWeight: '900', // Bold weight
+    fontFamily: 'DMSans-Bold',
     color: 'white',
     marginBottom: 20,
     marginTop: 20,
     textAlign: 'center',
   },
   eventDetails: {
-    fontFamily: 'DMSans',
+    fontFamily: 'DMSans-Medium',
     color: 'gray',
     textAlign: 'center',
     marginBottom: 20,
-    fontWeight: '500', // Medium weight for readability
   },
   button: {
     backgroundColor: '#333',
@@ -142,13 +125,8 @@ const styles = StyleSheet.create({
     borderColor: 'white',
   },
   buttonText: {
-    fontFamily: 'DMSans',
-    fontSize: 16,
-    fontWeight: '600', // Semi-bold for buttons
+    // fontFamily: 'DMSans-SemiBold',
     color: 'white',
-  },
-  enhancedEventTitle: {
-    textDecorationLine: 'underline',
   },
   trueToneOverlay: {
     position: 'absolute',

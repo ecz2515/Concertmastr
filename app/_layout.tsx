@@ -16,8 +16,21 @@ export default function RootLayout() {
 
   // Load DM Sans fonts
   const [loaded] = useFonts({
-    DMSans: require('../assets/fonts/DMSans-VariableFont_opsz,wght.ttf'),
-    DMSansItalic: require('../assets/fonts/DMSans-Italic-VariableFont_opsz,wght.ttf'),
+    'DMSans-Regular': require('../assets/fonts/DMSans-Regular.ttf'),
+    'DMSans-Bold': require('../assets/fonts/DMSans-Bold.ttf'),
+    'DMSans-Italic': require('../assets/fonts/DMSans-Italic.ttf'),
+    'DMSans-Light': require('../assets/fonts/DMSans-Light.ttf'),
+    'DMSans-LightItalic': require('../assets/fonts/DMSans-LightItalic.ttf'),
+    'DMSans-Medium': require('../assets/fonts/DMSans-Medium.ttf'),
+    'DMSans-MediumItalic': require('../assets/fonts/DMSans-MediumItalic.ttf'),
+    'DMSans-SemiBold': require('../assets/fonts/DMSans-SemiBold.ttf'),
+    'DMSans-SemiBoldItalic': require('../assets/fonts/DMSans-SemiBoldItalic.ttf'),
+    'DMSans-ExtraBold': require('../assets/fonts/DMSans-ExtraBold.ttf'),
+    'DMSans-ExtraBoldItalic': require('../assets/fonts/DMSans-ExtraBoldItalic.ttf'),
+    'DMSans-Black': require('../assets/fonts/DMSans-Black.ttf'),
+    'DMSans-BlackItalic': require('../assets/fonts/DMSans-BlackItalic.ttf'),
+    'DMSans-Thin': require('../assets/fonts/DMSans-Thin.ttf'),
+    'DMSans-ThinItalic': require('../assets/fonts/DMSans-ThinItalic.ttf'),
   });
 
   useEffect(() => {
@@ -35,24 +48,45 @@ export default function RootLayout() {
     fonts: {
       ...MD3DarkTheme.fonts,
       regular: {
-        fontFamily: 'DMSans',
-        fontWeight: '400', // Regular weight
+        fontFamily: 'DMSans-Regular',
+        fontWeight: '400',
       },
       medium: {
-        fontFamily: 'DMSans',
-        fontWeight: '500', // Medium weight
+        fontFamily: 'DMSans-Medium',
+        fontWeight: '500',
+      },
+      bold: {
+        fontFamily: 'DMSans-Bold',
+        fontWeight: '700',
       },
       light: {
-        fontFamily: 'DMSans',
-        fontWeight: '300', // Light weight
+        fontFamily: 'DMSans-Light',
+        fontWeight: '300',
       },
       thin: {
-        fontFamily: 'DMSans',
-        fontWeight: '200', // Thin weight
+        fontFamily: 'DMSans-Thin',
+        fontWeight: '100',
       },
       italic: {
-        fontFamily: 'DMSansItalic',
-        fontWeight: '400', // Italic weight
+        fontFamily: 'DMSans-Italic',
+        fontWeight: '400',
+      },
+      semiBold: {
+        fontFamily: 'DMSans-SemiBold',
+        fontWeight: '600',
+      },
+      extraBold: {
+        fontFamily: 'DMSans-ExtraBold',
+        fontWeight: '800',
+      },
+      black: {
+        fontFamily: 'DMSans-Black',
+        fontWeight: '900',
+      },
+      boldItalic: {
+        fontFamily: 'DMSans-BoldItalic',
+        fontWeight: '700',
+        fontStyle: 'italic',
       },
     },
   };
