@@ -34,7 +34,7 @@ const MeetOrchestra: React.FC = () => {
 
   const photoMap: { [key: string]: any } = {
     "jing_wang.jpg": require('@/assets/orchestra_headshots/jing_wang.jpg'),
-    "leung_kin_fung.jpg": require('@/assets/orchestra_headshots/leung_kin-fung.jpg'), 
+    "leung_kin_fung.jpg": require('@/assets/orchestra_headshots/leung_kin-fung.jpg'),
     "anders_hui.jpg": require('@/assets/orchestra_headshots/anders_hui.jpg'),
     "wang_liang.jpg": require('@/assets/orchestra_headshots/wang_liang.jpg'),
     "bei_de_gaulle.jpg": require('@/assets/orchestra_headshots/bei_de_gaulle.jpg'),
@@ -71,34 +71,37 @@ const MeetOrchestra: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Text
-        style={[
-          styles.title,
-          { fontSize: fontSize * 1.8 },
-          enhancedContrast && styles.enhancedTitle,
-        ]}
-      >
-        Meet the Orchestra
-      </Text>
       <FlatList
         ref={flatListRef} // Attach ref
         data={musicians}
         ListHeaderComponent={
-          <Text
-            style={[
-              styles.disclaimer,
-              { fontSize: fontSize * 0.9 },
-              enhancedContrast && styles.enhancedDisclaimer,
-            ]}
-          >
-            Images feature members of the Hong Kong Philharmonic first violin section, credited to
-            hkphil.org. These are for demonstration only and will be replaced with client-provided
-            content.
-          </Text>
+          <View>
+            <Text
+              style={[
+                styles.title,
+                { fontSize: fontSize * 1.8 },
+                enhancedContrast && styles.enhancedTitle,
+              ]}
+            >
+              Meet the Orchestra
+            </Text>
+            <Text
+              style={[
+                styles.disclaimer,
+                { fontSize: fontSize * 0.9 },
+                enhancedContrast && styles.enhancedDisclaimer,
+              ]}
+            >
+              Images feature members of the Hong Kong Philharmonic first violin section, credited
+              to hkphil.org. These are for demonstration only and will be replaced with client-provided
+              content.
+            </Text>
+          </View>
         }
         renderItem={renderMusicianCard}
         keyExtractor={(item, index) => index.toString()}
         numColumns={2} // 2 cards per row
+        contentContainerStyle={{ paddingBottom: 20 }} // Ensure padding at bottom
       />
       {trueTone && <View style={styles.trueToneOverlay} />}
       {blueLight && <View style={styles.blueLightOverlay} />}
@@ -108,7 +111,7 @@ const MeetOrchestra: React.FC = () => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
+    flex: 1,
     backgroundColor: '#111',
   },
   card: {
@@ -133,6 +136,7 @@ const styles = StyleSheet.create({
     fontFamily: 'DMSans-Bold',
     color: 'white',
     textAlign: 'center',
+    marginVertical: 20,
   },
   enhancedTitle: {
     fontWeight: '900',
@@ -144,12 +148,10 @@ const styles = StyleSheet.create({
     color: 'gray',
     textAlign: 'center',
     marginBottom: 10,
-    marginTop: 10,
     alignSelf: 'center',
   },
   enhancedDisclaimer: {
     fontWeight: '600',
-    fontFamily: 'DMSans',
     color: 'white',
   },
   image: {
@@ -168,7 +170,6 @@ const styles = StyleSheet.create({
   },
   enhancedName: {
     fontWeight: '900',
-    fontFamily: 'DMSans',
     textShadowColor: '#FFFFFF',
     textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 1,
@@ -181,7 +182,6 @@ const styles = StyleSheet.create({
   },
   enhancedInstrument: {
     fontWeight: '700',
-    fontFamily: 'DMSans',
     color: 'white',
   },
   trueToneOverlay: {
@@ -205,6 +205,5 @@ const styles = StyleSheet.create({
     pointerEvents: 'none', // Allow interactions through overlay
   },
 });
-
 
 export default MeetOrchestra;
