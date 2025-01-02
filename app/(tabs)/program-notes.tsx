@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   },
   composerName: {
     fontSize: 18,
-    fontFamily: 'DMSansItalic',
+    fontFamily: 'DMSans-Italic',
     color: 'white',
   },
   enhancedComposerName: {
