@@ -32,6 +32,9 @@ export default function SettingsModal({ visible, onClose }: SettingsModalProps) 
     setFontSize,
   } = useAppContext();
 
+  const MIN_FONT_SIZE = 12;
+  const MAX_FONT_SIZE = 24;
+
   useEffect(() => {
     if (visible) {
       setLocalVisible(true);
@@ -70,19 +73,29 @@ export default function SettingsModal({ visible, onClose }: SettingsModalProps) 
           <View style={styles.fontSizeControls}>
             <Button
               mode="contained"
-              style={[styles.fontButton, styles.decreaseButton]}
+              style={[
+                styles.fontButton,
+                styles.decreaseButton,
+                fontSize <= MIN_FONT_SIZE && { backgroundColor: 'gray' }, // Disabled style
+              ]}
               contentStyle={styles.fullButtonContent}
               labelStyle={styles.fontButtonText}
               onPress={() => setFontSize(fontSize - 1)}
+              disabled={fontSize <= MIN_FONT_SIZE} // Disable if at minimum
             >
               -
             </Button>
             <Button
               mode="contained"
-              style={[styles.fontButton, styles.increaseButton]}
+              style={[
+                styles.fontButton,
+                styles.increaseButton,
+                fontSize >= MAX_FONT_SIZE && { backgroundColor: 'gray' }, // Disabled style
+              ]}
               contentStyle={styles.fullButtonContent}
               labelStyle={styles.fontButtonText}
               onPress={() => setFontSize(fontSize + 1)}
+              disabled={fontSize >= MAX_FONT_SIZE} // Disable if at maximum
             >
               +
             </Button>

@@ -19,8 +19,18 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [enhancedContrast, setEnhancedContrast] = useState(false);
   const [trueTone, setTrueTone] = useState(false);
   const [blueLight, setBlueLight] = useState(false);
-  const [fontSize, setFontSize] = useState(16);
+  const [fontSize, setFontSizeState] = useState(16);
   const [fontFamily, setFontFamily] = useState('SourceSans3'); // Default font family
+
+  // Define the min and max font size
+  const MIN_FONT_SIZE = 12;
+  const MAX_FONT_SIZE = 24;
+
+  // Clamp font size when setting it
+  const setFontSize = (value: number) => {
+    const clampedValue = Math.max(MIN_FONT_SIZE, Math.min(MAX_FONT_SIZE, value));
+    setFontSizeState(clampedValue);
+  };
 
   return (
     <AppContext.Provider
