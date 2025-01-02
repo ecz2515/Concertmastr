@@ -36,8 +36,20 @@ export default function HomeScreen() {
         <Button
           mode="contained"
           style={[styles.button, enhancedContrast && styles.enhancedButton]}
-          contentStyle={styles.buttonContent}
-          labelStyle={[styles.buttonText, { fontSize }]}
+          contentStyle={[
+            styles.buttonContent,
+            {
+              minHeight: fontSize * 2.5,
+              paddingVertical: Math.max(fontSize * 0.3, 8),
+            },
+          ]}
+          labelStyle={[
+            styles.buttonText,
+            {
+              fontSize,
+              lineHeight: fontSize * 1.2,
+            },
+          ]}
           onPress={() => router.push('/program')}
         >
           Concert Program
@@ -45,8 +57,20 @@ export default function HomeScreen() {
         <Button
           mode="contained"
           style={[styles.button, enhancedContrast && styles.enhancedButton]}
-          contentStyle={styles.buttonContent}
-          labelStyle={[styles.buttonText, { fontSize }]}
+          contentStyle={[
+            styles.buttonContent,
+            {
+              minHeight: fontSize * 2.5,
+              paddingVertical: Math.max(fontSize * 0.3, 8),
+            },
+          ]}
+          labelStyle={[
+            styles.buttonText,
+            {
+              fontSize,
+              lineHeight: fontSize * 1.2,
+            },
+          ]}
           onPress={() => router.push('/biographies')}
         >
           Biographies
@@ -54,8 +78,20 @@ export default function HomeScreen() {
         <Button
           mode="contained"
           style={[styles.button, enhancedContrast && styles.enhancedButton]}
-          contentStyle={styles.buttonContent}
-          labelStyle={[styles.buttonText, { fontSize }]}
+          contentStyle={[
+            styles.buttonContent,
+            {
+              minHeight: fontSize * 2.5,
+              paddingVertical: Math.max(fontSize * 0.3, 8),
+            },
+          ]}
+          labelStyle={[
+            styles.buttonText,
+            {
+              fontSize,
+              lineHeight: fontSize * 1.2,
+            },
+          ]}
           onPress={() => router.push('/program-notes')}
         >
           Program Notes
@@ -63,8 +99,20 @@ export default function HomeScreen() {
         <Button
           mode="contained"
           style={[styles.button, enhancedContrast && styles.enhancedButton]}
-          contentStyle={styles.buttonContent}
-          labelStyle={[styles.buttonText, { fontSize }]}
+          contentStyle={[
+            styles.buttonContent,
+            {
+              minHeight: fontSize * 2.5,
+              paddingVertical: Math.max(fontSize * 0.3, 8),
+            },
+          ]}
+          labelStyle={[
+            styles.buttonText,
+            {
+              fontSize,
+              lineHeight: fontSize * 1.2,
+            },
+          ]}
           onPress={() => router.push('/meet-orchestra')}
         >
           Meet the Orchestra
@@ -115,7 +163,6 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   buttonContent: {
-    paddingVertical: 8,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -125,7 +172,6 @@ const styles = StyleSheet.create({
     borderColor: 'white',
   },
   buttonText: {
-    // fontFamily: 'DMSans-SemiBold',
     color: 'white',
   },
   trueToneOverlay: {
