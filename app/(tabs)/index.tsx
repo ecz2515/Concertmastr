@@ -48,6 +48,7 @@ export default function HomeScreen() {
             {
               fontSize,
               lineHeight: fontSize * 1.2,
+              fontFamily: enhancedContrast ? 'DMSans-Bold' : undefined
             },
           ]}
           onPress={() => router.push('/program')}
@@ -69,6 +70,7 @@ export default function HomeScreen() {
             {
               fontSize,
               lineHeight: fontSize * 1.2,
+              fontFamily: enhancedContrast ? 'DMSans-Bold' : undefined
             },
           ]}
           onPress={() => router.push('/biographies')}
@@ -90,6 +92,7 @@ export default function HomeScreen() {
             {
               fontSize,
               lineHeight: fontSize * 1.2,
+              fontFamily: enhancedContrast ? 'DMSans-Bold' : undefined
             },
           ]}
           onPress={() => router.push('/program-notes')}
@@ -111,6 +114,7 @@ export default function HomeScreen() {
             {
               fontSize,
               lineHeight: fontSize * 1.2,
+              fontFamily: enhancedContrast ? 'DMSans-Bold' : undefined
             },
           ]}
           onPress={() => router.push('/meet-orchestra')}
@@ -144,7 +148,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   eventTitle: {
-    fontFamily: 'DMSans-Bold',
+    fontFamily: 'DMSans-Black',
     color: 'white',
     marginBottom: 20,
     marginTop: 20,

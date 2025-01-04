@@ -140,6 +140,7 @@ const styles = StyleSheet.create({
   },
   enhancedTitle: {
     fontWeight: '900',
+    textDecorationLine: 'underline',
   },
   disclaimer: {
     fontSize: 14,
