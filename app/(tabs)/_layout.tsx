@@ -42,12 +42,12 @@ export default function AppLayout() {
 
   const renderBackButton = () => {
     console.log('[BACK BUTTON]: Rendered on Path ->', currentPath);
-
+  
     return (
       <TouchableOpacity
         onPress={() => {
           console.log('[BACK BUTTON]: Pressed on Path ->', currentPath);
-
+  
           if (currentPath?.startsWith('pnotes/')) {
             router.push('/program-notes');
           } else if (currentPath?.startsWith('bios/')) {
@@ -58,6 +58,7 @@ export default function AppLayout() {
             router.push('/');
           }
         }}
+        hitSlop={{ top: 25, bottom: 25, left: 25, right: 25 }} // Increase tappable area
       >
         <Ionicons
           name="arrow-back"
@@ -68,6 +69,7 @@ export default function AppLayout() {
       </TouchableOpacity>
     );
   };
+  
 
   return (
     <>
@@ -78,7 +80,10 @@ export default function AppLayout() {
           headerTintColor: 'white',
           tabBarStyle: { display: 'none' },
           headerRight: () => (
-            <TouchableOpacity onPress={() => setIsSettingsVisible(true)}>
+            <TouchableOpacity
+              onPress={() => setIsSettingsVisible(true)}
+              hitSlop={{ top: 25, bottom: 25, left: 25, right: 25 }} // Increase tappable area
+            >
               <Ionicons
                 name="settings-outline"
                 size={25}
@@ -86,7 +91,7 @@ export default function AppLayout() {
                 style={{ paddingRight: 15 }}
               />
             </TouchableOpacity>
-          ),
+          ),          
         }}
       >
         <Tabs.Screen
