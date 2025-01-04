@@ -24,7 +24,7 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   // Define the min and max font size
   const MIN_FONT_SIZE = 12;
-  const MAX_FONT_SIZE = 24;
+  const MAX_FONT_SIZE = 28;
 
   // Clamp font size when setting it
   const setFontSize = (value: number) => {

@@ -33,7 +33,7 @@ export default function SettingsModal({ visible, onClose }: SettingsModalProps) 
   } = useAppContext();
 
   const MIN_FONT_SIZE = 12;
-  const MAX_FONT_SIZE = 24;
+  const MAX_FONT_SIZE = 28;
 
   useEffect(() => {
     if (visible) {
@@ -83,7 +83,7 @@ export default function SettingsModal({ visible, onClose }: SettingsModalProps) 
                 ]}
                 contentStyle={styles.fullButtonContent}
                 labelStyle={styles.fontButtonText}
-                onPress={() => setFontSize(fontSize - 1)}
+                onPress={() => setFontSize(fontSize - 2)}
                 disabled={fontSize <= MIN_FONT_SIZE} // Disable if at minimum
               >
                 -
@@ -96,7 +96,7 @@ export default function SettingsModal({ visible, onClose }: SettingsModalProps) 
                 ]}
                 contentStyle={styles.fullButtonContent}
                 labelStyle={styles.fontButtonText}
-                onPress={() => setFontSize(fontSize + 1)}
+                onPress={() => setFontSize(fontSize + 2)}
                 disabled={fontSize >= MAX_FONT_SIZE} // Disable if at maximum
               >
                 +
