@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, Text, Image, StyleSheet, Alert } from 'react-native';
 import { Button } from 'react-native-paper';
 import { useAppContext } from '@/AppStateProvider';
 import { router } from 'expo-router';
@@ -12,6 +12,15 @@ const imagesToPreload = [
 
 export default function HomeScreen() {
   const { fontFamily, enhancedContrast, fontSize, trueTone, blueLight } = useAppContext();
+
+  useEffect(() => {
+    // Display an alert to remind users to silence their phones
+    Alert.alert(
+      "Shh... Phones on Silent!",
+      "To let the music play uninterrupted, please kindly set your mobile phone to silent mode",
+      [{ text: "Got it!", onPress: () => console.log("Alert acknowledged") }]
+    );
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -27,12 +36,8 @@ export default function HomeScreen() {
         />
       </View>
       <View style={styles.mainContent}>
-        <Text style={[styles.eventTitle, { fontSize: fontSize * 1.6 }]}>
-          {concertData.concertName}
-        </Text>
-        <Text style={[styles.eventDetails, { fontSize }]}>
-          {concertData.date} | {concertData.venue} | {concertData.time}
-        </Text>
+        <Text style={[styles.eventTitle, { fontSize: fontSize * 1.6 }]}> {concertData.concertName} </Text>
+        <Text style={[styles.eventDetails, { fontSize }]}> {concertData.date} | {concertData.venue} | {concertData.time} </Text>
         <Button
           mode="contained"
           style={[styles.button, enhancedContrast && styles.enhancedButton]}
@@ -48,7 +53,7 @@ export default function HomeScreen() {
             {
               fontSize,
               lineHeight: fontSize * 1.2,
-              fontFamily: enhancedContrast ? 'DMSans-Bold' : undefined
+              fontFamily: enhancedContrast ? 'DMSans-Bold' : undefined,
             },
           ]}
           onPress={() => router.push('/program')}
@@ -70,7 +75,7 @@ export default function HomeScreen() {
             {
               fontSize,
               lineHeight: fontSize * 1.2,
-              fontFamily: enhancedContrast ? 'DMSans-Bold' : undefined
+              fontFamily: enhancedContrast ? 'DMSans-Bold' : undefined,
             },
           ]}
           onPress={() => router.push('/biographies')}
@@ -92,7 +97,7 @@ export default function HomeScreen() {
             {
               fontSize,
               lineHeight: fontSize * 1.2,
-              fontFamily: enhancedContrast ? 'DMSans-Bold' : undefined
+              fontFamily: enhancedContrast ? 'DMSans-Bold' : undefined,
             },
           ]}
           onPress={() => router.push('/program-notes')}
@@ -114,7 +119,7 @@ export default function HomeScreen() {
             {
               fontSize,
               lineHeight: fontSize * 1.2,
-              fontFamily: enhancedContrast ? 'DMSans-Bold' : undefined
+              fontFamily: enhancedContrast ? 'DMSans-Bold' : undefined,
             },
           ]}
           onPress={() => router.push('/meet-orchestra')}
