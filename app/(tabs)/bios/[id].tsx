@@ -32,38 +32,41 @@ export default function ArtistBio() {
       ]}
       contentContainerStyle={styles.container}
     >
-      <Text
-        style={[
-          styles.sectionTitle,
-          { fontSize: fontSize * 1.5 },
-          enhancedContrast && styles.enhancedSectionTitle,
-        ]}
-      >
-        {artist.name}
-      </Text>
-      <Text
-        style={[
-          styles.pieceSubtitle,
-          { fontSize: fontSize * 1.2 },
-          enhancedContrast && styles.enhancedPieceSubtitle,
-        ]}
-      >
-        {artist.role || 'Musician'} {/* Default to 'Musician' if no role */}
-      </Text>
-      {artist.image && (
-        <Image
-          source={
-            artist.image?.startsWith('http')
-              ? { uri: artist.image } // Use remote URL if valid
-              : require('../../../assets/images/default_musician.jpg') // Default fallback image
-          }
-          style={styles.bioImage}
-          onError={() =>
-            console.error(`Failed to load image for ${artist.name}: ${artist.image}`)
-          }
-        />
-      
-      )}
+      <View style={styles.centeredContainer}>
+        {artist.image && (
+          <Image
+            source={
+              artist.image?.startsWith('http')
+                ? { uri: artist.image }
+                : require('../../../assets/images/default_musician.jpg')
+            }
+            style={styles.bioImage}
+            onError={() =>
+              console.error(
+                `Failed to load image for ${artist.name}: ${artist.image}`
+              )
+            }
+          />
+        )}
+        <Text
+          style={[
+            styles.sectionTitle,
+            { fontSize: fontSize * 1.5 },
+            enhancedContrast && styles.enhancedSectionTitle,
+          ]}
+        >
+          {artist.name}
+        </Text>
+        <Text
+          style={[
+            styles.pieceSubtitle,
+            { fontSize: fontSize * 1.2 },
+            enhancedContrast && styles.enhancedPieceSubtitle,
+          ]}
+        >
+          {artist.role || ''}
+        </Text>
+      </View>
       <Text
         style={[
           styles.content,
@@ -90,19 +93,25 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
   },
-  bioImage: {
-    width: '100%',
-    height: 250,
-    alignSelf: 'center',
-    resizeMode: 'cover',
+  centeredContainer: {
+    alignItems: 'center',
     marginBottom: 20,
+  },
+  bioImage: {
+    width: 150,
+    height: 150,
+    borderRadius: 75, // Makes the image circular
+    resizeMode: 'cover',
+    marginBottom: 10,
+    borderWidth: 2,
+    borderColor: 'white', // Optional: Adds a white border for emphasis
   },
   sectionTitle: {
     fontSize: 24,
-    fontFamily: 'DMSans',
     fontWeight: 'bold',
     color: 'white',
-    marginBottom: 20,
+    marginBottom: 5,
+    textAlign: 'center',
   },
   enhancedSectionTitle: {
     fontWeight: '900', // Extra bold for Enhanced Contrast
@@ -110,20 +119,12 @@ const styles = StyleSheet.create({
   },
   pieceSubtitle: {
     fontSize: 18,
-    fontFamily: 'DMSans',
-    fontWeight: '600',
-    color: 'white',
-    marginBottom: 20,
-  },
-  enhancedPieceSubtitle: {
-    fontWeight: '800', // Bolder font weight for Enhanced Contrast
-    textShadowColor: '#FFFFFF', // Subtle shadow to enhance visibility
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 1,
+    color: 'gray',
+    textAlign: 'center',
+    marginBottom: 15,
   },
   content: {
     fontSize: 16,
-    fontFamily: 'DMSans',
     lineHeight: 24,
     color: 'white',
   },
@@ -159,5 +160,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 140, 0, 0.4)', // Blue light filter
     zIndex: 1,
     pointerEvents: 'none', // Allow interactions through overlay
+  },
+  enhancedPieceSubtitle: {
+    fontWeight: '800',
+    color: 'white',
+    textShadowColor: '#FFFFFF',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 1,
   },
 });
