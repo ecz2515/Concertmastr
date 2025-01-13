@@ -46,7 +46,7 @@ const MeetOrchestra: React.FC = () => {
   };
 
   const renderMusicianCard = ({ item }: { item: Musician }) => (
-    <View style={[styles.card, enhancedContrast && styles.enhancedCard] }>
+    <View style={[styles.card, enhancedContrast && styles.enhancedCard]}>
       <Image source={photoMap[item.photo]} style={styles.image} />
       <Text
         style={[
@@ -74,6 +74,7 @@ const MeetOrchestra: React.FC = () => {
       <FlatList
         ref={flatListRef} // Attach ref
         data={musicians}
+        bounces={false}
         ListHeaderComponent={
           <View>
             <Text
