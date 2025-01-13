@@ -15,6 +15,7 @@ export default function ProgramScreen() {
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         style={styles.scrollView}
+        bounces={false}
       >
         {/* Title */}
         <Text

@@ -26,6 +26,7 @@ export default function ArtistBio() {
   return (
     <ScrollView
       ref={scrollViewRef}
+      bounces={false}
       style={[
         styles.scrollView,
         enhancedContrast && styles.enhancedBackground,

@@ -10,7 +10,7 @@ export default function BiographiesScreen() {
 
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <ScrollView contentContainerStyle={styles.scrollContainer} bounces={false}>
         {/* Title */}
         <Text
           style={[

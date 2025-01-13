@@ -29,6 +29,7 @@ export default function ProgramNotes() {
         ref={scrollViewRef}
         style={[styles.scrollView, enhancedContrast && styles.enhancedBackground]}
         contentContainerStyle={styles.containerContent}
+        bounces={false}
       >
         <Text
           style={[styles.sectionTitle, { fontSize: fontSize * 1.5 }, enhancedContrast && styles.enhancedSectionTitle]}
