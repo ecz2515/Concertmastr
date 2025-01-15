@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
-import { View, Text, Image, StyleSheet, Alert } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, Image, StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
 import { useAppContext } from '@/AppStateProvider';
 import { router } from 'expo-router';
 import concertData from '@/concert.json';
+import SilencePhonesModal from '../../components/SilencePhonesModal';
 
 const imagesToPreload = [
   require('@/assets/images/default_event-image.jpg'),
@@ -11,19 +12,20 @@ const imagesToPreload = [
 ];
 
 export default function HomeScreen() {
-  const { fontFamily, enhancedContrast, fontSize, trueTone, blueLight } = useAppContext();
+  const { enhancedContrast, fontSize, trueTone, blueLight } = useAppContext();
+  const [isModalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
-    // Display an alert to remind users to silence their phones
-    Alert.alert(
-      "Shh... Phones on Silent!",
-      "To let the music play uninterrupted, please kindly set your mobile phone to silent mode",
-      [{ text: "Got it!", onPress: () => console.log("Alert acknowledged") }]
-    );
+    // Show the modal when the screen loads
+    setModalVisible(true);
   }, []);
 
   return (
     <View style={styles.container}>
+      <SilencePhonesModal
+        visible={isModalVisible}
+        onDismiss={() => setModalVisible(false)}
+      />
       <View style={styles.imageContainer}>
         <Image
           source={
