@@ -3,6 +3,7 @@
     "name": "Concertmastr",
     "slug": "Concertmastr",
     "version": "1.0.0",
+    "platforms": ["ios", "android", "web"],
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -26,7 +27,13 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/favicon.png",
+      "publicPath": "/",
+      "build": {
+        "babel": {
+          "include": ["@expo/webpack-config"]
+        }
+      }
     },
     "plugins": [
       "expo-router",
