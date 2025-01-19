@@ -6,7 +6,7 @@ import { useFocusEffect } from '@react-navigation/native';
 interface Musician {
   name: string;
   photo: string;
-  position?: string; // Optional parameter for special roles
+  position?: string;
 }
 
 interface Section {
@@ -16,10 +16,8 @@ interface Section {
 
 const MeetOrchestra: React.FC = () => {
   const [groupedMusicians, setGroupedMusicians] = useState<Section[]>([]);
+  const [key, setKey] = useState(0); // Add a key to force re-rendering
   const { enhancedContrast, fontSize, trueTone, blueLight } = useAppContext();
-
-  // Reference for SectionList
-  const sectionListRef = useRef<SectionList>(null);
 
   useEffect(() => {
     const fetchMusicians = async () => {
@@ -28,7 +26,7 @@ const MeetOrchestra: React.FC = () => {
       // Map sections directly from the JSON
       const groupedData = data.sections.map((section: any) => ({
         title: section.section,
-        data: section.musicians
+        data: section.musicians,
       }));
 
       setGroupedMusicians(groupedData);
@@ -39,14 +37,9 @@ const MeetOrchestra: React.FC = () => {
 
   useFocusEffect(
     React.useCallback(() => {
-      if (groupedMusicians.length > 0) {
-        sectionListRef.current?.scrollToLocation({
-          animated: false,
-          sectionIndex: 0,
-          itemIndex: 0,
-        });
-      }
-    }, [groupedMusicians])
+      // Update the key to force re-render when the page is focused
+      setKey((prevKey) => prevKey + 1);
+    }, [])
   );
 
   const photoMap: { [key: string]: any } = {
@@ -59,8 +52,7 @@ const MeetOrchestra: React.FC = () => {
     "cheng_li.jpg": require('@/assets/orchestra_headshots/cheng_li.jpg'),
     "gui_li.jpg": require('@/assets/orchestra_headshots/gui_li.jpg'),
     "jia_shuchen.jpg": require('@/assets/orchestra_headshots/jia_shuchen.jpg'),
-    // Default fallback image
-    default: require('@/assets/images/default_musician.jpg'),
+    default: require('@/assets/images/default_musician.jpg'), // Default fallback image
   };
 
   const renderMusicianCard = ({ item }: { item: Musician }) => {
@@ -120,7 +112,7 @@ const MeetOrchestra: React.FC = () => {
   return (
     <View style={styles.container}>
       <SectionList
-        ref={sectionListRef}
+        key={key} // Force re-render with updated key
         sections={groupedMusicians}
         keyExtractor={(item, index) => `${item.name}-${index}`}
         renderItem={() => null} // Use renderSection for section rendering
@@ -129,6 +121,7 @@ const MeetOrchestra: React.FC = () => {
         contentContainerStyle={{ paddingBottom: 20 }}
         bounces={false}
       />
+
       {trueTone && <View style={styles.trueToneOverlay} />}
       {blueLight && <View style={styles.blueLightOverlay} />}
     </View>
@@ -158,7 +151,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: '#333',
     alignItems: 'center',
-    maxWidth: '45%', // Ensure cards are side-by-side
+    maxWidth: '45%',
   },
   enhancedCard: {
     backgroundColor: '#444',

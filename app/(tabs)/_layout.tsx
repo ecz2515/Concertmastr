@@ -10,7 +10,7 @@ const LogoTitle = () => (
   <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
     <Image
       source={require('@/assets/images/CM_logo.png')}
-      style={{ width: 25, height: 25, marginRight: 10 }}
+      style={{ width: 20, height: 20, marginRight: 8 }}
       resizeMode="contain"
     />
     <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'white', fontFamily: 'DMSans-Regular' }}>
@@ -18,8 +18,6 @@ const LogoTitle = () => (
     </Text>
   </View>
 );
-
-
 
 export default function AppLayout() {
   const router = useRouter();
@@ -59,27 +57,26 @@ export default function AppLayout() {
             router.push('/');
           }
         }}
-        hitSlop={{ top: 25, bottom: 25, left: 25, right: 25 }} // Increase tappable area
+        hitSlop={{ top: 25, bottom: 25, left: 25, right: 25 }}
       >
         <Ionicons
           name="arrow-back"
-          size={30}
+          size={24}
           color="white"
-          style={{ paddingLeft: 15 }}
+          style={{ paddingLeft: 12 }}
         />
       </TouchableOpacity>
     );
   };
-  
 
   return (
     <>
       <Tabs
         screenOptions={{
           headerShown: true,
-          headerStyle: { backgroundColor: 'black' },
+          headerStyle: { backgroundColor: 'black', height: 45 },
           headerTintColor: 'white',
-          headerTitleAlign: 'center', // Ensures title is centered
+          headerTitleAlign: 'center',
           tabBarStyle: { display: 'none' },
           headerRight: () => (
             <TouchableOpacity
@@ -90,13 +87,12 @@ export default function AppLayout() {
                 name="settings-outline"
                 size={25}
                 color="white"
-                style={{ paddingRight: 15 }}
+                style={{ paddingRight: 12 }}
               />
             </TouchableOpacity>
           ),
         }}
       >
-
         <Tabs.Screen
           name="index"
           options={{
@@ -129,14 +125,13 @@ export default function AppLayout() {
           }}
         />
         <Tabs.Screen
-          name="pnotes/[id]" // Dynamic route for program notes
+          name="pnotes/[id]"
           options={{
             title: 'Program Notes',
             headerTitle: () => <LogoTitle />,
-            headerLeft: renderBackButton, // Use the shared back button
+            headerLeft: renderBackButton,
           }}
         />
-
         <Tabs.Screen
           name="meet-orchestra"
           options={{
@@ -146,17 +141,15 @@ export default function AppLayout() {
           }}
         />
         <Tabs.Screen
-          name="bios/[id]" // Dynamic route for artist bios
+          name="bios/[id]"
           options={{
-            title: 'Biography',
-            headerTitle: () => <LogoTitle />, // Keeps the consistent header design
-            headerLeft: renderBackButton, // Reuses the shared back button functionality
+            title: 'Biography', 
+            headerTitle: () => <LogoTitle />,
+            headerLeft: renderBackButton,
           }}
         />
       </Tabs>
 
-
-      {/* Settings Modal */}
       <SettingsModal
         visible={isSettingsVisible}
         onClose={() => setIsSettingsVisible(false)}

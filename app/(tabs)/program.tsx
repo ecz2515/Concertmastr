@@ -1,5 +1,5 @@
-import { useNavigation } from 'expo-router';
-import React from 'react';
+import { useNavigation, useFocusEffect } from 'expo-router';
+import React, { useRef } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { useAppContext } from '@/AppStateProvider'; // Import global state hook
 import concertData from '@/concert.json'; // Import JSON file directly
@@ -7,12 +7,21 @@ import concertData from '@/concert.json'; // Import JSON file directly
 export default function ProgramScreen() {
   const navigation = useNavigation();
   const { enhancedContrast, fontSize, trueTone, blueLight } = useAppContext();
+  const scrollViewRef = useRef<ScrollView>(null);
 
   const { program, intermissionAfter, intermissionDuration } = concertData;
+
+  useFocusEffect(
+    React.useCallback(() => {
+      // Scroll to top when screen gains focus
+      scrollViewRef.current?.scrollTo({ y: 0, animated: false });
+    }, [])
+  );
 
   return (
     <View style={styles.container}>
       <ScrollView
+        ref={scrollViewRef}
         contentContainerStyle={styles.scrollContainer}
         style={styles.scrollView}
         bounces={false}

@@ -46,8 +46,8 @@ export default function HomeScreen() {
           contentStyle={[
             styles.buttonContent,
             {
-              minHeight: fontSize * 2.5,
-              paddingVertical: Math.max(fontSize * 0.3, 8),
+              minHeight: fontSize * 1.2,
+              paddingVertical: Math.max(fontSize * 0.1, 8),
             },
           ]}
           labelStyle={[
@@ -68,8 +68,8 @@ export default function HomeScreen() {
           contentStyle={[
             styles.buttonContent,
             {
-              minHeight: fontSize * 2.5,
-              paddingVertical: Math.max(fontSize * 0.3, 8),
+              minHeight: fontSize * 1.2,
+              paddingVertical: Math.max(fontSize * 0.2, 8),
             },
           ]}
           labelStyle={[
@@ -90,8 +90,8 @@ export default function HomeScreen() {
           contentStyle={[
             styles.buttonContent,
             {
-              minHeight: fontSize * 2.5,
-              paddingVertical: Math.max(fontSize * 0.3, 8),
+              minHeight: fontSize * 1.2,
+              paddingVertical: Math.max(fontSize * 0.2, 8),
             },
           ]}
           labelStyle={[
@@ -112,8 +112,8 @@ export default function HomeScreen() {
           contentStyle={[
             styles.buttonContent,
             {
-              minHeight: fontSize * 2.5,
-              paddingVertical: Math.max(fontSize * 0.3, 8),
+              minHeight: fontSize * 1.2,
+              paddingVertical: Math.max(fontSize * 0.2, 8),
             },
           ]}
           labelStyle={[
@@ -151,7 +151,6 @@ const styles = StyleSheet.create({
   },
   mainContent: {
     paddingHorizontal: 15,
-    paddingBottom: 20,
     justifyContent: 'flex-end',
   },
   eventTitle: {
@@ -170,7 +169,7 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: '#333',
     borderRadius: 25,
-    marginBottom: 10,
+    marginBottom: 8,
     width: '100%',
   },
   buttonContent: {
