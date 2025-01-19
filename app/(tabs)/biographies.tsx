@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
   },
   bioText: {
     fontSize: 18,
-    fontFamily: 'DMSans',
+    fontFamily: 'DMSans-Regular',
     fontWeight: 'bold',
     color: 'white',
     flex: 1,

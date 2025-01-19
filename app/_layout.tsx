@@ -31,6 +31,7 @@ export default function RootLayout() {
     'DMSans-BlackItalic': require('../assets/fonts/DMSans-BlackItalic.ttf'),
     'DMSans-Thin': require('../assets/fonts/DMSans-Thin.ttf'),
     'DMSans-ThinItalic': require('../assets/fonts/DMSans-ThinItalic.ttf'),
+    'DMSans-BoldItalic': require('../assets/fonts/DMSans-BoldItalic.ttf'),
   });
 
   useEffect(() => {

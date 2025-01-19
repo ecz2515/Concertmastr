@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
   },
   workTitle: {
     fontSize: 18,
-    fontFamily: 'DMSans',
+    fontFamily: 'DMSans-Regular',
     fontWeight: 'bold',
     color: 'white',
     marginTop: 5,

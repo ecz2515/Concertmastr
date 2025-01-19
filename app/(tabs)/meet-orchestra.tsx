@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 16,
-    fontFamily: 'DMSans',
+    fontFamily: 'DMSans-Regular',
     fontWeight: 'bold',
     color: 'white',
     marginBottom: 5,

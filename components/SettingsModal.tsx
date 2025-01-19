@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 18,
-    fontFamily: 'DMSans',
+    fontFamily: 'DMSans-Regular',
     color: 'white',
     marginBottom: 10,
   },
@@ -228,7 +228,7 @@ const styles = StyleSheet.create({
   },
   fontButtonText: {
     fontSize: 20,
-    fontFamily: 'DMSans',
+    fontFamily: 'DMSans-Regular',
     color: 'white',
   },
   resetButton: {
@@ -239,7 +239,7 @@ const styles = StyleSheet.create({
   },
   resetButtonText: {
     fontSize: 14,
-    fontFamily: 'DMSans',
+    fontFamily: 'DMSans-Regular',
     color: 'white',
   },
   toggleGroup: {
@@ -247,7 +247,7 @@ const styles = StyleSheet.create({
   },
   toggleLabel: {
     fontSize: 16,
-    fontFamily: 'DMSans',
+    fontFamily: 'DMSans-Regular',
     color: 'white',
     marginBottom: 5,
   },
@@ -262,7 +262,7 @@ const styles = StyleSheet.create({
   },
   resetAllButtonText: {
     fontSize: 16,
-    fontFamily: 'DMSans',
+    fontFamily: 'DMSans-Regular',
     fontWeight: 'bold',
     color: 'white',
   },

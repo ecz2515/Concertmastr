@@ -7,17 +7,18 @@ import { Ionicons } from '@expo/vector-icons';
 import SettingsModal from '@/components/SettingsModal';
 
 const LogoTitle = () => (
-  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+  <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
     <Image
       source={require('@/assets/images/CM_logo.png')}
       style={{ width: 25, height: 25, marginRight: 10 }}
       resizeMode="contain"
     />
-    <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'white', fontFamily: 'DMSans' }}>
+    <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'white', fontFamily: 'DMSans-Regular' }}>
       Concertmastr
     </Text>
   </View>
 );
+
 
 
 export default function AppLayout() {
@@ -78,11 +79,12 @@ export default function AppLayout() {
           headerShown: true,
           headerStyle: { backgroundColor: 'black' },
           headerTintColor: 'white',
+          headerTitleAlign: 'center', // Ensures title is centered
           tabBarStyle: { display: 'none' },
           headerRight: () => (
             <TouchableOpacity
               onPress={() => setIsSettingsVisible(true)}
-              hitSlop={{ top: 25, bottom: 25, left: 25, right: 25 }} // Increase tappable area
+              hitSlop={{ top: 25, bottom: 25, left: 25, right: 25 }}
             >
               <Ionicons
                 name="settings-outline"
@@ -91,9 +93,10 @@ export default function AppLayout() {
                 style={{ paddingRight: 15 }}
               />
             </TouchableOpacity>
-          ),          
+          ),
         }}
       >
+
         <Tabs.Screen
           name="index"
           options={{
