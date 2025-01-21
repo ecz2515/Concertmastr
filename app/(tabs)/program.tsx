@@ -58,7 +58,7 @@ export default function ProgramScreen() {
                 <Text
                   style={[
                     styles.dates,
-                    { fontSize: fontSize * 0.9 }, // Scale dates with fontSize
+                    { fontSize: fontSize * 1.2 }, // Match composer name font size
                   ]}
                 >
                   {piece.born && piece.death
