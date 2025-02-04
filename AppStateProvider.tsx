@@ -1,3 +1,5 @@
+'use client';
+
 import React, { createContext, useContext, useState } from 'react';
 
 interface AppState {
@@ -5,12 +7,12 @@ interface AppState {
   trueTone: boolean;
   blueLight: boolean;
   fontSize: number;
-  fontFamily: string; // Add fontFamily
+  fontFamily: string;
   setEnhancedContrast: (value: boolean) => void;
   setTrueTone: (value: boolean) => void;
   setBlueLight: (value: boolean) => void;
   setFontSize: (value: number) => void;
-  setFontFamily: (value: string) => void; // Add setter for fontFamily
+  setFontFamily: (value: string) => void;
 }
 
 const AppContext = createContext<AppState | undefined>(undefined);
@@ -20,13 +22,11 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [trueTone, setTrueTone] = useState(false);
   const [blueLight, setBlueLight] = useState(false);
   const [fontSize, setFontSizeState] = useState(16);
-  const [fontFamily, setFontFamily] = useState('SourceSans3'); // Default font family
+  const [fontFamily, setFontFamily] = useState('SourceSans3');
 
-  // Define the min and max font size
   const MIN_FONT_SIZE = 12;
   const MAX_FONT_SIZE = 28;
 
-  // Clamp font size when setting it
   const setFontSize = (value: number) => {
     const clampedValue = Math.max(MIN_FONT_SIZE, Math.min(MAX_FONT_SIZE, value));
     setFontSizeState(clampedValue);
@@ -44,7 +44,7 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         setTrueTone,
         setBlueLight,
         setFontSize,
-        setFontFamily, // Provide setter
+        setFontFamily,
       }}
     >
       {children}
@@ -52,7 +52,6 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   );
 };
 
-// Custom hook for accessing the context
 export const useAppContext = (): AppState => {
   const context = useContext(AppContext);
   if (!context) {
