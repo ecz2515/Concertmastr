@@ -25,10 +25,25 @@ self.__BUILD_MANIFEST = {
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
+    "/meet-orchestra": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/meet-orchestra.js"
+    ],
+    "/pnotes/[id]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/pnotes/[id].js"
+    ],
     "/program": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/program.js"
+    ],
+    "/program-notes": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/program-notes.js"
     ]
   },
   "ampFirstPages": []

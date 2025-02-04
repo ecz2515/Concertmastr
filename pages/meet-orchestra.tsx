@@ -4,7 +4,7 @@ import { useAppContext } from '../AppStateProvider';
 
 interface Musician {
   name: string;
-  photo: string;
+  photo?: string;
   position?: string;
 }
 
@@ -19,30 +19,47 @@ export default function MeetOrchestra() {
 
   useEffect(() => {
     const fetchMusicians = async () => {
-      const data = require('../assets/musicians.json');
-      const groupedData = data.sections.map((section: any) => ({
-        title: section.section,
-        data: section.musicians,
-      }));
-      setGroupedMusicians(groupedData);
+      try {
+        const response = await fetch('/assets/musicians.json');
+        const data = await response.json();
+        const groupedData = data.sections.map((section: any) => ({
+          title: section.section,
+          data: section.musicians,
+        }));
+        setGroupedMusicians(groupedData);
+      } catch (error) {
+        console.error('Error fetching musicians data:', error);
+        setGroupedMusicians([]);
+      }
     };
 
     fetchMusicians();
   }, []);
 
+  const defaultMusicianImage = "/assets/images/default_musician.jpg";
+
   const MusicianCard = ({ musician }: { musician: Musician }) => {
+    const [imgSrc, setImgSrc] = useState(
+      musician.photo
+        ? (musician.photo.startsWith('http')
+            ? musician.photo
+            : `/assets/orchestra_headshots/${musician.photo}`)
+        : defaultMusicianImage
+    );
+
     return (
       <div style={{
         ...styles.card,
         ...(enhancedContrast ? styles.enhancedCard : {})
       }}>
         <Image
-          src={musician.photo.startsWith('http') 
-            ? musician.photo 
-            : `/assets/orchestra_headshots/${musician.photo}`}
+          src={imgSrc}
           alt={`Photo of ${musician.name}`}
-          width={100}
+          width={100} 
           height={100}
+          priority={true}
+          quality={75}
+          onError={() => setImgSrc(defaultMusicianImage)}
           style={styles.image}
         />
         <p style={{

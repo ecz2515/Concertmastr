@@ -13,7 +13,6 @@ module.exports = {
       });
       return config;
     },
-    webpack5: true,
     // Ignore font files
     webpack: (config, { isServer }) => {
       config.module.rules.push({

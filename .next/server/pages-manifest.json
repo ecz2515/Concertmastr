@@ -2,6 +2,9 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
+  "/meet-orchestra": "pages/meet-orchestra.js",
+  "/program": "pages/program.js",
   "/": "pages/index.js",
-  "/program": "pages/program.js"
+  "/pnotes/[id]": "pages/pnotes/[id].js",
+  "/program-notes": "pages/program-notes.js"
 }

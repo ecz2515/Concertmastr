@@ -4,7 +4,7 @@
       "section": "First Violins",
       "musicians": [
         { "name": "Jing Wang", "photo": "jing_wang.jpg", "position": "Concertmaster" },
-        { "name": "Leung Kin-Fung", "photo": "leung_kin_fung.jpg", "position": "First Associate Concertmaster" },
+        { "name": "Leung Kin-Fung", "photo": "leung_kin-fung.jpg", "position": "First Associate Concertmaster" },
         { "name": "Anders Hui", "photo": "anders_hui.jpg", "position": "Second Associate Concertmaster" },
         { "name": "Wang Liang", "photo": "wang_liang.jpg", "position": "Third Associate Concertmaster" },
         { "name": "Ai Jin", "photo": "ai_jin.jpg" },

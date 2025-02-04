@@ -12,18 +12,6 @@ export default function HomeScreen() {
   useEffect(() => {
     // Show the modal when the screen loads
     setModalVisible(true);
-
-    // Register the service worker
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker
-        .register('/service-worker.js', { scope: '/' }) // Ensure the scope is set to the root
-        .then((registration) => {
-          console.log('Service Worker registered with scope:', registration.scope);
-        })
-        .catch((error) => {
-          console.error('Service Worker registration failed:', error);
-        });
-    }
   }, []);
 
   return (
@@ -36,9 +24,10 @@ export default function HomeScreen() {
         <Image
           src={concertData.image?.startsWith('http')
             ? concertData.image
-            : '/assets/images/default_event-image.jpg'}
+            : concertData.image
+              ? `/assets/concert_images/${concertData.image}`
+              : '/assets/images/default_event-image.jpg'}
           alt="Event Image"
-          layout="responsive"
           width={800}
           height={600}
           style={styles.eventImage}
